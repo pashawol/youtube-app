@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing"
 
-import { SearchResultsItemComponent } from './search-results-item.component';
+import { SearchResultsItemComponent } from "./search-results-item.component"
 
-describe('SearchResultsItemComponent', () => {
-  let component: SearchResultsItemComponent;
-  let fixture: ComponentFixture<SearchResultsItemComponent>;
+describe("SearchResultsItemComponent", () => {
+    let component: SearchResultsItemComponent
+    let fixture: ComponentFixture<SearchResultsItemComponent>
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [SearchResultsItemComponent]
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [SearchResultsItemComponent]
+        }).compileComponents()
+
+        fixture = TestBed.createComponent(SearchResultsItemComponent)
+        component = fixture.componentInstance
+        fixture.detectChanges()
     })
-    .compileComponents();
 
-    fixture = TestBed.createComponent(SearchResultsItemComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    it("should create", () => {
+        expect(component).toBeTruthy()
+    })
+})

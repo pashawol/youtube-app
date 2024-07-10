@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing"
 
-import { LoginInformationBlockComponent } from './login-information-block.component';
+import { LoginInformationBlockComponent } from "./login-information-block.component"
 
-describe('LoginInformationBlockComponent', () => {
-  let component: LoginInformationBlockComponent;
-  let fixture: ComponentFixture<LoginInformationBlockComponent>;
+describe("LoginInformationBlockComponent", () => {
+    let component: LoginInformationBlockComponent
+    let fixture: ComponentFixture<LoginInformationBlockComponent>
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [LoginInformationBlockComponent]
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [LoginInformationBlockComponent]
+        }).compileComponents()
+
+        fixture = TestBed.createComponent(LoginInformationBlockComponent)
+        component = fixture.componentInstance
+        fixture.detectChanges()
     })
-    .compileComponents();
 
-    fixture = TestBed.createComponent(LoginInformationBlockComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    it("should create", () => {
+        expect(component).toBeTruthy()
+    })
+})

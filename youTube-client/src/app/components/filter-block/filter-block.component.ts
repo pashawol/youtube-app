@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core"
 
 @Component({
-  selector: 'app-filter-block',
-  standalone: true,
-  imports: [],
-  templateUrl: './filter-block.component.html',
-  styleUrl: './filter-block.component.scss'
+    selector: "app-filter-block",
+    standalone: true,
+    imports: [],
+    templateUrl: "./filter-block.component.html",
+    styleUrl: "./filter-block.component.scss"
 })
-export class FilterBlockComponent {
-
-}
+export class FilterBlockComponent {}

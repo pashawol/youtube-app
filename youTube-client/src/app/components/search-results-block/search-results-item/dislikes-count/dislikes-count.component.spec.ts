@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing"
 
-import { DislikesCountComponent } from './dislikes-count.component';
+import { DislikesCountComponent } from "./dislikes-count.component"
 
-describe('DislikesCountComponent', () => {
-  let component: DislikesCountComponent;
-  let fixture: ComponentFixture<DislikesCountComponent>;
+describe("DislikesCountComponent", () => {
+    let component: DislikesCountComponent
+    let fixture: ComponentFixture<DislikesCountComponent>
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [DislikesCountComponent]
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [DislikesCountComponent]
+        }).compileComponents()
+
+        fixture = TestBed.createComponent(DislikesCountComponent)
+        component = fixture.componentInstance
+        fixture.detectChanges()
     })
-    .compileComponents();
 
-    fixture = TestBed.createComponent(DislikesCountComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    it("should create", () => {
+        expect(component).toBeTruthy()
+    })
+})
