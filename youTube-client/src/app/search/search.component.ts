@@ -1,9 +1,14 @@
 import { Component } from "@angular/core"
+import { FormsModule } from "@angular/forms"
+import { ButtonComponent } from "../components/shared/button/button.component"
+import { InputGroupModule } from "primeng/inputgroup"
+import { InputGroupAddonModule } from "primeng/inputgroupaddon"
+import { InputTextModule } from "primeng/inputtext"
 
 @Component({
     selector: "app-search",
     standalone: true,
-    imports: [],
+    imports: [FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ButtonComponent],
     templateUrl: "./search.component.html",
     styleUrl: "./search.component.scss"
 })

@@ -13,9 +13,8 @@ export class ButtonComponent {
     @Input() icon!: string
     @Input() type: string = "button"
     @Input() label!: string
-    @Input() size: ButtonDirective["size"]
     @Input() disabled = false
-    @Input() class!: string
-    @Input() style!: string
+    @Input() classList!: string
     @Input() severity: ButtonDirective["severity"]
+    @Input() outlined: boolean = false
 }

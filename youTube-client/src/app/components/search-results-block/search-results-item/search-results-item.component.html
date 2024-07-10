@@ -1,1 +1,26 @@
-<p>search-results-item works!</p>
+<p-card header="{{ data.snippet.title }}">
+    <ng-template pTemplate="header">
+        <img alt="Card" src="{{ data.snippet.thumbnails.standard.url }}" />
+    </ng-template>
+    <div class="statistic">
+        <div class="statistic__item">
+            <i class="pi pi-eye"></i>
+            {{ data.statistics.viewCount }}
+        </div>
+        <div class="statistic__item">
+            <i class="pi pi-thumbs-up-fill"></i>
+            {{ data.statistics.likeCount }}
+        </div>
+        <div class="statistic__item">
+            <i class="pi pi-thumbs-down-fill"></i>
+            {{ data.statistics.dislikeCount }}
+        </div>
+        <div class="statistic__item">
+            <i class="pi pi-comment"></i>
+            {{ data.statistics.commentCount }}
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <app-button>More </app-button>
+    </ng-template>
+</p-card>

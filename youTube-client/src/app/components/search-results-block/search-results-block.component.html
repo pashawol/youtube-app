@@ -1,1 +1,7 @@
-<p>search-results-block works!</p>
+<div class="row">
+    @for (data of dataItems; track $index) {
+        <app-search-results-item [data]="data" />
+    } @empty {
+        <h2>Sorry, we didn`t found anything (:</h2>
+    }
+</div>

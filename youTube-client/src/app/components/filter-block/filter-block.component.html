@@ -1,1 +1,14 @@
-<p>filter-block works!</p>
+<div class="filter-block row">
+    <div class="row">
+        <span>Sorting by:</span>
+
+        <app-button class="active" [outlined]="true">date</app-button>
+
+        <app-button class="actives" [outlined]="true">count of views</app-button>
+    </div>
+
+    <div class="row">
+        <span>by word or sentance</span>
+        <input type="text" pInputText [(ngModel)]="value" />
+    </div>
+</div>

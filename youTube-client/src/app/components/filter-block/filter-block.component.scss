@@ -1,0 +1,19 @@
+.filter-block {
+    justify-content: center;
+    padding-top: 1rem;
+    font-weight: normal;
+    align-items: center;
+    --gap: 1rem;
+    .row {
+        --gap: 0.5rem 1rem;
+        align-items: center;
+        span {
+            // width: 100%;
+            font-size: 1rem;
+        }
+    }
+}
+
+.p-inputtext {
+    width: 15rem;
+}
