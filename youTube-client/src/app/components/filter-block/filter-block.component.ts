@@ -18,9 +18,16 @@ export class FilterBlockComponent {
     filterCriteria: { date: string; count: string; word: string } = { date: "", count: "", word: "" }
     private subscription: Subscription
 
+    toggleFilterBlock: boolean = false
+    private toggleSubscription: Subscription
+
     constructor(private filterService: FilterService) {
         this.subscription = this.filterService.filter$.subscribe((data) => {
             this.filterCriteria = data
+        })
+
+        this.toggleSubscription = this.filterService.filterToggle$.subscribe((state) => {
+            this.toggleFilterBlock = state
         })
     }
 
