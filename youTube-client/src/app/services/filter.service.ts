@@ -5,18 +5,18 @@ import { BehaviorSubject, Subject } from "rxjs"
     providedIn: "root"
 })
 export class FilterService {
-    private filterSubject = new BehaviorSubject<{ date: string; count: string; word: string }>({
+    private filterSubject = new BehaviorSubject<{ date: string; count: string; searchText: string }>({
         date: "",
         count: "",
-        word: ""
+        searchText: ""
     })
     public filter$ = this.filterSubject.asObservable()
 
     private filterToggleSubject = new Subject<boolean>()
     filterToggle$ = this.filterToggleSubject.asObservable()
 
-    setFilterData(data: { date: string; count: string; word: string }) {
-        this.filterSubject.next(data)
+    setFilterData(criteria: { date?: string; count?: string; searchText?: string }) {
+        this.filterSubject.next({ ...this.filterSubject.value, ...criteria })
     }
 
     toggleFilter(value: boolean) {

@@ -1,21 +1,23 @@
 import { Component, OnDestroy } from "@angular/core"
 import { FormsModule } from "@angular/forms"
 import { InputTextModule } from "primeng/inputtext"
-import { ButtonComponent } from "../shared/button/button.component"
-import { FilterService } from "../../services/filter.service"
 import { Subscription } from "rxjs"
+
+import { FilterService } from "../../services/filter.service"
+import { ButtonComponent } from "../shared/button/button.component"
+import { FilterByWordPipe } from "../../pipes/filter-by-word.pipe"
 
 @Component({
     selector: "app-filter-block",
     standalone: true,
-    imports: [ButtonComponent, FormsModule, InputTextModule],
+    imports: [ButtonComponent, FormsModule, InputTextModule, FilterByWordPipe],
     templateUrl: "./filter-block.component.html",
     styleUrl: "./filter-block.component.scss"
 })
-export class FilterBlockComponent {
-    value!: string
+export class FilterBlockComponent implements OnDestroy {
+    searchText!: string
 
-    filterCriteria: { date: string; count: string; word: string } = { date: "", count: "", word: "" }
+    filterCriteria: { date: string; count: string; searchText: string } = { date: "", count: "", searchText: "" }
     private subscription: Subscription
 
     toggleFilterBlock: boolean = false
@@ -39,7 +41,11 @@ export class FilterBlockComponent {
             } else {
                 way = "Down"
             }
-            this.filterService.setFilterData({ date: filterCriteria + way, count: "", word: this.filterCriteria.word })
+            this.filterService.setFilterData({
+                date: filterCriteria + way,
+                count: "",
+                searchText: this.filterCriteria.searchText
+            })
         }
         if (filterCriteria === "count") {
             if (this.filterCriteria.count !== "countUp") {
@@ -48,14 +54,18 @@ export class FilterBlockComponent {
                 way = "Down"
             }
 
-            this.filterService.setFilterData({ date: "", count: filterCriteria + way, word: this.filterCriteria.word })
+            this.filterService.setFilterData({
+                date: "",
+                count: filterCriteria + way,
+                searchText: this.filterCriteria.searchText
+            })
         }
     }
     onINputChange() {
         this.filterService.setFilterData({
             date: this.filterCriteria.date,
             count: this.filterCriteria.count,
-            word: this.value.trim().toLowerCase()
+            searchText: this.searchText
         })
     }
 

@@ -1,21 +1,22 @@
-import { Component, Input, OnInit, OnDestroy } from "@angular/core"
+import { Component, Input, OnDestroy, OnInit } from "@angular/core"
 import { Subscription } from "rxjs"
+
 import { Item } from "../../models/types.model"
 import response from "../../response.json"
-import { SearchResultsItemComponent } from "./search-results-item/search-results-item.component"
 import { FilterService } from "../../services/filter.service"
-
+import { SearchResultsItemComponent } from "./search-results-item/search-results-item.component"
+import { FilterByWordPipe } from "../../pipes/filter-by-word.pipe"
 @Component({
     selector: "app-search-results-block",
     standalone: true,
-    imports: [SearchResultsItemComponent],
+    imports: [SearchResultsItemComponent, FilterByWordPipe],
     templateUrl: "./search-results-block.component.html",
     styleUrl: "./search-results-block.component.scss"
 })
 export class SearchResultsBlockComponent implements OnInit, OnDestroy {
     @Input() dataItems: Item[] = []
 
-    filterCriteria: { date: string; count: string; word: string } = { date: "", count: "", word: "" }
+    filterCriteria: { date: string; count: string } = { date: "", count: "" }
     private subscription: Subscription
 
     constructor(private filterService: FilterService) {
@@ -37,17 +38,24 @@ export class SearchResultsBlockComponent implements OnInit, OnDestroy {
             if (this.filterCriteria.count === "countDown") {
                 this.dataItems = response.items.sort((a, b) => +b.statistics.viewCount - +a.statistics.viewCount)
             }
-
-            if (this.filterCriteria.word !== "") {
-                this.dataItems = response.items.filter((item) =>
-                    item.snippet.title.toLowerCase().includes(this.filterCriteria.word)
-                )
-            }
         })
     }
 
     ngOnInit() {
-        this.dataItems = response.items
+        this.subscription = this.filterService.filter$.subscribe(({ searchText }) => {
+            this.applyFilters(searchText)
+        })
+        // this.dataItems = response.items
+    }
+
+    applyFilters(searchText: string) {
+        let filteredItems: Item[] = response.items
+
+        if (searchText) {
+            filteredItems = new FilterByWordPipe().transform(filteredItems, searchText)
+        }
+
+        this.dataItems = filteredItems
     }
 
     ngOnDestroy() {

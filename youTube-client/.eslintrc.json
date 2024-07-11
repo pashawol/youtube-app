@@ -77,6 +77,12 @@
                 // NOTE: WE ARE OVERRIDING THE DEFAULT CONFIG TO ALWAYS SET THE PARSER TO ANGULAR (SEE BELOW)
                 "prettier/prettier": ["error", { "parser": "angular" }]
             }
+        },
+        {
+            "files": ["*.pipe.ts"],
+            "rules": {
+                "class-methods-use-this": "off"
+            }
         }
     ]
 }

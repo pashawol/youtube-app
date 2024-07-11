@@ -1,4 +1,5 @@
 import { Component } from "@angular/core"
+
 import { LoginInformationBlockComponent } from "./login-information-block/login-information-block.component"
 import { LogoComponent } from "./logo/logo.component"
 import { SearchBlockComponent } from "./search-block/search-block.component"
