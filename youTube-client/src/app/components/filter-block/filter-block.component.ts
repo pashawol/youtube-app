@@ -1,8 +1,9 @@
-import { Component } from "@angular/core"
+import { Component, OnDestroy } from "@angular/core"
 import { FormsModule } from "@angular/forms"
 import { InputTextModule } from "primeng/inputtext"
-
 import { ButtonComponent } from "../shared/button/button.component"
+import { FilterService } from "../../services/filter.service"
+import { Subscription } from "rxjs"
 
 @Component({
     selector: "app-filter-block",
@@ -13,4 +14,45 @@ import { ButtonComponent } from "../shared/button/button.component"
 })
 export class FilterBlockComponent {
     value!: string
+
+    filterCriteria: { date: string; count: string; word: string } = { date: "", count: "", word: "" }
+    private subscription: Subscription
+
+    constructor(private filterService: FilterService) {
+        this.subscription = this.filterService.filter$.subscribe((data) => {
+            this.filterCriteria = data
+        })
+    }
+
+    onButtonClick(filterCriteria: string) {
+        let way = ""
+        if (filterCriteria === "date") {
+            if (this.filterCriteria.date !== "dateUp") {
+                way = "Up"
+            } else {
+                way = "Down"
+            }
+            this.filterService.setFilterData({ date: filterCriteria + way, count: "", word: this.filterCriteria.word })
+        }
+        if (filterCriteria === "count") {
+            if (this.filterCriteria.count !== "countUp") {
+                way = "Up"
+            } else {
+                way = "Down"
+            }
+
+            this.filterService.setFilterData({ date: "", count: filterCriteria + way, word: this.filterCriteria.word })
+        }
+    }
+    onINputChange() {
+        this.filterService.setFilterData({
+            date: this.filterCriteria.date,
+            count: this.filterCriteria.count,
+            word: this.value.trim().toLowerCase()
+        })
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe()
+    }
 }

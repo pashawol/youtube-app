@@ -18,18 +18,9 @@ export class HighlightDirective implements OnInit {
         const diff = today.getTime() - publishedDay.getTime()
         const diffDays = diff / (1000 * 3600 * 24)
 
-        if (diffDays <= 7) {
-            return "#025ef2"
-        }
-        if (diffDays <= 30 && diffDays > 7) {
-            return "#0ab306"
-        }
-        if (diffDays <= 182 && diffDays > 30) {
-            return "#fdcd1d"
-        }
-        if (diffDays > 182) {
-            return "#d52914"
-        }
-        return "#333"
+        if (diffDays <= 7) return "#025ef2"
+        if (diffDays <= 30) return "#0ab306"
+        if (diffDays <= 182) return "#fdcd1d"
+        return "#d52914"
     }
 }

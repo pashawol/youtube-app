@@ -1,5 +1,5 @@
 <div class="row">
-    @for (data of dataItems; track $index) {
+    @for (data of dataItems; track data.id) {
         <app-search-results-item [data]="data" />
     } @empty {
         <h2>Sorry, we didn`t found anything (:</h2>
