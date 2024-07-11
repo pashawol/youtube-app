@@ -1,7 +1,8 @@
-import { Component, Input } from "@angular/core"
+import { Component, Input, OnInit } from "@angular/core"
+
 import { Item } from "../../models/types.model"
-import { SearchResultsItemComponent } from "./search-results-item/search-results-item.component"
 import response from "../../response.json"
+import { SearchResultsItemComponent } from "./search-results-item/search-results-item.component"
 
 @Component({
     selector: "app-search-results-block",
@@ -10,7 +11,7 @@ import response from "../../response.json"
     templateUrl: "./search-results-block.component.html",
     styleUrl: "./search-results-block.component.scss"
 })
-export class SearchResultsBlockComponent {
+export class SearchResultsBlockComponent implements OnInit {
     @Input() dataItems: Item[] = []
 
     ngOnInit() {

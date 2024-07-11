@@ -1,7 +1,8 @@
 import { Component } from "@angular/core"
-import { ButtonComponent } from "../shared/button/button.component"
-import { InputTextModule } from "primeng/inputtext"
 import { FormsModule } from "@angular/forms"
+import { InputTextModule } from "primeng/inputtext"
+
+import { ButtonComponent } from "../shared/button/button.component"
 
 @Component({
     selector: "app-filter-block",
