@@ -6,6 +6,8 @@ import { InputTextModule } from "primeng/inputtext"
 
 import { ButtonComponent } from "../../shared/button/button.component"
 
+import { SearchService } from "../../../services/search.service"
+
 @Component({
     selector: "app-search-block",
     standalone: true,
@@ -13,4 +15,9 @@ import { ButtonComponent } from "../../shared/button/button.component"
     templateUrl: "./search-block.component.html",
     styleUrl: "./search-block.component.scss"
 })
-export class SearchBlockComponent {}
+export class SearchBlockComponent {
+    constructor(private searchService: SearchService) {}
+    onSubmit() {
+        this.searchService.activateSearch(true)
+    }
+}
