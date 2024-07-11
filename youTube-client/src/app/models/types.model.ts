@@ -83,3 +83,9 @@ export interface Statistics {
     favoriteCount: string
     commentCount: string
 }
+
+export interface FilterCriteria {
+    date: string
+    count: string
+    searchText: string
+}

@@ -1,11 +1,13 @@
 import { Injectable } from "@angular/core"
 import { BehaviorSubject, Subject } from "rxjs"
 
+import { FilterCriteria } from "../models/types.model"
+
 @Injectable({
     providedIn: "root"
 })
 export class FilterService {
-    private filterSubject = new BehaviorSubject<{ date: string; count: string; searchText: string }>({
+    private filterSubject = new BehaviorSubject<FilterCriteria>({
         date: "",
         count: "",
         searchText: ""

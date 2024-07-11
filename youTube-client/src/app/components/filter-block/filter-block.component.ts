@@ -3,6 +3,7 @@ import { FormsModule } from "@angular/forms"
 import { InputTextModule } from "primeng/inputtext"
 import { Subscription } from "rxjs"
 
+import { FilterCriteria } from "../../models/types.model"
 import { FilterByWordPipe } from "../../pipes/filter-by-word.pipe"
 import { FilterService } from "../../services/filter.service"
 import { ButtonComponent } from "../shared/button/button.component"
@@ -17,7 +18,7 @@ import { ButtonComponent } from "../shared/button/button.component"
 export class FilterBlockComponent implements OnDestroy {
     searchText!: string
 
-    filterCriteria: { date: string; count: string; searchText: string } = { date: "", count: "", searchText: "" }
+    filterCriteria: FilterCriteria = { date: "", count: "", searchText: "" }
     private subscription: Subscription
 
     toggleFilterBlock: boolean = false
