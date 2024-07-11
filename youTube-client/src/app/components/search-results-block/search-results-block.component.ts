@@ -22,27 +22,27 @@ export class SearchResultsBlockComponent implements OnInit, OnDestroy {
         this.subscription = this.filterService.filter$.subscribe((data) => {
             this.filterCriteria = data
             if (this.filterCriteria.date === "dateUp") {
-                this.dataItems = this.dataItems.sort(
+                this.dataItems = response.items.sort(
                     (a, b) => +new Date(a.snippet.publishedAt) - +new Date(b.snippet.publishedAt)
                 )
             }
             if (this.filterCriteria.date === "dateDown") {
-                this.dataItems = this.dataItems.sort(
+                this.dataItems = response.items.sort(
                     (a, b) => +new Date(b.snippet.publishedAt) - +new Date(a.snippet.publishedAt)
                 )
             }
             if (this.filterCriteria.count === "countUp") {
-                this.dataItems = this.dataItems.sort((a, b) => +a.statistics.viewCount - +b.statistics.viewCount)
+                this.dataItems = response.items.sort((a, b) => +a.statistics.viewCount - +b.statistics.viewCount)
             }
             if (this.filterCriteria.count === "countDown") {
-                this.dataItems = this.dataItems.sort((a, b) => +b.statistics.viewCount - +a.statistics.viewCount)
+                this.dataItems = response.items.sort((a, b) => +b.statistics.viewCount - +a.statistics.viewCount)
             }
 
-            // if (this.filterCriteria.word !== "") {
-            // this.dataItems = response.items.filter((item) =>
-            //     item.snippet.title.toLowerCase().includes(this.filterCriteria.word)
-            // )
-            // }
+            if (this.filterCriteria.word !== "") {
+                this.dataItems = response.items.filter((item) =>
+                    item.snippet.title.toLowerCase().includes(this.filterCriteria.word)
+                )
+            }
         })
     }
 
