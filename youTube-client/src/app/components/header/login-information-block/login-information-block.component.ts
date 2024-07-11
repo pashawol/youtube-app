@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core"
 
 @Component({
-  selector: 'app-login-information-block',
-  standalone: true,
-  imports: [],
-  templateUrl: './login-information-block.component.html',
-  styleUrl: './login-information-block.component.scss'
+    selector: "app-login-information-block",
+    standalone: true,
+    imports: [],
+    templateUrl: "./login-information-block.component.html",
+    styleUrl: "./login-information-block.component.scss"
 })
-export class LoginInformationBlockComponent {
-
-}
+export class LoginInformationBlockComponent {}
