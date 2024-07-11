@@ -3,9 +3,9 @@ import { FormsModule } from "@angular/forms"
 import { InputTextModule } from "primeng/inputtext"
 import { Subscription } from "rxjs"
 
+import { FilterByWordPipe } from "../../pipes/filter-by-word.pipe"
 import { FilterService } from "../../services/filter.service"
 import { ButtonComponent } from "../shared/button/button.component"
-import { FilterByWordPipe } from "../../pipes/filter-by-word.pipe"
 
 @Component({
     selector: "app-filter-block",

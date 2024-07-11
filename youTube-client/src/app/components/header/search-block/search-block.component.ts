@@ -4,9 +4,8 @@ import { InputGroupModule } from "primeng/inputgroup"
 import { InputGroupAddonModule } from "primeng/inputgroupaddon"
 import { InputTextModule } from "primeng/inputtext"
 
-import { ButtonComponent } from "../../shared/button/button.component"
-
 import { SearchService } from "../../../services/search.service"
+import { ButtonComponent } from "../../shared/button/button.component"
 
 @Component({
     selector: "app-search-block",

@@ -1,6 +1,7 @@
-import { Component, OnDestroy } from "@angular/core"
 import { CommonModule } from "@angular/common" //
+import { Component, OnDestroy } from "@angular/core"
 import { Subscription } from "rxjs"
+
 import { FilterBlockComponent } from "../../components/filter-block/filter-block.component"
 import { SearchResultsBlockComponent } from "../../components/search-results-block/search-results-block.component"
 import { SearchService } from "../../services/search.service"
@@ -16,9 +17,9 @@ export class SearchResultComponent implements OnDestroy {
     public showSearchResults: boolean = false
     private subscription: Subscription
     constructor(private searchService: SearchService) {
-        this.subscription = this.searchService.searchActivated$.subscribe(
-            (activate) => (this.showSearchResults = activate)
-        )
+        this.subscription = this.searchService.searchActivated$.subscribe((activate) => {
+            this.showSearchResults = activate
+        })
     }
 
     ngOnDestroy() {

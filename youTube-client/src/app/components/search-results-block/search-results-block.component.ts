@@ -2,10 +2,11 @@ import { Component, Input, OnDestroy, OnInit } from "@angular/core"
 import { Subscription } from "rxjs"
 
 import { Item } from "../../models/types.model"
+import { FilterByWordPipe } from "../../pipes/filter-by-word.pipe"
 import response from "../../response.json"
 import { FilterService } from "../../services/filter.service"
 import { SearchResultsItemComponent } from "./search-results-item/search-results-item.component"
-import { FilterByWordPipe } from "../../pipes/filter-by-word.pipe"
+
 @Component({
     selector: "app-search-results-block",
     standalone: true,
