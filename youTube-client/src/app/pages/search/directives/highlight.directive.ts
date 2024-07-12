@@ -1,15 +1,14 @@
-import { Directive, ElementRef, Input, OnInit } from "@angular/core"
+import { Directive, HostBinding, Input } from "@angular/core"
 
 @Directive({
     selector: "[appHighlight]",
     standalone: true
 })
-export class HighlightDirective implements OnInit {
+export class HighlightDirective {
     @Input() appHighlight!: string
-    constructor(private el: ElementRef) {}
 
-    ngOnInit() {
-        this.el.nativeElement.style.setProperty("--bd-color", this.setBorderColor())
+    @HostBinding("style.--bd-color") get color() {
+        return this.setBorderColor()
     }
 
     setBorderColor() {

@@ -1,5 +1,5 @@
 <div class="container">
     <app-filter-block />
-    <!-- <app-search-results-list *ngIf="showSearchResults" /> -->
-    <app-search-results-list />
+    <app-search-results-list *ngIf="searchActivated$ | async" />
+    <!-- <app-search-results-list /> -->
 </div>

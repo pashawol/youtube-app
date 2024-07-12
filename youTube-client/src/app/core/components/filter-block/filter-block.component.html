@@ -3,11 +3,11 @@
         <div class="row">
             <span>Sorting by:</span>
 
-            <app-button class="active" (click)="onButtonClick('date')" [outlined]="true">
+            <app-button class="active" (cClick)="onButtonClick('date')" [outlined]="true">
                 Date {{ filterCriteria.date === "dateUp" ? "↑" : filterCriteria.date === "dateDown" ? "↓" : "" }}
             </app-button>
 
-            <app-button class="actives" (click)="onButtonClick('count')" [outlined]="true">
+            <app-button class="actives" (cClick)="onButtonClick('count')" [outlined]="true">
                 Count of views
                 {{ filterCriteria.count === "countUp" ? "↑" : filterCriteria.count === "countDown" ? "↓" : "" }}
             </app-button>
@@ -15,7 +15,7 @@
 
         <div class="row">
             <span>by word or sentance</span>
-            <input type="text" pInputText [(ngModel)]="searchText" />
+            <input type="text" pInputText [(ngModel)]="searchText" (input)="onINputChange()" />
         </div>
     </div>
 }
