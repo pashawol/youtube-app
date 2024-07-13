@@ -5,7 +5,7 @@ import { Item } from "../models/response.model"
 @Pipe({
     name: "filterByWord",
     standalone: true,
-    pure: true
+    pure: false
 })
 export class FilterByWordPipe implements PipeTransform {
     transform(items: Item[], searchText: string): Item[] {

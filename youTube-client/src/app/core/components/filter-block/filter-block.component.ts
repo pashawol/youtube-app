@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common"
 import { Component, OnDestroy } from "@angular/core"
 import { FormsModule } from "@angular/forms"
 import { FilterService } from "@pages/search/services/filter.service"
@@ -10,7 +11,7 @@ import { FilterCriteria } from "./filter.model"
 @Component({
     selector: "app-filter-block",
     standalone: true,
-    imports: [ButtonComponent, FormsModule, InputTextModule],
+    imports: [CommonModule, ButtonComponent, FormsModule, InputTextModule],
     templateUrl: "./filter-block.component.html",
     styleUrl: "./filter-block.component.scss"
 })
@@ -20,16 +21,11 @@ export class FilterBlockComponent implements OnDestroy {
     filterCriteria: FilterCriteria = { date: "", count: "", searchText: this.searchText }
     private subscription: Subscription
 
-    toggleFilterBlock: boolean = false
-    private toggleSubscription: Subscription
+    toggleFilterBlock = this.filterService.filterToggle$
 
     constructor(private filterService: FilterService) {
         this.subscription = this.filterService.filter$.subscribe((data) => {
             this.filterCriteria = data
-        })
-
-        this.toggleSubscription = this.filterService.filterToggle$.subscribe((state) => {
-            this.toggleFilterBlock = state
         })
     }
 
@@ -54,7 +50,7 @@ export class FilterBlockComponent implements OnDestroy {
             })
         }
     }
-    onINputChange() {
+    onInputChange() {
         this.filterService.setFilterData(this.filterCriteria)
     }
 

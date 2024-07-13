@@ -1,5 +1,6 @@
 <div class="container">
     <app-filter-block />
-    <app-search-results-list *ngIf="searchActivated$ | async" />
+    <!-- *ngIf="searchActivated$ | async" -->
+    <app-search-results-list [items]="dataItems | filterByWord: filterCriteria.searchText" />
     <!-- <app-search-results-list /> -->
 </div>
