@@ -18,7 +18,7 @@ export class FilterService {
     private filterToggleSubject = new Subject<boolean>()
     filterToggle$ = this.filterToggleSubject.asObservable()
 
-    setFilterData(criteria: FilterCriteria) {
+    setFilterData(criteria: Partial<FilterCriteria>) {
         this.filterSubject.next({ ...this.filterSubject.value, ...criteria })
     }
 
@@ -48,20 +48,22 @@ export class FilterService {
         }
     }
 
-    onInputChange() {
-        this.filterSubject.value.searchText = this.filterSubject.value.searchText.trim()
-        if (this.filterSubject.value.searchText.length === 0) this.setFilterData(this.filterSubject.value)
+    onInputChange(searchText: string) {
+        this.setFilterData({ searchText: searchText.trim() })
     }
 
-    sortDataByFilterCriteria(data: Item[]) {
+    sortDataByFilterCriteria(data: Item[]): Item[] {
+        const sorted: Item[] = [...data]
+
         if (this.filterSubject.value.date === "dateUp") {
-            data.sort((a, b) => +new Date(a.snippet.publishedAt) - +new Date(b.snippet.publishedAt))
+            sorted.sort((a, b) => +new Date(a.snippet.publishedAt) - +new Date(b.snippet.publishedAt))
         }
         if (this.filterSubject.value.count === "countUp") {
-            data.sort((a, b) => +a.statistics.viewCount - +b.statistics.viewCount)
+            sorted.sort((a, b) => +a.statistics.viewCount - +b.statistics.viewCount)
         }
         if (this.filterSubject.value.date === "dateDown" || this.filterSubject.value.count === "countDown") {
-            data.reverse()
+            sorted.reverse()
         }
+        return sorted
     }
 }

@@ -8,7 +8,7 @@ import { Item } from "../models/response.model"
     pure: false
 })
 export class FilterByWordPipe implements PipeTransform {
-    transform(items: Item[], searchText: string): Item[] {
+    transform(items: Item[] | null, searchText: string): Item[] {
         if (!items) return []
         if (!searchText) {
             return items

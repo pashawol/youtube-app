@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common"
-import { Component, Input } from "@angular/core"
+import { Component, Input, OnChanges, SimpleChanges } from "@angular/core"
 import { FormsModule } from "@angular/forms"
 import { FilterService } from "@pages/search/services/filter.service"
 import { ButtonComponent } from "@shared/components"
@@ -14,15 +14,22 @@ import { FilterCriteria } from "./filter.model"
     templateUrl: "./filter-block.component.html",
     styleUrl: "./filter-block.component.scss"
 })
-export class FilterBlockComponent {
+export class FilterBlockComponent implements OnChanges {
     @Input() filterCriteria: FilterCriteria = { date: "", count: "", searchText: "" }
+
+    searchText: string = ""
 
     constructor(private filterService: FilterService) {}
 
-    onButtonClick(filterCriteria: string) {
-        this.filterService.onButtonClick(filterCriteria)
+    ngOnChanges({ filterCriteria }: SimpleChanges) {
+        if (filterCriteria?.currentValue && filterCriteria?.firstChange) {
+            this.searchText = filterCriteria.currentValue.searchText
+        }
+    }
+    onButtonClick(filterData: string) {
+        this.filterService.onButtonClick(filterData)
     }
     onInputChange() {
-        this.filterService.onInputChange()
+        this.filterService.onInputChange(this.searchText)
     }
 }

@@ -1,10 +1,10 @@
-import { CommonModule } from "@angular/common" //
-import { Component, DestroyRef, inject, Input, OnInit } from "@angular/core"
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop"
+import { CommonModule } from "@angular/common"
+import { Component } from "@angular/core"
 import { FilterCriteria } from "@app/core/components/filter-block/filter.model"
-import { FilterBlockComponent } from "@core/components/filter-block/filter-block.component"
+import { FilterBlockComponent } from "@core/components"
+import { map, Observable, of, switchMap } from "rxjs"
 
-import { SearchResultsListComponent } from "../../components/search-results-list/search-results-list.component"
+import { SearchResultsListComponent } from "../../components"
 import { Item } from "../../models/response.model"
 import { FilterByWordPipe } from "../../pipes/filter-by-word.pipe"
 import { FilterService, RequestService, SearchService } from "../../services"
@@ -16,28 +16,25 @@ import { FilterService, RequestService, SearchService } from "../../services"
     templateUrl: "./search-result-container.component.html",
     styleUrl: "./search-result-container.component.scss"
 })
-export class SearchResultContainerComponent implements OnInit {
-    @Input() dataItems: Item[] = this.requestService.search()
+export class SearchResultContainerComponent {
+    dataItems$: Observable<Item[]> = this.getItems$()
 
     searchActivated$ = this.searchService.searchActivated$
-    filterCriteria: FilterCriteria = { date: "", count: "", searchText: "" }
+    filterCriteria$: Observable<FilterCriteria> = this.filterService.filter$
 
-    toggleFilterBlock = this.filterService.filterToggle$
-
-    private destroyRef: DestroyRef
+    toggleFilterBlock: Observable<boolean> = this.filterService.filterToggle$
 
     constructor(
         private filterService: FilterService,
         private searchService: SearchService,
         private requestService: RequestService
-    ) {
-        this.destroyRef = inject(DestroyRef)
-    }
+    ) {}
 
-    ngOnInit() {
-        this.filterService.filter$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data) => {
-            this.filterCriteria = data
-            this.filterService.sortDataByFilterCriteria(this.dataItems)
-        })
+    private getItems$(): Observable<Item[]> {
+        return of(this.requestService.search()).pipe(
+            switchMap((items: Item[]) =>
+                this.filterService.filter$.pipe(map(() => this.filterService.sortDataByFilterCriteria(items)))
+            )
+        )
     }
 }
