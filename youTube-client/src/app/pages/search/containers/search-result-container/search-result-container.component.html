@@ -1,4 +1,5 @@
 <div class="container">
+    <!-- <app-filter-block *ngIf="toggleFilterBlock | async" /> -->
     <app-filter-block />
     <!-- *ngIf="searchActivated$ | async" -->
     <app-search-results-list [items]="dataItems | filterByWord: filterCriteria.searchText" />

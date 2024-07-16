@@ -21,20 +21,29 @@ import { SearchService } from "../../services/search.service"
 export class SearchResultContainerComponent implements OnInit, OnDestroy {
     @Input() dataItems: Item[] = response.items
     searchActivated$ = this.searchService.searchActivated$
-
     filterCriteria: FilterCriteria = { date: "", count: "", searchText: "" }
     private subscription: Subscription
+    toggleFilterBlock = this.filterService.filterToggle$
 
     constructor(
         private filterService: FilterService,
         private searchService: SearchService
     ) {
-        this.subscription = this.filterService.filter$.subscribe((data) => {
-            this.filterCriteria = data
-        })
+        this.subscription = this.filterService.filter$.subscribe()
     }
 
     ngOnInit() {
+        this.subscription = this.filterService.filter$.subscribe((data) => {
+            this.filterCriteria = data
+            this.sortDataByFilterCriteria()
+        })
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe()
+    }
+
+    sortDataByFilterCriteria() {
         if (this.filterCriteria.date === "dateUp") {
             this.dataItems.sort((a, b) => +new Date(a.snippet.publishedAt) - +new Date(b.snippet.publishedAt))
         }
@@ -44,9 +53,5 @@ export class SearchResultContainerComponent implements OnInit, OnDestroy {
         if (this.filterCriteria.date === "dateDown" || this.filterCriteria.count === "countDown") {
             this.dataItems.reverse()
         }
-    }
-
-    ngOnDestroy() {
-        this.subscription.unsubscribe()
     }
 }

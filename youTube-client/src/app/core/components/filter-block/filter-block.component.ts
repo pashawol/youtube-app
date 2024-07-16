@@ -21,8 +21,6 @@ export class FilterBlockComponent implements OnDestroy {
     filterCriteria: FilterCriteria = { date: "", count: "", searchText: this.searchText }
     private subscription: Subscription
 
-    toggleFilterBlock = this.filterService.filterToggle$
-
     constructor(private filterService: FilterService) {
         this.subscription = this.filterService.filter$.subscribe((data) => {
             this.filterCriteria = data
