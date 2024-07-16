@@ -58,12 +58,18 @@ export class FilterService {
         if (this.filterSubject.value.date === "dateUp") {
             sorted.sort((a, b) => +new Date(a.snippet.publishedAt) - +new Date(b.snippet.publishedAt))
         }
+        if (this.filterSubject.value.date === "dateDown") {
+            sorted.sort((a, b) => +new Date(b.snippet.publishedAt) - +new Date(a.snippet.publishedAt))
+        }
+
         if (this.filterSubject.value.count === "countUp") {
             sorted.sort((a, b) => +a.statistics.viewCount - +b.statistics.viewCount)
         }
-        if (this.filterSubject.value.date === "dateDown" || this.filterSubject.value.count === "countDown") {
-            sorted.reverse()
+
+        if (this.filterSubject.value.count === "countDown") {
+            sorted.sort((a, b) => +b.statistics.viewCount - +a.statistics.viewCount)
         }
+
         return sorted
     }
 }
