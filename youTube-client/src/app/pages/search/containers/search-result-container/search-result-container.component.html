@@ -1,7 +1,10 @@
 <div class="container">
-    <!-- <app-filter-block *ngIf="toggleFilterBlock | async" /> -->
-    <app-filter-block />
-    <!-- *ngIf="searchActivated$ | async" -->
-    <app-search-results-list [items]="dataItems | filterByWord: filterCriteria.searchText" />
+    <app-filter-block *ngIf="toggleFilterBlock | async" />
+    <!-- <app-filter-block /> -->
+    <!-- -->
+    <app-search-results-list
+        *ngIf="searchActivated$ | async"
+        [items]="dataItems | filterByWord: filterCriteria.searchText"
+    />
     <!-- <app-search-results-list /> -->
 </div>

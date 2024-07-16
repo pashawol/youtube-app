@@ -16,9 +16,7 @@ import { FilterCriteria } from "./filter.model"
     styleUrl: "./filter-block.component.scss"
 })
 export class FilterBlockComponent implements OnDestroy {
-    searchText!: string
-
-    filterCriteria: FilterCriteria = { date: "", count: "", searchText: this.searchText }
+    filterCriteria: FilterCriteria = { date: "", count: "", searchText: "" }
     private subscription: Subscription
 
     constructor(private filterService: FilterService) {
@@ -28,26 +26,27 @@ export class FilterBlockComponent implements OnDestroy {
     }
 
     onButtonClick(filterCriteria: string) {
-        let way = ""
+        let direction = ""
         if (filterCriteria === "date") {
-            way = this.filterCriteria.date !== "dateUp" ? "Up" : "Down"
+            direction = this.filterCriteria.date !== "dateUp" ? "Up" : "Down"
 
             this.filterService.setFilterData({
-                date: filterCriteria + way,
+                date: filterCriteria + direction,
                 count: "",
                 searchText: this.filterCriteria.searchText
             })
         }
         if (filterCriteria === "count") {
-            way = this.filterCriteria.count !== "countUp" ? "Up" : "Down"
+            direction = this.filterCriteria.count !== "countUp" ? "Up" : "Down"
 
             this.filterService.setFilterData({
                 date: "",
-                count: filterCriteria + way,
+                count: filterCriteria + direction,
                 searchText: this.filterCriteria.searchText
             })
         }
     }
+
     onInputChange() {
         this.filterService.setFilterData(this.filterCriteria)
     }

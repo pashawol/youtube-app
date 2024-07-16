@@ -16,7 +16,7 @@ export class FilterService {
     private filterToggleSubject = new Subject<boolean>()
     filterToggle$ = this.filterToggleSubject.asObservable()
 
-    setFilterData(criteria: { date?: string; count?: string; searchText?: string }) {
+    setFilterData(criteria: FilterCriteria) {
         this.filterSubject.next({ ...this.filterSubject.value, ...criteria })
     }
 

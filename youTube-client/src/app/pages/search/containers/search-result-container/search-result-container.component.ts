@@ -23,6 +23,7 @@ export class SearchResultContainerComponent implements OnInit, OnDestroy {
     searchActivated$ = this.searchService.searchActivated$
     filterCriteria: FilterCriteria = { date: "", count: "", searchText: "" }
     private subscription: Subscription
+
     toggleFilterBlock = this.filterService.filterToggle$
 
     constructor(
@@ -36,6 +37,7 @@ export class SearchResultContainerComponent implements OnInit, OnDestroy {
         this.subscription = this.filterService.filter$.subscribe((data) => {
             this.filterCriteria = data
             this.sortDataByFilterCriteria()
+            console.log(this.filterCriteria)
         })
     }
 
