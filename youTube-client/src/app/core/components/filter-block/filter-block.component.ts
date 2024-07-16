@@ -1,10 +1,11 @@
 import { CommonModule } from "@angular/common"
-import { Component, OnDestroy } from "@angular/core"
+import { Component, OnInit } from "@angular/core"
 import { FormsModule } from "@angular/forms"
 import { FilterService } from "@pages/search/services/filter.service"
 import { ButtonComponent } from "@shared/components"
 import { InputTextModule } from "primeng/inputtext"
-import { Subscription } from "rxjs"
+import { Subject } from "rxjs"
+import { takeUntil } from "rxjs/operators"
 
 import { FilterCriteria } from "./filter.model"
 
@@ -15,12 +16,14 @@ import { FilterCriteria } from "./filter.model"
     templateUrl: "./filter-block.component.html",
     styleUrl: "./filter-block.component.scss"
 })
-export class FilterBlockComponent implements OnDestroy {
+export class FilterBlockComponent implements OnInit {
     filterCriteria: FilterCriteria = { date: "", count: "", searchText: "" }
-    private subscription: Subscription
+    private destroyed$ = new Subject<void>()
 
-    constructor(private filterService: FilterService) {
-        this.subscription = this.filterService.filter$.subscribe((data) => {
+    constructor(private filterService: FilterService) {}
+
+    ngOnInit() {
+        this.filterService.filter$.pipe(takeUntil(this.destroyed$)).subscribe((data) => {
             this.filterCriteria = data
         })
     }
@@ -49,9 +52,5 @@ export class FilterBlockComponent implements OnDestroy {
 
     onInputChange() {
         this.filterService.setFilterData(this.filterCriteria)
-    }
-
-    ngOnDestroy() {
-        this.subscription.unsubscribe()
     }
 }

@@ -1,9 +1,10 @@
 import { CommonModule } from "@angular/common" //
-import { Component, Input, OnDestroy, OnInit } from "@angular/core"
+import { Component, Input, OnInit } from "@angular/core"
 import { FilterCriteria } from "@app/core/components/filter-block/filter.model"
 import response from "@app/response.json"
 import { FilterBlockComponent } from "@core/components/filter-block/filter-block.component"
-import { Subscription } from "rxjs"
+import { Subject } from "rxjs"
+import { takeUntil } from "rxjs/operators"
 
 import { SearchResultsListComponent } from "../../components/search-results-list/search-results-list.component"
 import { Item } from "../../models/response.model"
@@ -18,31 +19,26 @@ import { SearchService } from "../../services/search.service"
     templateUrl: "./search-result-container.component.html",
     styleUrl: "./search-result-container.component.scss"
 })
-export class SearchResultContainerComponent implements OnInit, OnDestroy {
+export class SearchResultContainerComponent implements OnInit {
     @Input() dataItems: Item[] = response.items
+
     searchActivated$ = this.searchService.searchActivated$
     filterCriteria: FilterCriteria = { date: "", count: "", searchText: "" }
-    private subscription: Subscription
 
     toggleFilterBlock = this.filterService.filterToggle$
+
+    private destroyed$ = new Subject<void>()
 
     constructor(
         private filterService: FilterService,
         private searchService: SearchService
-    ) {
-        this.subscription = this.filterService.filter$.subscribe()
-    }
+    ) {}
 
     ngOnInit() {
-        this.subscription = this.filterService.filter$.subscribe((data) => {
+        this.filterService.filter$.pipe(takeUntil(this.destroyed$)).subscribe((data) => {
             this.filterCriteria = data
             this.sortDataByFilterCriteria()
-            console.log(this.filterCriteria)
         })
-    }
-
-    ngOnDestroy() {
-        this.subscription.unsubscribe()
     }
 
     sortDataByFilterCriteria() {
