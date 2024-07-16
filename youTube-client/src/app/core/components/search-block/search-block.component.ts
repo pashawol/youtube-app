@@ -1,7 +1,7 @@
 import { Component } from "@angular/core"
 import { FormsModule } from "@angular/forms"
 import { SearchService } from "@pages/search/services/search.service"
-import { ButtonComponent } from "@shared/components/button/button.component"
+import { ButtonComponent } from "@shared/components"
 import { InputGroupModule } from "primeng/inputgroup"
 import { InputGroupAddonModule } from "primeng/inputgroupaddon"
 import { InputTextModule } from "primeng/inputtext"

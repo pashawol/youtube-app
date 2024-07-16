@@ -1,7 +1,7 @@
 import { Component } from "@angular/core"
 import { RouterOutlet } from "@angular/router"
 import { HeaderComponent } from "@core/components/header/header.component"
-import { SearchResultContainerComponent } from "@pages/search/containers/search-result-container/search-result-container.component"
+import { SearchResultContainerComponent } from "@pages/search/containers"
 
 @Component({
     selector: "app-root",

@@ -1,7 +1,6 @@
 import { Component } from "@angular/core"
-
-import { FilterService } from "../../../pages/search/services/filter.service"
-import { ButtonComponent } from "../../../shared/components/button/button.component"
+import { FilterService } from "@pages/search/services/filter.service"
+import { ButtonComponent } from "@shared/components"
 
 @Component({
     selector: "app-settings-button",

@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common"
 import { Component, OnDestroy } from "@angular/core"
 import { FormsModule } from "@angular/forms"
 import { FilterService } from "@pages/search/services/filter.service"
-import { ButtonComponent } from "@shared/components/button/button.component"
+import { ButtonComponent } from "@shared/components"
 import { InputTextModule } from "primeng/inputtext"
 import { Subscription } from "rxjs"
 
