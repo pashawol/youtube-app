@@ -18,9 +18,9 @@ export class ButtonComponent {
     @Input() severity: ButtonDirective["severity"]
     @Input() outlined: boolean = false
 
-    @Output() cClick = new EventEmitter<void>()
+    @Output() buttonClick = new EventEmitter<void>()
 
     onClick() {
-        this.cClick.emit()
+        this.buttonClick.emit()
     }
 }

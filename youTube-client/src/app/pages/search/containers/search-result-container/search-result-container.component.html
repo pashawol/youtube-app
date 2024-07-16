@@ -1,5 +1,5 @@
 <div class="container">
-    <app-filter-block *ngIf="toggleFilterBlock | async" />
+    <app-filter-block [filterCriteria]="filterCriteria" *ngIf="toggleFilterBlock | async" />
     <!-- <app-filter-block /> -->
     <!-- -->
     <app-search-results-list

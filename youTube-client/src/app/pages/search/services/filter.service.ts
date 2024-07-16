@@ -2,11 +2,13 @@ import { Injectable } from "@angular/core"
 import { FilterCriteria } from "@core/components/filter-block/filter.model"
 import { BehaviorSubject, Subject } from "rxjs"
 
+import { Item } from "../models/response.model"
+
 @Injectable({
     providedIn: "root"
 })
 export class FilterService {
-    private filterSubject = new BehaviorSubject<FilterCriteria>({
+    public filterSubject = new BehaviorSubject<FilterCriteria>({
         date: "",
         count: "",
         searchText: ""
@@ -22,5 +24,44 @@ export class FilterService {
 
     toggleFilter(value: boolean) {
         this.filterToggleSubject.next(value)
+    }
+
+    onButtonClick(filterCriteria: string) {
+        let direction = ""
+        if (filterCriteria === "date") {
+            direction = this.filterSubject.value.date !== "dateUp" ? "Up" : "Down"
+
+            this.setFilterData({
+                date: filterCriteria + direction,
+                count: "",
+                searchText: this.filterSubject.value.searchText
+            })
+        }
+        if (filterCriteria === "count") {
+            direction = this.filterSubject.value.count !== "countUp" ? "Up" : "Down"
+
+            this.setFilterData({
+                date: "",
+                count: filterCriteria + direction,
+                searchText: this.filterSubject.value.searchText
+            })
+        }
+    }
+
+    onInputChange() {
+        this.filterSubject.value.searchText = this.filterSubject.value.searchText.trim()
+        if (this.filterSubject.value.searchText.length === 0) this.setFilterData(this.filterSubject.value)
+    }
+
+    sortDataByFilterCriteria(data: Item[]) {
+        if (this.filterSubject.value.date === "dateUp") {
+            data.sort((a, b) => +new Date(a.snippet.publishedAt) - +new Date(b.snippet.publishedAt))
+        }
+        if (this.filterSubject.value.count === "countUp") {
+            data.sort((a, b) => +a.statistics.viewCount - +b.statistics.viewCount)
+        }
+        if (this.filterSubject.value.date === "dateDown" || this.filterSubject.value.count === "countDown") {
+            data.reverse()
+        }
     }
 }

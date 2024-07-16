@@ -1,11 +1,9 @@
 import { CommonModule } from "@angular/common"
-import { Component, OnInit } from "@angular/core"
+import { Component, Input } from "@angular/core"
 import { FormsModule } from "@angular/forms"
 import { FilterService } from "@pages/search/services/filter.service"
 import { ButtonComponent } from "@shared/components"
 import { InputTextModule } from "primeng/inputtext"
-import { Subject } from "rxjs"
-import { takeUntil } from "rxjs/operators"
 
 import { FilterCriteria } from "./filter.model"
 
@@ -16,41 +14,15 @@ import { FilterCriteria } from "./filter.model"
     templateUrl: "./filter-block.component.html",
     styleUrl: "./filter-block.component.scss"
 })
-export class FilterBlockComponent implements OnInit {
-    filterCriteria: FilterCriteria = { date: "", count: "", searchText: "" }
-    private destroyed$ = new Subject<void>()
+export class FilterBlockComponent {
+    @Input() filterCriteria: FilterCriteria = { date: "", count: "", searchText: "" }
 
     constructor(private filterService: FilterService) {}
 
-    ngOnInit() {
-        this.filterService.filter$.pipe(takeUntil(this.destroyed$)).subscribe((data) => {
-            this.filterCriteria = data
-        })
-    }
-
     onButtonClick(filterCriteria: string) {
-        let direction = ""
-        if (filterCriteria === "date") {
-            direction = this.filterCriteria.date !== "dateUp" ? "Up" : "Down"
-
-            this.filterService.setFilterData({
-                date: filterCriteria + direction,
-                count: "",
-                searchText: this.filterCriteria.searchText
-            })
-        }
-        if (filterCriteria === "count") {
-            direction = this.filterCriteria.count !== "countUp" ? "Up" : "Down"
-
-            this.filterService.setFilterData({
-                date: "",
-                count: filterCriteria + direction,
-                searchText: this.filterCriteria.searchText
-            })
-        }
+        this.filterService.onButtonClick(filterCriteria)
     }
-
     onInputChange() {
-        this.filterService.setFilterData(this.filterCriteria)
+        this.filterService.onInputChange()
     }
 }
