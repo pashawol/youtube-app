@@ -4,8 +4,8 @@ import { Item } from "../models/response.model"
 
 @Pipe({
     name: "filterByWord",
-    standalone: true,
-    pure: false
+    standalone: true
+    // pure: true
 })
 export class FilterByWordPipe implements PipeTransform {
     transform(items: Item[] | null, searchText: string): Item[] {
