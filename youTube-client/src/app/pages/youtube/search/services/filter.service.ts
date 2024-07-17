@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core"
-import { FilterCriteria } from "@core/components/filter-block/filter.model"
+import { FilterCriteria } from "@app/core/models/filter.model"
 import { BehaviorSubject, Subject } from "rxjs"
 
 import { Item } from "../models/response.model"

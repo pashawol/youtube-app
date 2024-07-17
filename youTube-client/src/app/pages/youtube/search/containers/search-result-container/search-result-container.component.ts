@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common"
 import { Component } from "@angular/core"
-import { FilterCriteria } from "@app/core/components/filter-block/filter.model"
+import { FilterCriteria } from "@app/core/models/filter.model"
 import { FilterBlockComponent } from "@core/components"
 import { map, Observable, of, switchMap } from "rxjs"
 

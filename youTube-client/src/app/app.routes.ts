@@ -1,5 +1,16 @@
 import { Routes } from "@angular/router"
-// eslint-disable-next-line max-len
-import { SearchResultContainerComponent } from "@pages/search/containers/search-result-container/search-result-container.component"
+import { ErrorModule } from "@pages/error/error.module"
+import { LoginModule } from "@pages/login/login.module"
+import { YoutubeModule } from "@pages/youtube/youtube.module"
 
-export const routes: Routes = [{ path: "", component: SearchResultContainerComponent }]
+export const routes: Routes = [
+    { path: "", loadChildren: () => YoutubeModule },
+    {
+        path: "login",
+        loadChildren: () => LoginModule
+    },
+    {
+        path: "**",
+        loadChildren: () => ErrorModule
+    }
+]

@@ -1,11 +1,11 @@
 import { CommonModule } from "@angular/common"
 import { Component, Input, OnChanges, SimpleChanges } from "@angular/core"
 import { FormsModule } from "@angular/forms"
-import { FilterService } from "@pages/search/services/filter.service"
+import { FilterService } from "@app/pages/youtube/search/services/filter.service"
 import { ButtonComponent } from "@shared/components"
 import { InputTextModule } from "primeng/inputtext"
 
-import { FilterCriteria } from "./filter.model"
+import { FilterCriteria } from "../../models/filter.model"
 
 @Component({
     selector: "app-filter-block",

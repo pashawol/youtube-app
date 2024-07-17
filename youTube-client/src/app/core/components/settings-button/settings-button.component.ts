@@ -1,5 +1,5 @@
 import { Component } from "@angular/core"
-import { FilterService } from "@pages/search/services/filter.service"
+import { FilterService } from "@app/pages/youtube/search/services/filter.service"
 import { ButtonComponent } from "@shared/components"
 
 @Component({

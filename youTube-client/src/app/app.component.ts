@@ -1,12 +1,13 @@
 import { Component } from "@angular/core"
 import { RouterOutlet } from "@angular/router"
-import { HeaderComponent } from "@core/components/header/header.component"
-import { SearchResultContainerComponent } from "@pages/search/containers"
+import { SearchResultContainerComponent } from "@app/pages/youtube/search/containers"
+import { CoreModule } from "@core/core.module"
+import { YoutubeModule } from "@pages/youtube/youtube.module"
 
 @Component({
     selector: "app-root",
     standalone: true,
-    imports: [RouterOutlet, HeaderComponent, SearchResultContainerComponent],
+    imports: [RouterOutlet, SearchResultContainerComponent, CoreModule, YoutubeModule],
     templateUrl: "./app.component.html",
     styleUrl: "./app.component.scss"
 })
