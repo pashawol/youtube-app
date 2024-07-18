@@ -21,6 +21,7 @@
     background-color: #333;
     color: #fff;
     border-bottom: 0.5rem solid var(--bd-color, #333);
+
     &-body {
         flex-grow: 1;
         display: flex;
@@ -38,4 +39,8 @@
             justify-content: center;
         }
     }
+}
+
+body {
+    font-size: 16px;
 }
