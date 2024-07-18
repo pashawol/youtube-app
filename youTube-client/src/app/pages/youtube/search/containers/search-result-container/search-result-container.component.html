@@ -3,10 +3,8 @@
         <app-filter-block *ngIf="toggleFilterBlock | async" [filterCriteria]="filterCriteria" />
         <!-- <app-filter-block /> -->
         <!-- -->
-        <app-search-results-list
-            *ngIf="searchActivated$ | async"
-            [items]="dataItems$ | async | filterByWord: filterCriteria.searchText"
-        />
+        <!-- *ngIf="searchActivated$ | async" -->
+        <app-search-results-list [items]="dataItems$ | async | filterByWord: filterCriteria.searchText" />
         <!-- <app-search-results-list /> -->
     </ng-container>
 </div>

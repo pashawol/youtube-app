@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core"
 import { FilterCriteria } from "@app/core/models/filter.model"
+import { Item } from "@shared/models/response.model"
 import { BehaviorSubject, Subject } from "rxjs"
-
-import { Item } from "../models/response.model"
 
 @Injectable({
     providedIn: "root"

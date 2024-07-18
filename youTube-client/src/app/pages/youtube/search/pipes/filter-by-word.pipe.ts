@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core"
-
-import { Item } from "../models/response.model"
+import { Item } from "@shared/models/response.model"
 
 @Pipe({
     name: "filterByWord",

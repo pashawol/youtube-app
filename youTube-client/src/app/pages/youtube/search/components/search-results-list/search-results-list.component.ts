@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core"
+import { Item } from "@shared/models/response.model"
 
-import { Item } from "../../models/response.model"
 import { SearchResultsItemComponent } from "../search-results-item/search-results-item.component"
 
 @Component({

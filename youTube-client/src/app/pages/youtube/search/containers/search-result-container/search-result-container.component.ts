@@ -2,10 +2,10 @@ import { CommonModule } from "@angular/common"
 import { Component } from "@angular/core"
 import { FilterCriteria } from "@app/core/models/filter.model"
 import { FilterBlockComponent } from "@core/components"
+import { Item } from "@shared/models/response.model"
 import { map, Observable, of, switchMap } from "rxjs"
 
 import { SearchResultsListComponent } from "../../components"
-import { Item } from "../../models/response.model"
 import { FilterByWordPipe } from "../../pipes/filter-by-word.pipe"
 import { FilterService, RequestService, SearchService } from "../../services"
 

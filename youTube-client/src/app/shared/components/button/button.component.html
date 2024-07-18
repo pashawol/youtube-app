@@ -1,14 +1,26 @@
-<button
-    pButton
-    pRipple
-    [icon]="icon"
-    [type]="type"
-    [label]="label"
+<a
+    *ngIf="buttonRouterLink; else buttonComponent"
+    class="p-element p-ripple p-button p-component"
     [class]="classList"
-    [disabled]="disabled"
-    [severity]="severity"
-    [outlined]="outlined"
-    (click)="onClick()"
+    [routerLink]="buttonRouterLink"
 >
-    <ng-content></ng-content>
-</button>
+    {{ label }}
+    <ng-content select="" />
+</a>
+
+<ng-template #buttonComponent>
+    <button
+        pButton
+        pRipple
+        [icon]="icon"
+        [type]="type"
+        [label]="label"
+        [class]="classList"
+        [disabled]="disabled"
+        [severity]="severity"
+        [outlined]="outlined"
+        (click)="onClick()"
+    >
+        <ng-content />
+    </button>
+</ng-template>

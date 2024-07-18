@@ -1,9 +1,9 @@
 import { Component, Input } from "@angular/core"
 import { ButtonComponent } from "@shared/components"
+import { Item } from "@shared/models/response.model"
 import { CardModule } from "primeng/card"
 
 import { HighlightDirective } from "../../directives/highlight.directive"
-import { Item } from "../../models/response.model"
 
 @Component({
     selector: "app-search-results-item",

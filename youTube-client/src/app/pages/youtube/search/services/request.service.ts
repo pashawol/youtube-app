@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core"
 import response from "@app/response.json"
-
-import { Item } from "../models/response.model"
+import { Item } from "@shared/models/response.model"
 
 @Injectable({
     providedIn: "root"
