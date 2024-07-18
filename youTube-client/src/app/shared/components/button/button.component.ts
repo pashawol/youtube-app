@@ -20,6 +20,7 @@ export class ButtonComponent {
     @Input() severity: ButtonDirective["severity"]
     @Input() outlined: boolean = false
     @Input() buttonRouterLink!: string
+    @Input() buttonStyle!: string
 
     @Output() buttonClick = new EventEmitter<void>()
 
