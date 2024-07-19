@@ -6,8 +6,9 @@
             <app-search-block />
             <app-settings-button />
         </div>
-        <div>
+        <div class="row">
             <app-login-information-block />
+            <app-button *ngIf="isLoggedIn()" severity="danger" (click)="logout()">Logout</app-button>
         </div>
     </div>
 </header>
