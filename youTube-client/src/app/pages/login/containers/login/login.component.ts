@@ -4,6 +4,7 @@ import { ButtonComponent } from "@app/shared/components"
 import { InputGroupModule } from "primeng/inputgroup"
 import { InputGroupAddonModule } from "primeng/inputgroupaddon"
 import { InputTextModule } from "primeng/inputtext"
+import { LoginService } from "@app/pages/login/services/login.service"
 
 @Component({
     selector: "app-login",
@@ -13,8 +14,12 @@ import { InputTextModule } from "primeng/inputtext"
     styleUrl: "./login.component.scss"
 })
 export class LoginComponent {
-    login: string = "1"
+    username: string = ""
+    password: string = ""
+
+    constructor(private loginService: LoginService) {}
+
     onSubmit() {
-        console.log(this.login)
+        this.loginService.login(this.username, this.password)
     }
 }
