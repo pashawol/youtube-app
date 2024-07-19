@@ -1,6 +1,6 @@
 import { Component } from "@angular/core"
 import { RouterOutlet } from "@angular/router"
-import { SearchResultContainerComponent } from "@app/pages/youtube/search/containers"
+import { SearchResultContainerComponent } from "@app/pages/youtube/pages/search/containers"
 import { CoreModule } from "@core/core.module"
 import { YoutubeModule } from "@pages/youtube/youtube.module"
 

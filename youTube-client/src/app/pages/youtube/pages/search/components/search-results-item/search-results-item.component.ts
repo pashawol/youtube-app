@@ -3,7 +3,7 @@ import { ButtonComponent } from "@shared/components"
 import { Item } from "@shared/models/response.model"
 import { CardModule } from "primeng/card"
 
-import { HighlightDirective } from "../../../directives/highlight.directive"
+import { HighlightDirective } from "../../../../directives/highlight.directive"
 
 @Component({
     selector: "app-search-results-item",

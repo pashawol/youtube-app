@@ -5,7 +5,7 @@ import { ActivatedRoute } from "@angular/router"
 import { Item } from "@shared/models/response.model"
 import { Observable } from "rxjs"
 
-import { HighlightDirective } from "../../../directives/highlight.directive"
+import { HighlightDirective } from "../../../../directives/highlight.directive"
 import { RequestService } from "../../services/request.service"
 
 @Component({
