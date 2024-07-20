@@ -1,16 +1,17 @@
 import { CommonModule } from "@angular/common"
 import { Component, EventEmitter, Input, Output } from "@angular/core"
+import { RouterModule } from "@angular/router"
 import { ButtonDirective, ButtonModule } from "primeng/button"
 import { RippleModule } from "primeng/ripple"
 
 @Component({
-    selector: "app-button",
+    selector: "app-button-link",
     standalone: true,
-    imports: [ButtonModule, RippleModule, CommonModule],
-    templateUrl: "./button.component.html",
-    styleUrl: "./button.component.scss"
+    imports: [ButtonModule, RippleModule, CommonModule, RouterModule],
+    templateUrl: "./button-link.component.html",
+    styleUrl: "./button-link.component.scss"
 })
-export class ButtonComponent {
+export class ButtonLinkComponent {
     @Input() icon!: string
     @Input() type: string = "button"
     @Input() label!: string
@@ -18,6 +19,7 @@ export class ButtonComponent {
     @Input() classList!: string
     @Input() severity: ButtonDirective["severity"]
     @Input() outlined: boolean = false
+    @Input() buttonRouterLink!: string | string[]
     @Input() buttonStyle!: string
 
     @Output() buttonClick = new EventEmitter<void>()
