@@ -7,8 +7,11 @@ export const authGuard: CanActivateFn = () => {
     const router = inject(Router)
 
     if (loginService.isLoggedIn()) {
-        router.navigate(["youtube"])
+        // User is logged in, redirect them to the YouTube page or dashboard
+        // router.navigate(["youtube"])
+        return true
     }
 
-    return !loginService.isLoggedIn()
+    router.navigate(["login"])
+    return false
 }

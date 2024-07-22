@@ -18,7 +18,7 @@ export class ButtonComponent {
     @Input() classList!: string
     @Input() severity: ButtonDirective["severity"]
     @Input() outlined: boolean = false
-    @Input() buttonStyle!: string
+    @Input() style!: string
 
     @Output() buttonClick = new EventEmitter<void>()
 

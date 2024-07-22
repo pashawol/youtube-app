@@ -1,10 +1,10 @@
 import { Component } from "@angular/core"
 import { FormsModule } from "@angular/forms"
+import { LoginService } from "@app/pages/login/services/login.service"
 import { ButtonComponent } from "@app/shared/components"
 import { InputGroupModule } from "primeng/inputgroup"
 import { InputGroupAddonModule } from "primeng/inputgroupaddon"
 import { InputTextModule } from "primeng/inputtext"
-import { LoginService } from "@app/pages/login/services/login.service"
 
 @Component({
     selector: "app-login",

@@ -6,9 +6,11 @@ export const youtubeGuard: CanActivateFn = () => {
     const loginService = inject(LoginService)
     const router = inject(Router)
 
-    if (!loginService.isLoggedIn()) {
-        router.navigate(["login"])
+    if (loginService.isLoggedIn()) {
+        // User is logged in, redirect them to the YouTube page or dashboard
+        router.navigate(["youtube"])
+        return false
     }
-
-    return loginService.isLoggedIn()
+    router.navigate(["login"])
+    return true
 }
