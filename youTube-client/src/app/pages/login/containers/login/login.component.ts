@@ -20,6 +20,13 @@ export class LoginComponent {
     constructor(private loginService: LoginService) {}
 
     onSubmit() {
-        this.loginService.login(this.username, this.password)
+        const isValidForm = this.isFormValid()
+        if (isValidForm) {
+            this.loginService.login(this.username, this.password)
+        }
+    }
+
+    private isFormValid(): boolean {
+        return !!this.username && !!this.password
     }
 }

@@ -1,27 +1,32 @@
 import { Injectable } from "@angular/core"
 import { Router } from "@angular/router"
+import { BehaviorSubject, Observable } from "rxjs"
 
 @Injectable({
     providedIn: "root"
 })
 export class LoginService {
-    loginStatus: boolean = false
-    constructor(private router: Router) {}
+    private loginStatusSubject$: BehaviorSubject<boolean> = new BehaviorSubject(false)
+    readonly loginStatus$: Observable<boolean> = this.loginStatusSubject$.asObservable()
+
+    constructor(private router: Router) {
+        this.init()
+    }
+
+    private init() {
+        const authToken = localStorage.getItem("authToken")
+        this.loginStatusSubject$.next(!!authToken)
+    }
 
     login(username: string, password: string): void {
-        // Simulate user authentication
-
-        window.localStorage.setItem("authToken", username + password) // Set token in local storage
-        this.router.navigate(["youtube"]) // Redirect to Main page after login
+        localStorage.setItem("authToken", username + password)
+        this.loginStatusSubject$.next(true)
+        this.router.navigate(["youtube"])
     }
 
     logout(): void {
         localStorage.removeItem("authToken")
+        this.loginStatusSubject$.next(false)
         this.router.navigate(["/login"]) // Redirect to Login page after logout
-    }
-
-    isLoggedIn(): boolean {
-        this.loginStatus = !!localStorage.getItem("authToken")
-        return this.loginStatus
     }
 }

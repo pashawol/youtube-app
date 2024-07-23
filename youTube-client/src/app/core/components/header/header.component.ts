@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common"
 import { Component } from "@angular/core"
 import { LoginService } from "@app/pages/login/services/login.service"
 import { ButtonComponent } from "@app/shared/components"
+import { Observable } from "rxjs"
 
 import { LoginInformationBlockComponent, LogoComponent, SearchBlockComponent, SettingsButtonComponent } from ".."
 
@@ -20,13 +21,11 @@ import { LoginInformationBlockComponent, LogoComponent, SearchBlockComponent, Se
     styleUrl: "./header.component.scss"
 })
 export class HeaderComponent {
+    readonly isLoggedIn$: Observable<boolean> = this.loginService.loginStatus$
+
     constructor(private loginService: LoginService) {}
 
     logout() {
         this.loginService.logout()
-    }
-
-    isLoggedIn(): boolean {
-        return this.loginService.isLoggedIn()
     }
 }

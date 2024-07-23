@@ -4,10 +4,8 @@ import { ErrorModule } from "@pages/error/error.module"
 import { LoginModule } from "@pages/login/login.module"
 import { YoutubeModule } from "@pages/youtube/youtube.module"
 
-// import { youtubeGuard } from "./pages/youtube/guards/youtube.guard"
-
 export const routes: Routes = [
-    { path: "", redirectTo: "login", pathMatch: "full" },
+    { path: "", redirectTo: "youtube", pathMatch: "full" },
     {
         path: "youtube",
         loadChildren: () => YoutubeModule,
@@ -15,8 +13,7 @@ export const routes: Routes = [
     },
     {
         path: "login",
-        loadChildren: () => LoginModule,
-        canDeactivate: [authGuard]
+        loadChildren: () => LoginModule
     },
     {
         path: "error",

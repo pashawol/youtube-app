@@ -1,17 +1,19 @@
 import { inject } from "@angular/core"
 import { CanActivateFn, Router } from "@angular/router"
 import { LoginService } from "@app/pages/login/services/login.service"
+import { map } from "rxjs"
 
 export const authGuard: CanActivateFn = () => {
     const loginService = inject(LoginService)
     const router = inject(Router)
 
-    if (loginService.isLoggedIn()) {
-        // User is logged in, redirect them to the YouTube page or dashboard
-        // router.navigate(["youtube"])
-        return true
-    }
+    return loginService.loginStatus$.pipe(
+        map((isLoggedIn: boolean) => {
+            if (isLoggedIn) {
+                return true
+            }
 
-    router.navigate(["login"])
-    return false
+            return router.parseUrl("login")
+        })
+    )
 }

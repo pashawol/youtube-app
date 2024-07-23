@@ -1,11 +1,11 @@
 <form (submit)="onSubmit()" class="login p-card">
     <h1>Login</h1>
     <p-inputGroup>
-        <input type="text" name="username" [(ngModel)]="username" pInputText placeholder="login" />
+        <input required type="text" name="username" [(ngModel)]="username" pInputText placeholder="login" />
     </p-inputGroup>
 
     <p-inputGroup>
-        <input type="password" name="password" [(ngModel)]="password" pInputText placeholder="password" />
+        <input required type="password" name="password" [(ngModel)]="password" pInputText placeholder="password" />
     </p-inputGroup>
     <app-button type="submit" buttonStyle="width: 100%">Login </app-button>
 </form>
