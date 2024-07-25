@@ -13,7 +13,8 @@ export const routes: Routes = [
     },
     {
         path: "login",
-        loadChildren: () => LoginModule
+        loadChildren: () => LoginModule,
+        canActivate: [authGuard]
     },
     {
         path: "error",
