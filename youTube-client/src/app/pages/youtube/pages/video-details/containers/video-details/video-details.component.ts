@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common"
 import { Component } from "@angular/core"
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser"
 import { ActivatedRoute, Router } from "@angular/router"
-import { Item2 } from "@shared/models/response.model"
+import { Item } from "@shared/models/response.model"
 import { Observable } from "rxjs"
 import { tap } from "rxjs/operators"
 
@@ -17,7 +17,7 @@ import { RequestService } from "../../services/request.service"
     styleUrl: "./video-details.component.scss"
 })
 export class VideoDetailsComponent {
-    data$: Observable<Item2> = this.getVideoDetails(this.route.snapshot.paramMap.get("id"))
+    data$: Observable<Item> = this.getVideoDetails(this.route.snapshot.paramMap.get("id") || "")
 
     constructor(
         private requestService: RequestService,
@@ -26,9 +26,9 @@ export class VideoDetailsComponent {
         private sanitizer: DomSanitizer
     ) {}
 
-    private getVideoDetails(id: string | null): Observable<Item2> {
+    private getVideoDetails(id: string): Observable<Item> {
         return this.requestService.fetchData(id).pipe(
-            tap((data: Item2) => {
+            tap((data: Item) => {
                 if (!data) {
                     this.router.navigate(["error"])
                 }

@@ -1,16 +1,31 @@
+import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import response from "@app/response.json"
-import { Item, Item2 } from "@shared/models/response.model"
-import { Observable, of } from "rxjs" // Import Observable and of
+import { environment } from "@environments/environment.development"
+import { Item } from "@shared/models/response.model"
+import { map, Observable } from "rxjs" // Import Observable and of
 
 @Injectable({
     providedIn: "root"
 })
 export class RequestService {
     private response = response
+    private apiUrl = environment.apiUrl
+    private apiKey = environment.apiKey
 
-    fetchData(id: string | null = ""): Observable<Item2> {
-        // Use of to create an Observable from the synchronous data
-        return of(this.response.items.find((item: Item2) => item.id === id) as Item2)
+    constructor(private http: HttpClient) {}
+
+    fetchData(id: string): Observable<Item> {
+        const statsParams = {
+            part: "snippet,statistics",
+            id,
+            key: this.apiKey
+        }
+
+        return this.http.get<{ items: Item[] }>(`${this.apiUrl}/videos`, { params: statsParams }).pipe(
+            map((statsResponse) => {
+                return statsResponse.items[0]
+            })
+        )
     }
 }

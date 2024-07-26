@@ -13,22 +13,9 @@ export interface PageInfo {
 export interface Item {
     kind: string
     etag: string
-    id: IdInterface
-    snippet: Snippet
-    statistics: Statistics
-}
-
-export interface Item2 {
-    kind: string
-    etag: string
     id: string
     snippet: Snippet
     statistics: Statistics
-}
-
-interface IdInterface {
-    kind: string
-    videoId: string
 }
 
 export interface Snippet {

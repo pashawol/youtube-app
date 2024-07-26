@@ -3,11 +3,11 @@ import { RouterModule, Routes } from "@angular/router"
 
 // eslint-disable-next-line max-len
 import { SearchResultContainerComponent } from "./pages/search/containers"
-// import { VideoDetailsComponenxt } from "./pages/video-details/containers/video-details/video-details.component"
+import { VideoDetailsComponent } from "./pages/video-details/containers/video-details/video-details.component"
 
 const routes: Routes = [
-    { path: "", component: SearchResultContainerComponent }
-    // { path: ":id", component: VideoDetailsComponent }
+    { path: "", component: SearchResultContainerComponent },
+    { path: ":id", component: VideoDetailsComponent }
 ]
 
 @NgModule({
