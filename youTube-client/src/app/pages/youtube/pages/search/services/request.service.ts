@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { environment } from "@environments/environment.development"
 import { Item } from "@shared/models/response.model"
-import { Observable, forkJoin } from "rxjs"
+import { BehaviorSubject, Observable, forkJoin } from "rxjs"
 import { map, switchMap } from "rxjs/operators"
 
 @Injectable({
@@ -12,16 +12,24 @@ export class RequestService {
     private apiUrl = environment.apiUrl
     private apiKey = environment.apiKey
 
+    public searchQuerySubject = new BehaviorSubject<string>("")
+    public searchQuery$ = this.searchQuerySubject.asObservable()
+
+    setQuery(query: string) {
+        this.searchQuerySubject.next(query)
+    }
+
     constructor(private http: HttpClient) {}
 
-    search(query: string = "angular"): Observable<Item[]> {
+    search(): Observable<Item[]> {
         const searchParams = {
             part: "id",
-            q: query,
+            q: this.searchQuerySubject.value,
             key: this.apiKey,
             type: "video",
             maxResults: "25"
         }
+        if (!searchParams.q) return forkJoin([])
 
         return this.http
             .get<{ items: { id: { videoId: string } }[] }>(`${this.apiUrl}/search`, { params: searchParams })
