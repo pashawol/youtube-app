@@ -3,7 +3,7 @@ import { Component } from "@angular/core"
 import { FilterCriteria } from "@app/core/models/filter.model"
 import { FilterBlockComponent } from "@core/components"
 import { Item } from "@shared/models/response.model"
-import { map, Observable, of, switchMap } from "rxjs"
+import { map, Observable, switchMap } from "rxjs"
 
 import { SearchResultsListComponent } from "../../components"
 import { FilterByWordPipe } from "../../pipes/filter-by-word.pipe"
@@ -31,10 +31,13 @@ export class SearchResultContainerComponent {
     ) {}
 
     private getItems$(): Observable<Item[]> {
-        return of(this.requestService.search()).pipe(
-            switchMap((items: Item[]) =>
-                this.filterService.filter$.pipe(map(() => this.filterService.sortDataByFilterCriteria(items)))
+        return this.requestService
+            .search("angular")
+
+            .pipe(
+                switchMap((items: Item[]) =>
+                    this.filterService.filter$.pipe(map(() => this.filterService.sortDataByFilterCriteria(items)))
+                )
             )
-        )
     }
 }

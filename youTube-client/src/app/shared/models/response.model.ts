@@ -13,9 +13,22 @@ export interface PageInfo {
 export interface Item {
     kind: string
     etag: string
+    id: IdInterface
+    snippet: Snippet
+    statistics: Statistics
+}
+
+export interface Item2 {
+    kind: string
+    etag: string
     id: string
     snippet: Snippet
     statistics: Statistics
+}
+
+interface IdInterface {
+    kind: string
+    videoId: string
 }
 
 export interface Snippet {
@@ -37,8 +50,6 @@ export interface Thumbnails {
     default: Thumbnail
     medium: Thumbnail
     high: Thumbnail
-    standard: Thumbnail
-    maxres: Thumbnail
 }
 
 export interface Thumbnail {
