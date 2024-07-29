@@ -14,7 +14,7 @@ export class RequestService {
 
     constructor(private http: HttpClient) {}
 
-    search(query: string = ""): Observable<Item[]> {
+    search(query: string): Observable<Item[]> {
         const searchParams = {
             part: "id",
             q: query,
@@ -22,7 +22,7 @@ export class RequestService {
             type: "video",
             maxResults: "25"
         }
-        if (searchParams.q.length < 1) return forkJoin([])
+        if (!query) return forkJoin([])
 
         return this.http
             .get<{ items: { id: { videoId: string } }[] }>(`${this.apiUrl}/search`, { params: searchParams })
