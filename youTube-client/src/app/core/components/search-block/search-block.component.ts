@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core"
+import { Component, DestroyRef, OnInit } from "@angular/core"
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop"
 import { FormsModule } from "@angular/forms"
-import { RequestService } from "@app/pages/youtube/pages/search/services"
 import { SearchService } from "@app/pages/youtube/pages/search/services/search.service"
 import { ButtonComponent } from "@shared/components"
 import { InputGroupModule } from "primeng/inputgroup"
 import { InputGroupAddonModule } from "primeng/inputgroupaddon"
 import { InputTextModule } from "primeng/inputtext"
-import { debounceTime, distinctUntilChanged, Subject, takeUntil } from "rxjs"
+import { debounceTime, distinctUntilChanged, filter, Subject } from "rxjs"
 
 @Component({
     selector: "app-search-block",
@@ -18,30 +18,24 @@ import { debounceTime, distinctUntilChanged, Subject, takeUntil } from "rxjs"
 export class SearchBlockComponent implements OnInit {
     searchText: string = ""
     private searchTextChanged = new Subject<string>()
-    private destroy$ = new Subject<void>()
 
     constructor(
         private searchService: SearchService,
-        private requestService: RequestService
+        private destroyRef: DestroyRef
     ) {}
 
     ngOnInit(): void {
         this.searchTextChanged
-            .pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.destroy$))
+            .pipe(debounceTime(300), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
+            .pipe(filter((searchText) => searchText.length > 2))
             .subscribe((searchText) => {
-                if (searchText.length > 2) {
-                    this.requestService.setQuery(searchText.trim())
-                    this.searchService.activateSearch(true)
-                }
+                this.searchService.setQuery(searchText.trim())
+                this.searchService.activateSearch(true)
             })
     }
 
     onInputChange() {
         this.searchTextChanged.next(this.searchText)
-    }
-    ngOnDestroy() {
-        this.destroy$.next()
-        this.destroy$.complete()
     }
     onSubmit() {
         this.searchService.activateSearch(true)

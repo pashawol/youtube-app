@@ -31,10 +31,10 @@ export class SearchResultContainerComponent {
     ) {}
 
     private getItems$(): Observable<Item[]> {
-        return this.requestService.searchQuery$.pipe(
-            switchMap(() => {
+        return this.searchService.searchQuery$.pipe(
+            switchMap((query) => {
                 return this.requestService
-                    .search()
+                    .search(query)
                     .pipe(
                         switchMap((items: Item[]) =>
                             this.filterService.filter$.pipe(
