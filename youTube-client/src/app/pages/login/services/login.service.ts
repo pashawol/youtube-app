@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable } from "rxjs"
     providedIn: "root"
 })
 export class LoginService {
-    private loginStatusSubject$: BehaviorSubject<boolean> = new BehaviorSubject(false)
+    private loginStatusSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
     readonly loginStatus$: Observable<boolean> = this.loginStatusSubject$.asObservable()
 
     constructor(private router: Router) {

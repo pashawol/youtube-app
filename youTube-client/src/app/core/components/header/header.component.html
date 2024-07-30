@@ -6,9 +6,9 @@
             <app-search-block />
             <app-settings-button />
         </div>
-        <div class="row">
+        <div class="row" *ngIf="isLoggedIn$ | async">
             <app-login-information-block />
-            <app-button *ngIf="isLoggedIn$ | async" severity="danger" (buttonClick)="logout()">Logout</app-button>
+            <app-button severity="danger" (buttonClick)="logout()">Logout</app-button>
         </div>
     </div>
 </header>
