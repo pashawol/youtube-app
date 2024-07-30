@@ -13,8 +13,6 @@ export class FilterByWordPipe implements PipeTransform {
             return items
         }
 
-        return items.filter((item) => {
-            return item.snippet.title.toLowerCase().includes(searchText.toLowerCase())
-        })
+        return items.filter((item) => item.snippet.title.toLowerCase().includes(searchText.toLowerCase()))
     }
 }

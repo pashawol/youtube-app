@@ -21,6 +21,7 @@
         "useDefineForClassFields": false,
         "lib": ["ES2022", "dom"],
         "noImplicitAny": true,
+        "strictNullChecks": false,
         "baseUrl": "./",
         "paths": {
             "@app/*": ["src/app/*"],

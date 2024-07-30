@@ -15,10 +15,8 @@ export class RequestService {
             id
         }
 
-        return this.http.get<{ items: Item[] }>("/videos", { params: statsParams }).pipe(
-            map((statsResponse) => {
-                return statsResponse.items[0]
-            })
-        )
+        return this.http
+            .get<{ items: Item[] }>("/videos", { params: statsParams })
+            .pipe(map((statsResponse) => statsResponse.items[0]))
     }
 }

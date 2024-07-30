@@ -3,7 +3,7 @@ import { Component } from "@angular/core"
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser"
 import { ActivatedRoute, Router } from "@angular/router"
 import { Item } from "@shared/models/response.model"
-import { Observable } from "rxjs"
+import { Observable, of } from "rxjs"
 import { tap } from "rxjs/operators"
 
 import { HighlightDirective } from "../../../../directives/highlight.directive"
@@ -17,7 +17,7 @@ import { RequestService } from "../../services/request.service"
     styleUrl: "./video-details.component.scss"
 })
 export class VideoDetailsComponent {
-    data$: Observable<Item> = this.getVideoDetails(this.route.snapshot.paramMap.get("id") || "")
+    data$: Observable<Item> = this.getVideoDetails(this.route.snapshot.paramMap.get("id"))
 
     constructor(
         private requestService: RequestService,
@@ -27,6 +27,7 @@ export class VideoDetailsComponent {
     ) {}
 
     private getVideoDetails(id: string): Observable<Item> {
+        if (!id) return of([] as unknown as Item)
         return this.requestService.fetchData(id).pipe(
             tap((data: Item) => {
                 if (!data) {

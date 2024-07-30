@@ -1,8 +1,8 @@
 import { HttpInterceptorFn } from "@angular/common/http"
+import { environment } from "@environments/environment.development"
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-    const apiUrl = "https://www.googleapis.com/youtube/v3"
-    const apiKey = "AIzaSyDPxfj2MXhocmzc2cwUcvvPhk6Mh10LkvE"
+    const { apiUrl, apiKey } = environment
 
     const modifiedUrl = `${apiUrl}${req.url}`
 
