@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core"
 import { Router } from "@angular/router"
+import { Login } from "@app/shared/models/login.model"
 import { BehaviorSubject, Observable } from "rxjs"
 
 @Injectable({
@@ -18,8 +19,8 @@ export class LoginService {
         this.loginStatusSubject$.next(!!authToken)
     }
 
-    login(username?: string, password?: string): void {
-        localStorage.setItem("authToken", username + password)
+    login(login: Login): void {
+        localStorage.setItem("authToken", login.username + login.password)
         this.loginStatusSubject$.next(true)
         this.router.navigate(["youtube"])
     }

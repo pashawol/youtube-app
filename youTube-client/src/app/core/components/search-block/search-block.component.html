@@ -1,12 +1,10 @@
 <form (submit)="onSubmit()" class="search-block">
-    <p-inputGroup>
-        <input
-            type="text"
-            pInputText
-            [(ngModel)]="searchText"
-            name="searchText"
-            (input)="onInputChange()"
-            placeholder="Keyword"
-        />
-    </p-inputGroup>
+    <input
+        type="text"
+        pInputText
+        [(ngModel)]="searchText"
+        name="searchText"
+        (input)="onInputChange()"
+        placeholder="Keyword"
+    />
 </form>
