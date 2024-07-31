@@ -1,5 +1,7 @@
-import { Component } from "@angular/core"
-import { FormsModule } from "@angular/forms"
+import { CommonModule } from "@angular/common"
+import { Component, OnInit } from "@angular/core"
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms"
+import { CustomValidateDirective } from "@shared/directives/custom-validate.directive"
 import { LoginService } from "@app/pages/login/services/login.service"
 import { ButtonComponent } from "@app/shared/components"
 import { InputGroupModule } from "primeng/inputgroup"
@@ -9,24 +11,51 @@ import { InputTextModule } from "primeng/inputtext"
 @Component({
     selector: "app-login",
     standalone: true,
-    imports: [FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, ButtonComponent],
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        InputGroupModule,
+        InputGroupAddonModule,
+        InputTextModule,
+        ButtonComponent,
+        CommonModule
+    ],
     templateUrl: "./login.component.html",
     styleUrl: "./login.component.scss"
 })
-export class LoginComponent {
-    username: string = ""
-    password: string = ""
+export class LoginComponent implements OnInit {
+    loginForm: FormGroup
 
-    constructor(private loginService: LoginService) {}
+    constructor(
+        private fb: FormBuilder,
+        private loginService: LoginService
+    ) {}
 
-    onSubmit() {
-        const isValidForm = this.isFormValid()
-        if (isValidForm) {
-            this.loginService.login(this.username, this.password)
-        }
+    ngOnInit(): void {
+        this.loginForm = this.fb.group({
+            username: ["", [Validators.required, Validators.email]],
+            password: [
+                "",
+                [
+                    Validators.required,
+                    Validators.minLength(8),
+                    CustomValidateDirective.passwordContainsUppercase,
+                    CustomValidateDirective.passwordContainsLowercase,
+                    CustomValidateDirective.passwordContainsNumber,
+                    CustomValidateDirective.passwordContainsLetter,
+                    CustomValidateDirective.passwordContainsSpecialCharacter
+                ]
+            ]
+        })
     }
 
-    private isFormValid(): boolean {
-        return !!this.username && !!this.password
+    onSubmit() {
+        if (this.loginForm.valid) {
+            // Handle form submission
+            this.loginService.login()
+        } else {
+            // Handle form errors
+            console.log("Form is invalid")
+        }
     }
 }

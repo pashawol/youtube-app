@@ -48,8 +48,20 @@ body {
 .p-button {
     padding: 1rem 1rem;
     display: flex;
-    // width: 100%;
+    width: 100%;
     min-width: 3.5rem;
     justify-content: center;
     text-decoration: none !important;
+}
+
+.p-inputgroup {
+    margin-bottom: 1rem;
+    flex-direction: column;
+    .p-inputtext {
+        width: 100%;
+    }
+}
+
+.invalid-text {
+    color: red;
 }

@@ -1,11 +1,38 @@
-<form (submit)="onSubmit()" class="login p-card">
+<form (ngSubmit)="onSubmit()" class="login p-card" [formGroup]="loginForm">
     <h1>Login</h1>
-    <p-inputGroup>
-        <input required type="text" name="username" [(ngModel)]="username" pInputText placeholder="login" />
-    </p-inputGroup>
+    <div class="p-inputgroup">
+        <input required type="email" formControlName="username" pInputText placeholder="login" />
 
-    <p-inputGroup>
-        <input required type="password" name="password" [(ngModel)]="password" pInputText placeholder="password" />
-    </p-inputGroup>
-    <app-button type="submit" buttonStyle="width: 100%">Login </app-button>
+        <div class="invalid-text" *ngIf="loginForm.get('username').invalid && loginForm.get('username').touched">
+            <small *ngIf="loginForm.get('username')?.errors['required']">Please enter a login email</small>
+            <small *ngIf="loginForm.get('username')?.errors['email']"> The login email is invalid </small>
+        </div>
+    </div>
+
+    <div class="p-inputgroup">
+        <input required type="password" formControlName="password" pInputText placeholder="password" />
+
+        <div class="invalid-text" *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
+            <small>Password </small>
+            <small *ngIf="loginForm.get('password')?.errors['required']"> is required.</small>
+            <small *ngIf="loginForm.get('password')?.errors['minlength']">must be at least 6 characters long.</small>
+
+            <small
+                *ngIf="
+                    loginForm.get('password')?.errors['noUppercase'] || loginForm.get('password')?.errors['noLowercase']
+                "
+            >
+                must be a mixture of both uppercase and lowercase letters
+            </small>
+
+            <small *ngIf="loginForm.get('password').errors['noNumber'] || loginForm.get('password').errors['noLetter']">
+                must be a mixture of both uppercase and lowercase letters
+            </small>
+
+            <small *ngIf="loginForm.get('password').errors['noSpecialCharacter']">
+                must be inclusion of at least one special character, e.g., ! &#64; # ? ]
+            </small>
+        </div>
+    </div>
+    <app-button type="submit" buttonStyle="width: 100%" [disabled]="loginForm.invalid">Login </app-button>
 </form>

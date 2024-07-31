@@ -18,7 +18,7 @@ export class LoginService {
         this.loginStatusSubject$.next(!!authToken)
     }
 
-    login(username: string, password: string): void {
+    login(username?: string, password?: string): void {
         localStorage.setItem("authToken", username + password)
         this.loginStatusSubject$.next(true)
         this.router.navigate(["youtube"])
