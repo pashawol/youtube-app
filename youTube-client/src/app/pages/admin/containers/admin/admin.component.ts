@@ -11,6 +11,7 @@ import {
 } from "@angular/forms"
 import { ButtonComponent } from "@app/shared/components"
 import { InvalidTextComponent } from "@app/shared/components/invalid-text/invalid-text.component"
+import { ValidationDate } from "@app/shared/validations/validation-date"
 // import { CustomValidateDirective } from "@shared/directives/custom-validate.directive"
 import { InputTextModule } from "primeng/inputtext"
 
@@ -35,7 +36,10 @@ export class AdminComponent implements OnInit {
             description: ["", [Validators.maxLength(255)]],
             img: ["", [Validators.required]],
             video: ["", [Validators.required]],
-            creationDate: ["", [Validators.required]],
+            creationDate: [
+                "",
+                [Validators.required, Validators.minLength(10), Validators.maxLength(10), ValidationDate.date]
+            ],
             tags: new FormArray([AdminComponent.createTag()])
         })
     }
@@ -50,7 +54,7 @@ export class AdminComponent implements OnInit {
         })
     }
     get isTagsLength() {
-        return this.tags.length <= 5
+        return this.tags.length < 5
     }
 
     removeTag(index: number): void {
@@ -64,6 +68,9 @@ export class AdminComponent implements OnInit {
         return this.adminForm.valid
     }
 
+    get disableReset() {
+        return this.adminForm.pristine
+    }
     resetForm() {
         this.adminForm.reset()
         this.tags.clear()
