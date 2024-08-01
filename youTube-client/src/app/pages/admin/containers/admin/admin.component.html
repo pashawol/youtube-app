@@ -47,8 +47,11 @@
     </div>
     <div class="tags-wrap">
         <ng-container formArrayName="tags" *ngFor="let tag of tags.controls; let i = index">
-            <div class="p-inputgroup p-inputgroup-tag" [formGroupName]="i">
-                <input required type="text" formControlName="tag" pInputText placeholder="Add tag" />
+            <div class="p-inputgroup" [formGroupName]="i">
+                <div class="p-inputgroup-tag">
+                    <input required type="text" formControlName="tag" pInputText placeholder="Add tag" />
+                    <app-button *ngIf="tags.length > 1" (buttonClick)="removeTag(i)" icon="pi pi-times"> </app-button>
+                </div>
                 <app-invalid-text
                     [field]="tag.get('tag')"
                     [errors]="[
@@ -60,7 +63,6 @@
                         { name: 'maxlength', text: 'The tag is too long' }
                     ]"
                 />
-                <app-button *ngIf="tags.length > 1" (buttonClick)="removeTag(i)" icon="pi pi-times"> </app-button>
             </div>
         </ng-container>
         <app-button *ngIf="isTagsLength" (buttonClick)="addTag()">Add tag </app-button>
@@ -68,6 +70,6 @@
 
     <div class="buttons">
         <app-button type="submit" buttonStyle="width: 100%" [disabled]="adminForm.invalid">Created card </app-button>
-        <app-button buttonStyle="width: 100%" [disabled]="adminForm.invalid">Reset </app-button>
+        <app-button buttonStyle="width: 100%" (buttonClick)="resetForm()">Reset </app-button>
     </div>
 </form>

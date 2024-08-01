@@ -40,7 +40,7 @@ export class AdminComponent implements OnInit {
         })
     }
 
-    get tags() {
+    get tags(): FormArray {
         return this.adminForm.get("tags") as FormArray
     }
 
@@ -62,5 +62,11 @@ export class AdminComponent implements OnInit {
 
     onSubmit() {
         return this.adminForm.valid
+    }
+
+    resetForm() {
+        this.adminForm.reset()
+        this.tags.clear()
+        this.tags.push(AdminComponent.createTag())
     }
 }

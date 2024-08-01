@@ -13,7 +13,8 @@
 
 .p-inputgroup-tag {
     display: flex;
-    flex-direction: row;
+    .p-inputtext {
+    }
 }
 
 .tags-wrap {
