@@ -1,9 +1,10 @@
 import { CommonModule } from "@angular/common"
 import { Component, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms"
-import { CustomValidateDirective } from "@shared/directives/custom-validate.directive"
 import { LoginService } from "@app/pages/login/services/login.service"
 import { ButtonComponent } from "@app/shared/components"
+import { InvalidTextComponent } from "@app/shared/components/invalid-text/invalid-text.component"
+import { CustomValidateDirective } from "@shared/directives/custom-validate.directive"
 import { InputGroupModule } from "primeng/inputgroup"
 import { InputGroupAddonModule } from "primeng/inputgroupaddon"
 import { InputTextModule } from "primeng/inputtext"
@@ -18,7 +19,8 @@ import { InputTextModule } from "primeng/inputtext"
         InputGroupAddonModule,
         InputTextModule,
         ButtonComponent,
-        CommonModule
+        CommonModule,
+        InvalidTextComponent
     ],
     templateUrl: "./login.component.html",
     styleUrl: "./login.component.scss"

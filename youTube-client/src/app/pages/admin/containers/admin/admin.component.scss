@@ -1,0 +1,21 @@
+.form {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.buttons {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.p-inputgroup-tag {
+    display: flex;
+    flex-direction: row;
+}
+
+.tags-wrap {
+    max-width: 500px;
+}
