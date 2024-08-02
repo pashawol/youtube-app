@@ -1,10 +1,5 @@
-import { Directive } from "@angular/core"
 import { AbstractControl, ValidationErrors } from "@angular/forms"
 
-@Directive({
-    selector: "[appCustomValidate]",
-    standalone: true
-})
 export class CustomValidateDirective {
     static passwordContainsUppercase(control: AbstractControl): ValidationErrors | null {
         const hasUppercase = /[A-Z]/.test(control.value)
