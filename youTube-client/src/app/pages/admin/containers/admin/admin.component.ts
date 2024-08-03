@@ -12,6 +12,7 @@ import {
 import { ButtonComponent } from "@app/shared/components"
 import { InvalidTextComponent } from "@app/shared/components/invalid-text/invalid-text.component"
 import { dateValidator } from "@app/shared/validations/validation-date"
+import { error } from "console"
 // import { CustomValidateDirective } from "@shared/directives/custom-validate.directive"
 import { InputTextModule } from "primeng/inputtext"
 
@@ -46,6 +47,14 @@ export class AdminComponent implements OnInit {
             { name: "maxlength", text: "The tag is too long" }
         ]
     }
+
+    INPUTS = [
+        { label: "Title", formControlName: "title", type: "text", errors: this.ERRORS.title },
+        { label: "Description", formControlName: "description", type: "text", errors: this.ERRORS.description },
+        { label: "Image", formControlName: "img", type: "text", errors: this.ERRORS.img },
+        { label: "Video", formControlName: "video", type: "text", errors: this.ERRORS.video },
+        { label: "Creation Date", formControlName: "creationDate", type: "text", errors: this.ERRORS.creationDate }
+    ]
 
     constructor(
         private fb: FormBuilder

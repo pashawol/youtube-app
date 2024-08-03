@@ -1,28 +1,17 @@
 <form (ngSubmit)="onSubmit()" class="form p-card" [formGroup]="adminForm">
     <h1>Created new card</h1>
 
-    <div class="p-inputgroup">
-        <input required type="text" formControlName="title" pInputText placeholder="Title" />
-        <app-invalid-text [field]="adminForm.get('title')" [errors]="ERRORS.title" />
+    <div class="p-inputgroup" *ngFor="let input of INPUTS">
+        <input
+            required
+            [type]="input.type"
+            [formControlName]="input.formControlName"
+            pInputText
+            [placeholder]="input.label"
+        />
+        <app-invalid-text [field]="adminForm.get(input.formControlName)" [errors]="input.errors" />
     </div>
 
-    <div class="p-inputgroup">
-        <input required type="text" formControlName="description" pInputText placeholder="Description" />
-        <app-invalid-text [field]="adminForm.get('description')" [errors]="ERRORS.description" />
-    </div>
-    <div class="p-inputgroup">
-        <input required type="text" formControlName="img" pInputText placeholder="Img" />
-        <app-invalid-text [field]="adminForm.get('img')" [errors]="ERRORS.img" />
-    </div>
-    <div class="p-inputgroup">
-        <input required type="text" formControlName="video" pInputText placeholder="Link video" />
-        <app-invalid-text [field]="adminForm.get('video')" [errors]="ERRORS.video" />
-    </div>
-
-    <div class="p-inputgroup">
-        <input required type="text" formControlName="creationDate" pInputText placeholder="Creation date" />
-        <app-invalid-text [field]="adminForm.get('creationDate')" [errors]="ERRORS.creationDate" />
-    </div>
     <div class="tags-wrap">
         <ng-container formArrayName="tags" *ngFor="let tag of tags.controls; let i = index">
             <div class="p-inputgroup" [formGroupName]="i">
