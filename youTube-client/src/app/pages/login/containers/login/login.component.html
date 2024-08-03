@@ -3,33 +3,13 @@
     <div class="p-inputgroup">
         <input required type="email" formControlName="username" pInputText placeholder="login" />
 
-        <app-invalid-text
-            [field]="loginForm.get('username')"
-            [errors]="[
-                { name: 'required', text: 'Please enter a login email' },
-                { name: 'email', text: 'The login email is invalid' }
-            ]"
-        />
+        <app-invalid-text [field]="loginForm.get('username')" [errors]="ERRORS.email" />
     </div>
 
     <div class="p-inputgroup">
         <input required type="password" formControlName="password" pInputText placeholder="password" />
 
-        <app-invalid-text
-            [field]="loginForm.get('password')"
-            [errors]="[
-                { name: 'required', text: 'Please enter a password' },
-                { name: 'minlength', text: 'The password is too short' },
-                { name: 'noUppercase', text: 'Password must be a mixture of both uppercase and lowercase letters' },
-                { name: 'noLowercase', text: 'Password must be a mixture of both uppercase and lowercase letters' },
-                { name: 'noNumber', text: 'Password must be a mixture of letters and numbers' },
-                { name: 'noLetter', text: 'Password must be a mixture of letters and numbers' },
-                {
-                    name: 'noSpecialCharacter',
-                    text: 'Password must be inclusion of at least one special character, e.g., !  &#64; # ?'
-                }
-            ]"
-        />
+        <app-invalid-text [field]="loginForm.get('password')" [errors]="ERRORS.password" />
     </div>
     <app-button type="submit" buttonStyle="width: 100%" [disabled]="loginForm.invalid">Login </app-button>
 </form>

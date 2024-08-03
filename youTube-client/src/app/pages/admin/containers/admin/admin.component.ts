@@ -25,6 +25,28 @@ import { InputTextModule } from "primeng/inputtext"
 export class AdminComponent implements OnInit {
     adminForm: FormGroup
 
+    readonly ERRORS = {
+        title: [
+            { name: "required", text: "Please enter a title" },
+            { name: "minlength", text: "The title is too short" },
+            { name: "maxlength", text: "The title is too long" }
+        ],
+        description: [{ name: "maxlength", text: "The description is too long" }],
+        img: [{ name: "required", text: "Please enter an image" }],
+        video: [{ name: "required", text: "Please enter a video" }],
+        creationDate: [
+            { name: "required", text: "Please enter a creation date" },
+            { name: "minlength", text: "The creation date is too short" },
+            { name: "maxlength", text: "The creation date is too long" },
+            { name: "date", text: "The creation date is invalid" }
+        ],
+        tag: [
+            { name: "required", text: "Please enter a tag" },
+            { name: "minlength", text: "The tag is too short" },
+            { name: "maxlength", text: "The tag is too long" }
+        ]
+    }
+
     constructor(
         private fb: FormBuilder
         // private loginService: LoginService

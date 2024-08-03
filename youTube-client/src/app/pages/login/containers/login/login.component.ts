@@ -8,6 +8,7 @@ import { CustomValidateDirective } from "@shared/directives/custom-validate.dire
 import { InputGroupModule } from "primeng/inputgroup"
 import { InputGroupAddonModule } from "primeng/inputgroupaddon"
 import { InputTextModule } from "primeng/inputtext"
+import { Password } from "primeng/password"
 
 @Component({
     selector: "app-login",
@@ -27,6 +28,25 @@ import { InputTextModule } from "primeng/inputtext"
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup
+
+    readonly ERRORS = {
+        email: [
+            { name: "required", text: "Please enter a login email" },
+            { name: "email", text: "The login email is invalid" }
+        ],
+        password: [
+            { name: "required", text: "Please enter a password" },
+            { name: "minlength", text: "The password is too short" },
+            { name: "noUppercase", text: "Password must be a mixture of both uppercase and lowercase letters" },
+            { name: "noLowercase", text: "Password must be a mixture of both uppercase and lowercase letters" },
+            { name: "noNumber", text: "Password must be a mixture of letters and numbers" },
+            { name: "noLetter", text: "Password must be a mixture of letters and numbers" },
+            {
+                name: "noSpecialCharacter",
+                text: "Password must be inclusion of at least one special character, e.g., !  &#64; # ?"
+            }
+        ]
+    }
 
     constructor(
         private fb: FormBuilder,

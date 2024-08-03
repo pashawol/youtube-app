@@ -3,49 +3,25 @@
 
     <div class="p-inputgroup">
         <input required type="text" formControlName="title" pInputText placeholder="Title" />
-        <app-invalid-text
-            [field]="adminForm.get('title')"
-            [errors]="[
-                { name: 'required', text: 'Please enter a title' },
-                { name: 'minlength', text: 'The title is too short' },
-                { name: 'maxlength', text: 'The title is too long' }
-            ]"
-        />
+        <app-invalid-text [field]="adminForm.get('title')" [errors]="ERRORS.title" />
     </div>
 
     <div class="p-inputgroup">
         <input required type="text" formControlName="description" pInputText placeholder="Description" />
-        <app-invalid-text
-            [field]="adminForm.get('description')"
-            [errors]="[{ name: 'maxlength', text: 'The description is too long' }]"
-        />
+        <app-invalid-text [field]="adminForm.get('description')" [errors]="ERRORS.description" />
     </div>
     <div class="p-inputgroup">
         <input required type="text" formControlName="img" pInputText placeholder="Img" />
-        <app-invalid-text
-            [field]="adminForm.get('img')"
-            [errors]="[{ name: 'required', text: 'Please enter a link to the image' }]"
-        />
+        <app-invalid-text [field]="adminForm.get('img')" [errors]="ERRORS.img" />
     </div>
     <div class="p-inputgroup">
         <input required type="text" formControlName="video" pInputText placeholder="Link video" />
-        <app-invalid-text
-            [field]="adminForm.get('video')"
-            [errors]="[{ name: 'required', text: 'Please enter a link to the video' }]"
-        />
+        <app-invalid-text [field]="adminForm.get('video')" [errors]="ERRORS.video" />
     </div>
 
     <div class="p-inputgroup">
         <input required type="text" formControlName="creationDate" pInputText placeholder="Creation date" />
-        <app-invalid-text
-            [field]="adminForm.get('creationDate')"
-            [errors]="[
-                { name: 'required', text: 'Please enter a date' },
-                { name: 'minlength', text: 'The date is invalid. Example 12/30/2024' },
-                { name: 'maxlength', text: 'The date is invalid. Example 12/30/2024' },
-                { name: 'date', text: 'The date is invalid. Example 12/30/2024' }
-            ]"
-        />
+        <app-invalid-text [field]="adminForm.get('creationDate')" [errors]="ERRORS.creationDate" />
     </div>
     <div class="tags-wrap">
         <ng-container formArrayName="tags" *ngFor="let tag of tags.controls; let i = index">
@@ -60,17 +36,7 @@
                     >
                     </app-button>
                 </div>
-                <app-invalid-text
-                    [field]="tag.get('tag')"
-                    [errors]="[
-                        { name: 'required', text: 'Please enter a link to the video' },
-                        {
-                            name: 'minlength',
-                            text: 'The tag is too short'
-                        },
-                        { name: 'maxlength', text: 'The tag is too long' }
-                    ]"
-                />
+                <app-invalid-text [field]="tag.get('tag')" [errors]="ERRORS.tag" />
             </div>
         </ng-container>
         <app-button *ngIf="isTagsLength" (buttonClick)="addTag()">Add tag </app-button>
