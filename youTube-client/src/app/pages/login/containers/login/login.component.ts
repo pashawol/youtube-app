@@ -48,6 +48,11 @@ export class LoginComponent implements OnInit {
         ]
     }
 
+    readonly INPUTS = [
+        { label: "Email", formControlName: "email", type: "text", errors: this.ERRORS.email },
+        { label: "Password", formControlName: "password", type: "password", errors: this.ERRORS.password }
+    ]
+
     constructor(
         private fb: FormBuilder,
         private loginService: LoginService

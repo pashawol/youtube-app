@@ -1,15 +1,15 @@
 <form (ngSubmit)="onSubmit()" class="login p-card" [formGroup]="loginForm">
     <h1>Login</h1>
-    <div class="p-inputgroup">
-        <input required type="email" formControlName="username" pInputText placeholder="login" />
+    <div class="p-inputgroup" *ngFor="let input of INPUTS">
+        <input
+            required
+            [type]="input.type"
+            [formControlName]="input.formControlName"
+            pInputText
+            [placeholder]="input.label"
+        />
 
-        <app-invalid-text [field]="loginForm.get('username')" [errors]="ERRORS.email" />
-    </div>
-
-    <div class="p-inputgroup">
-        <input required type="password" formControlName="password" pInputText placeholder="password" />
-
-        <app-invalid-text [field]="loginForm.get('password')" [errors]="ERRORS.password" />
+        <app-invalid-text [field]="loginForm.get(input.formControlName)" [errors]="input.errors" />
     </div>
     <app-button type="submit" buttonStyle="width: 100%" [disabled]="loginForm.invalid">Login </app-button>
 </form>
