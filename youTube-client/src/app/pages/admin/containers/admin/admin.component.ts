@@ -48,7 +48,7 @@ export class AdminComponent implements OnInit {
         ]
     }
 
-    INPUTS = [
+    readonly INPUTS = [
         { label: "Title", formControlName: "title", type: "text", errors: this.ERRORS.title },
         { label: "Description", formControlName: "description", type: "text", errors: this.ERRORS.description },
         { label: "Image", formControlName: "img", type: "text", errors: this.ERRORS.img },
