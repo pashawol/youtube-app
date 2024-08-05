@@ -9,51 +9,45 @@ import {
     ReactiveFormsModule,
     Validators
 } from "@angular/forms"
-import { ButtonComponent } from "@app/shared/components"
+import { ButtonComponent, InputComponent } from "@app/shared/components"
 import { InvalidTextComponent } from "@app/shared/components/invalid-text/invalid-text.component"
 import { dateValidator } from "@app/shared/validations/validation-date"
-import { error } from "console"
 // import { CustomValidateDirective } from "@shared/directives/custom-validate.directive"
 import { InputTextModule } from "primeng/inputtext"
+
+import { AdminFormErrors } from "../../constants/error.constants"
 
 @Component({
     selector: "app-admin",
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, ButtonComponent, InputTextModule, CommonModule, InvalidTextComponent],
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        InputTextModule,
+        ButtonComponent,
+        InputComponent,
+        CommonModule,
+        InvalidTextComponent
+    ],
     templateUrl: "./admin.component.html",
     styleUrl: "./admin.component.scss"
 })
 export class AdminComponent implements OnInit {
     adminForm: FormGroup
 
-    readonly ERRORS = {
-        title: [
-            { name: "required", text: "Please enter a title" },
-            { name: "minlength", text: "The title is too short" },
-            { name: "maxlength", text: "The title is too long" }
-        ],
-        description: [{ name: "maxlength", text: "The description is too long" }],
-        img: [{ name: "required", text: "Please enter an image" }],
-        video: [{ name: "required", text: "Please enter a video" }],
-        creationDate: [
-            { name: "required", text: "Please enter a creation date" },
-            { name: "minlength", text: "The creation date is too short" },
-            { name: "maxlength", text: "The creation date is too long" },
-            { name: "date", text: "The creation date is invalid" }
-        ],
-        tag: [
-            { name: "required", text: "Please enter a tag" },
-            { name: "minlength", text: "The tag is too short" },
-            { name: "maxlength", text: "The tag is too long" }
-        ]
-    }
+    readonly errors = AdminFormErrors
 
     readonly INPUTS = [
-        { label: "Title", formControlName: "title", type: "text", errors: this.ERRORS.title },
-        { label: "Description", formControlName: "description", type: "text", errors: this.ERRORS.description },
-        { label: "Image", formControlName: "img", type: "text", errors: this.ERRORS.img },
-        { label: "Video", formControlName: "video", type: "text", errors: this.ERRORS.video },
-        { label: "Creation Date", formControlName: "creationDate", type: "text", errors: this.ERRORS.creationDate }
+        { placeholder: "Title", formControlName: "title", type: "text", errors: this.errors.title },
+        { placeholder: "Description", formControlName: "description", type: "text", errors: this.errors.description },
+        { placeholder: "Image", formControlName: "img", type: "text", errors: this.errors.img },
+        { placeholder: "Video", formControlName: "video", type: "text", errors: this.errors.video },
+        {
+            placeholder: "Creation Date",
+            formControlName: "creationDate",
+            type: "text",
+            errors: this.errors.creationDate
+        }
     ]
 
     constructor(

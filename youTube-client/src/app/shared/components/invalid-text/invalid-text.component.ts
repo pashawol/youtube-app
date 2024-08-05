@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common"
 import { Component, Input } from "@angular/core"
 import { AbstractControl } from "@angular/forms"
-import { Error } from "@app/shared/models/error.model"
+import { FormError } from "@app/shared/models/error.model"
 
 @Component({
     selector: "app-invalid-text",
@@ -12,5 +12,6 @@ import { Error } from "@app/shared/models/error.model"
 })
 export class InvalidTextComponent {
     @Input() field!: AbstractControl
-    @Input() errors!: Error[]
+    @Input({ transform: (errors: FormError[]) => new Map(errors.map((error: FormError) => [error.name, error.text])) })
+    errors: Map<string, string>
 }

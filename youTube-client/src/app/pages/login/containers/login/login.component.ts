@@ -2,13 +2,14 @@ import { CommonModule } from "@angular/common"
 import { Component, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms"
 import { LoginService } from "@app/pages/login/services/login.service"
-import { ButtonComponent } from "@app/shared/components"
+import { ButtonComponent, InputComponent } from "@app/shared/components"
 import { InvalidTextComponent } from "@app/shared/components/invalid-text/invalid-text.component"
 import { CustomValidateDirective } from "@shared/directives/custom-validate.directive"
 import { InputGroupModule } from "primeng/inputgroup"
 import { InputGroupAddonModule } from "primeng/inputgroupaddon"
 import { InputTextModule } from "primeng/inputtext"
-import { Password } from "primeng/password"
+
+import { LoginFormErrors } from "../../constants/error.constants"
 
 @Component({
     selector: "app-login",
@@ -21,7 +22,8 @@ import { Password } from "primeng/password"
         InputTextModule,
         ButtonComponent,
         CommonModule,
-        InvalidTextComponent
+        InvalidTextComponent,
+        InputComponent
     ],
     templateUrl: "./login.component.html",
     styleUrl: "./login.component.scss"
@@ -29,28 +31,11 @@ import { Password } from "primeng/password"
 export class LoginComponent implements OnInit {
     loginForm: FormGroup
 
-    readonly ERRORS = {
-        email: [
-            { name: "required", text: "Please enter a login email" },
-            { name: "email", text: "The login email is invalid" }
-        ],
-        password: [
-            { name: "required", text: "Please enter a password" },
-            { name: "minlength", text: "The password is too short" },
-            { name: "noUppercase", text: "Password must be a mixture of both uppercase and lowercase letters" },
-            { name: "noLowercase", text: "Password must be a mixture of both uppercase and lowercase letters" },
-            { name: "noNumber", text: "Password must be a mixture of letters and numbers" },
-            { name: "noLetter", text: "Password must be a mixture of letters and numbers" },
-            {
-                name: "noSpecialCharacter",
-                text: "Password must be inclusion of at least one special character, e.g., !  &#64; # ?"
-            }
-        ]
-    }
+    readonly errors = LoginFormErrors
 
     readonly INPUTS = [
-        { label: "Email", formControlName: "email", type: "text", errors: this.ERRORS.email },
-        { label: "Password", formControlName: "password", type: "password", errors: this.ERRORS.password }
+        { placeholder: "Email", formControlName: "username", type: "email", errors: this.errors.email },
+        { placeholder: "Password", formControlName: "password", type: "password", errors: this.errors.password }
     ]
 
     constructor(

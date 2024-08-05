@@ -2,12 +2,11 @@
     <h1>Created new card</h1>
 
     <div class="p-inputgroup" *ngFor="let input of INPUTS">
-        <input
-            required
+        <app-input
+            [required]="true"
             [type]="input.type"
-            [formControlName]="input.formControlName"
-            pInputText
-            [placeholder]="input.label"
+            [controlName]="input.formControlName"
+            [placeholder]="input.placeholder"
         />
         <app-invalid-text [field]="adminForm.get(input.formControlName)" [errors]="input.errors" />
     </div>
@@ -17,6 +16,8 @@
             <div class="p-inputgroup" [formGroupName]="i">
                 <div class="p-inputgroup-tag">
                     <input required type="text" formControlName="tag" pInputText placeholder="Add tag" />
+
+                    <!-- <app-input [required]="true" [type]="'text'" [controlName]="'tag'" [placeholder]="'Add tag'" /> -->
                     <app-button
                         severity="danger"
                         *ngIf="tags.length > 1"
@@ -25,7 +26,7 @@
                     >
                     </app-button>
                 </div>
-                <app-invalid-text [field]="tag.get('tag')" [errors]="ERRORS.tag" />
+                <app-invalid-text [field]="tag.get('tag')" [errors]="errors.tag" />
             </div>
         </ng-container>
         <app-button *ngIf="isTagsLength" (buttonClick)="addTag()">Add tag </app-button>

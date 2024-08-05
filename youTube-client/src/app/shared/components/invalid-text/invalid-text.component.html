@@ -1,7 +1,7 @@
-<div class="invalid-text" *ngIf="field.invalid && field.touched">
-    <ng-container *ngFor="let error of errors">
-        <small *ngIf="field?.errors && field.errors[error.name]">
-            {{ error.text }}
+<div class="invalid-text" *ngIf="field.invalid && field.touched && field.errors">
+    <ng-container *ngFor="let error of field.errors | keyvalue">
+        <small *ngIf="errors.get(error.key) as text">
+            {{ text }}
         </small>
     </ng-container>
 </div>

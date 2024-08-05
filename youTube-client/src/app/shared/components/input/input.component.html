@@ -1,15 +1,5 @@
-<div class="p-inputgroup">
-    <input
-        [required]="required"
-        [type]="type"
-        pInputText
-        [placeholder]="label"
-        *ngFor="let attr of customAttributes"
-        [attr.[attr.key]]="attr.value"
-    />
-    <div class="invalid-text" *ngIf="formName.get(name).invalid && formName.get(name).touched">
-        <ng-template *ngFor="let error of errorsCustom">
-            <small *ngIf="formName.get(name).errors[error.name]">{{ error.text }}</small>
-        </ng-template>
-    </div>
-</div>
+<ng-container [formGroup]="formGroup">
+    <!-- <div class="p-inputgroup"> -->
+    <input [formControlName]="controlName" [required]="required" [type]="type" pInputText [placeholder]="placeholder" />
+    <!-- </div> -->
+</ng-container>

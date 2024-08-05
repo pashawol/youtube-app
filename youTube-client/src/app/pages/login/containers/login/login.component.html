@@ -1,12 +1,11 @@
 <form (ngSubmit)="onSubmit()" class="login p-card" [formGroup]="loginForm">
     <h1>Login</h1>
     <div class="p-inputgroup" *ngFor="let input of INPUTS">
-        <input
-            required
+        <app-input
+            [required]="true"
             [type]="input.type"
-            [formControlName]="input.formControlName"
-            pInputText
-            [placeholder]="input.label"
+            [controlName]="input.formControlName"
+            [placeholder]="input.placeholder"
         />
         <app-invalid-text [field]="loginForm.get(input.formControlName)" [errors]="input.errors" />
     </div>
