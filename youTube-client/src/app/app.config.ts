@@ -1,6 +1,7 @@
 import { provideHttpClient, withInterceptors } from "@angular/common/http"
 import { ApplicationConfig, provideZoneChangeDetection } from "@angular/core"
 import { provideRouter } from "@angular/router"
+import { provideStore } from "@ngrx/store"
 
 import { routes } from "./app.routes"
 import { authInterceptor } from "./interceptors/auth.interceptor"
@@ -10,6 +11,7 @@ export const appConfig: ApplicationConfig = {
         provideZoneChangeDetection({ eventCoalescing: true }),
         provideRouter(routes),
         // provideClientHydration(),
-        provideHttpClient(withInterceptors([authInterceptor]))
+        provideHttpClient(withInterceptors([authInterceptor])),
+        provideStore()
     ]
 }
