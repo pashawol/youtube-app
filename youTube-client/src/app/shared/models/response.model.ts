@@ -10,6 +10,16 @@ export interface PageInfo {
     resultsPerPage: number
 }
 
+export interface Card {
+    id: string
+    title: string
+    description: string
+    img: string
+    video: string
+    creationDate: string
+    tags: string[]
+}
+
 export interface Item {
     kind: string
     etag: string

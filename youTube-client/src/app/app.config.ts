@@ -5,6 +5,7 @@ import { provideStore } from "@ngrx/store"
 
 import { routes } from "./app.routes"
 import { authInterceptor } from "./interceptors/auth.interceptor"
+import { videoReducer } from "./store/reducers/video.reducer"
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -12,6 +13,6 @@ export const appConfig: ApplicationConfig = {
         provideRouter(routes),
         // provideClientHydration(),
         provideHttpClient(withInterceptors([authInterceptor])),
-        provideStore()
+        provideStore(videoReducer)
     ]
 }

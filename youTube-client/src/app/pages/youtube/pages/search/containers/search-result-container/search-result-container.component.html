@@ -2,6 +2,6 @@
     <ng-container *ngIf="filterCriteria$ | async as filterCriteria">
         <app-filter-block *ngIf="toggleFilterBlock | async" [filterCriteria]="filterCriteria" />
         <!-- *ngIf="searchActivated$ | async" -->
-        <app-search-results-list [items]="dataItems$ | async | filterByWord: filterCriteria.searchText" />
+        <app-search-results-list [items]="videos$ | async | filterByWord: filterCriteria.searchText" />
     </ng-container>
 </div>

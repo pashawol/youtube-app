@@ -29,8 +29,8 @@ export class RequestService {
 
             switchMap((statsParams) =>
                 this.http
-                .get<{ items: Item[] }>("/videos", { params: statsParams })
-                .pipe(map((statsResponse) => statsResponse.items))
+                    .get<{ items: Item[] }>("/videos", { params: statsParams })
+                    .pipe(map((statsResponse) => statsResponse.items))
             )
         )
     }
