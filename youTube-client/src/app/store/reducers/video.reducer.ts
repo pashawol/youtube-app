@@ -1,19 +1,7 @@
 import { createReducer, on } from "@ngrx/store"
-import { Item } from "@shared/models/response.model"
 
 import * as VideoActions from "../actions/video.actions"
-
-export interface VideoState {
-    videos: Item[]
-    localVideos: Item[]
-    video: Item | null
-}
-
-export const initialState: VideoState = {
-    videos: [],
-    localVideos: [],
-    video: null
-}
+import { initialState, VideoState } from "../videos.state"
 
 export const videoReducer = createReducer(
     initialState,
@@ -29,9 +17,10 @@ export const videoReducer = createReducer(
             videos
         }
     }),
-    on(VideoActions.getVideoByIdSuccess, (state): VideoState => {
+    on(VideoActions.getVideoByIdSuccess, (state, { video }): VideoState => {
         return {
-            ...state
+            ...state,
+            video
         }
     }),
     on(VideoActions.deleteVideo, (state, { id }): VideoState => {

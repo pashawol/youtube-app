@@ -1,8 +1,9 @@
 import { createFeatureSelector, createSelector, createSelectorFactory, defaultMemoize } from "@ngrx/store"
 
-import { VideoState } from "../reducers/video.reducer"
+import { videosFeatureKey } from "../store.constants"
+import { VideoState } from "../videos.state"
 
-export const selectVideoFeature = createFeatureSelector<VideoState>("video")
+export const selectVideoFeature = createFeatureSelector<VideoState>(videosFeatureKey)
 
 export const selectVideos = createSelector(selectVideoFeature, (state) => state.videos)
 
