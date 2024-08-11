@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common"
 import { Component, OnInit } from "@angular/core"
 import { FilterCriteria } from "@app/core/models/filter.model"
 import { loadVideos } from "@app/store/actions/video.actions"
-import { selectVideos } from "@app/store/selectors/video.selectors"
+import { selectLocalVideos, selectVideos } from "@app/store/selectors/video.selectors"
 import { FilterBlockComponent } from "@core/components"
 import { Store } from "@ngrx/store"
 import { Item } from "@shared/models/response.model"
@@ -20,6 +20,7 @@ import { FilterService } from "../../services"
 })
 export class SearchResultContainerComponent implements OnInit {
     videos$: Observable<Item[]> = this.store.select(selectVideos)
+    videosLocal$: Observable<Item[]> = this.store.select(selectLocalVideos)
 
     // searchActivated$: Observable<boolean> = this.searchService.searchActivated$
     filterCriteria$: Observable<FilterCriteria> = this.filterService.filter$

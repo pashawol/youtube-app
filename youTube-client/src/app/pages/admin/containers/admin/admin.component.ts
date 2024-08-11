@@ -12,10 +12,14 @@ import {
 import { ButtonComponent, InputComponent } from "@app/shared/components"
 import { InvalidTextComponent } from "@app/shared/components/invalid-text/invalid-text.component"
 import { dateValidator } from "@app/shared/validations/validation-date"
+import { createVideo } from "@app/store/actions/video.actions"
+import { Store } from "@ngrx/store"
+import { Item } from "@shared/models/response.model"
 // import { CustomValidateDirective } from "@shared/directives/custom-validate.directive"
 import { InputTextModule } from "primeng/inputtext"
 
 import { AdminFormErrors } from "../../constants/error.constants"
+import { shared } from "@app/shared/constants/shared.constants"
 
 @Component({
     selector: "app-admin",
@@ -33,6 +37,7 @@ import { AdminFormErrors } from "../../constants/error.constants"
     styleUrl: "./admin.component.scss"
 })
 export class AdminComponent implements OnInit {
+    PREFIX = shared.PREFIX
     adminForm: FormGroup
 
     readonly errors = AdminFormErrors
@@ -51,7 +56,8 @@ export class AdminComponent implements OnInit {
     ]
 
     constructor(
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private store: Store
         // private loginService: LoginService
     ) {}
 
@@ -90,7 +96,53 @@ export class AdminComponent implements OnInit {
     }
 
     onSubmit() {
-        return this.adminForm.valid
+        const { title, description, img, video, creationDate, tags } = this.adminForm.value
+        const card: Item = {
+            id: this.PREFIX + video.split("v=")[1],
+            snippet: {
+                publishedAt: creationDate as string,
+                title,
+                description,
+                thumbnails: {
+                    default: {
+                        url: img,
+                        width: 0,
+                        height: 0
+                    },
+                    medium: {
+                        url: img,
+                        width: 0,
+                        height: 0
+                    },
+                    high: {
+                        url: img,
+                        width: 0,
+                        height: 0
+                    }
+                },
+                channelTitle: "",
+                tags: tags.map((tag: { tag: string }) => tag.tag),
+                categoryId: "local",
+                liveBroadcastContent: "",
+                localized: {
+                    title,
+                    description
+                },
+                defaultAudioLanguage: "",
+                defaultLanguage: "",
+                channelId: ""
+            },
+            statistics: {
+                viewCount: "0",
+                likeCount: "0",
+                dislikeCount: "0",
+                favoriteCount: "0",
+                commentCount: "0"
+            },
+            kind: "",
+            etag: ""
+        }
+        this.store.dispatch(createVideo({ video: card }))
     }
 
     get disableReset() {

@@ -27,7 +27,7 @@ export class VideoEffects {
             switchMap(({ id }) =>
                 this.detailService.fetchData(id).pipe(
                     map((video: Item) => VideoActions.getVideoByIdSuccess({ video })),
-                    catchError((error) => of(VideoActions.getVideoByIdFailure({ error })))
+                    catchError((error) => of(VideoActions.getVideoByIdFailure({ error: error.message })))
                 )
             )
         )
@@ -44,7 +44,7 @@ export class VideoEffects {
                                 this.filterService.filter$.pipe(
                                     map(() => this.filterService.sortDataByFilterCriteria(items)),
                                     map((videos) => VideoActions.loadVideosSuccess({ videos })),
-                                    catchError((error) => of(VideoActions.loadVideosFailure({ error })))
+                                    catchError((error) => of(VideoActions.loadVideosFailure({ error: error.message })))
                                 )
                             )
                         )

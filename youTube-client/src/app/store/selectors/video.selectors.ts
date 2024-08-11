@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector, createSelectorFactory, defaultMemoize } from "@ngrx/store"
+import { createFeatureSelector, createSelector } from "@ngrx/store"
 
 import { videosFeatureKey } from "../store.constants"
 import { VideoState } from "../videos.state"
@@ -11,6 +11,5 @@ export const selectLocalVideos = createSelector(selectVideoFeature, (state) => s
 
 export const selectVideo = createSelector(selectVideoFeature, (state) => state.video)
 
-export const selectLocalVideoById = createSelectorFactory(defaultMemoize)((id: string) => {
-    return createSelector(selectLocalVideos, (videos) => videos.find((video) => video.id === id))
-})
+export const selectLocalVideoById = (id: string) =>
+    createSelector(selectLocalVideos, (videos) => videos.find((video) => video.id === id) || null)
