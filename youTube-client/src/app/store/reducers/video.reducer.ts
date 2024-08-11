@@ -26,7 +26,7 @@ export const videoReducer = createReducer(
     on(VideoActions.deleteVideo, (state, { id }): VideoState => {
         return {
             ...state,
-            videos: state.videos.filter((video) => video.id !== id)
+            localVideos: state.localVideos.filter((video) => video.id !== id)
         }
     })
 )

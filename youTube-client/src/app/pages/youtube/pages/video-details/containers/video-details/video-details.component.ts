@@ -2,8 +2,9 @@ import { CommonModule } from "@angular/common"
 import { Component, OnInit } from "@angular/core"
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser"
 import { ActivatedRoute } from "@angular/router"
+import { ButtonComponent } from "@app/shared/components"
 import { shared } from "@app/shared/constants/shared.constants"
-import { getVideoById } from "@app/store/actions/video.actions"
+import { deleteVideo, getVideoById } from "@app/store/actions/video.actions"
 import { selectLocalVideoById, selectVideo } from "@app/store/selectors/video.selectors"
 import { Store } from "@ngrx/store"
 import { Item } from "@shared/models/response.model"
@@ -14,7 +15,7 @@ import { HighlightDirective } from "../../../../directives/highlight.directive"
 @Component({
     selector: "app-video-details",
     standalone: true,
-    imports: [CommonModule, HighlightDirective],
+    imports: [CommonModule, HighlightDirective, ButtonComponent],
     templateUrl: "./video-details.component.html",
     styleUrl: "./video-details.component.scss"
 })
@@ -42,5 +43,9 @@ export class VideoDetailsComponent implements OnInit {
         if (!this.isLocal) {
             this.store.dispatch(getVideoById({ id: this.id }))
         }
+    }
+
+    removeCard(id: string): void {
+        this.store.dispatch(deleteVideo({ id }))
     }
 }

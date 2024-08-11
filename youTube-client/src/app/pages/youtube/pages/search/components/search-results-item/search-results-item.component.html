@@ -25,5 +25,9 @@
     </div>
     <ng-template pTemplate="footer">
         <app-link [link]="[data.id]" [style]="'button'">More</app-link>
+        <div *ngIf="hasPrefix" style="margin-top: 1rem; text-align: center">
+            <app-button severity="danger" (buttonClick)="removeCard(data.id)" icon="pi pi-times" label="Remove video">
+            </app-button>
+        </div>
     </ng-template>
 </p-card>

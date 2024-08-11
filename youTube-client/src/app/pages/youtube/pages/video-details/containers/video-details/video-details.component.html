@@ -43,6 +43,15 @@
                     {{ data.statistics.commentCount }}
                 </div>
             </div>
+            <div *ngIf="isLocal" style="margin-top: 2rem; text-align: center">
+                <app-button
+                    severity="danger"
+                    (buttonClick)="removeCard(data.id)"
+                    icon="pi pi-times"
+                    label="Remove video"
+                >
+                </app-button>
+            </div>
         </div>
     </div>
 </div>
