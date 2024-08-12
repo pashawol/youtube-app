@@ -40,6 +40,13 @@
         }
     }
 }
+.p-card-header {
+    position: relative;
+}
+.p-card-header img {
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
 
 body {
     font-size: 16px;
@@ -68,4 +75,10 @@ body {
         display: block;
         margin-top: 0.2em;
     }
+}
+
+app-search-results-list + app-search-results-list {
+    // margin-top: 2rem;
+    padding-top: 3rem;
+    display: block;
 }

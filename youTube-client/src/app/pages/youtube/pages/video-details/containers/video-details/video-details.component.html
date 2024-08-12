@@ -17,6 +17,7 @@
             </div>
         </div>
         <div class="col-description">
+            <app-favorite-button [id]="data.id" />
             <h1>{{ data.snippet.title }}</h1>
             <p>{{ data.snippet.publishedAt | date: "fullDate" }}</p>
             <br />
@@ -44,13 +45,7 @@
                 </div>
             </div>
             <div *ngIf="isLocal" style="margin-top: 2rem; text-align: center">
-                <app-button
-                    severity="danger"
-                    (buttonClick)="removeCard(data.id)"
-                    icon="pi pi-times"
-                    label="Remove video"
-                >
-                </app-button>
+                <app-remove-button [id]="data.id" />
             </div>
         </div>
     </div>

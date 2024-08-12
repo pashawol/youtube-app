@@ -2,13 +2,16 @@ import { Item } from "@app/shared/models/response.model"
 
 export interface VideoState {
     videos: Item[]
+    favoriteList: Item[]
     localVideos: Item[]
     video: Item | null
+    currentPagination: string | null
     error: string | null
 }
 
 export const initialState: VideoState = {
     videos: [],
+    favoriteList: [],
     localVideos: [
         {
             id: "local-obUsyRdkHaM",
@@ -102,5 +105,6 @@ export const initialState: VideoState = {
         }
     ],
     video: null,
+    currentPagination: null,
     error: null
 }

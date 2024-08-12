@@ -10,13 +10,18 @@ import { map, switchMap } from "rxjs/operators"
 export class RequestService {
     constructor(private http: HttpClient) {}
 
-    search(query: string): Observable<Item[]> {
+    search(query: string, pageToken: string = ""): Observable<Item[]> {
+        if (!query) return forkJoin([])
+
         const searchParams = {
             part: "id",
             q: query,
             type: "video",
-            maxResults: "25"
+            maxResults: "10",
+            pageToken: "CBQQAA"
+            // pageToken: "CAoQAA"
         }
+
         if (!query) return forkJoin([])
 
         return this.http.get<{ items: { id: { videoId: string } }[] }>("/search", { params: searchParams }).pipe(
