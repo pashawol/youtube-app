@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="col-description">
-            <app-favorite-button [id]="data.id" />
+            <app-favorite-button *ngIf="!isLocal" [id]="data.id" />
             <h1>{{ data.snippet.title }}</h1>
             <p>{{ data.snippet.publishedAt | date: "fullDate" }}</p>
             <br />

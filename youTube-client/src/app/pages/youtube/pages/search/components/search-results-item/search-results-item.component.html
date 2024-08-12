@@ -1,6 +1,6 @@
 <p-card [appHighlight]="data.snippet.publishedAt">
     <ng-template pTemplate="header">
-        <app-favorite-button [id]="data.id" />
+        <app-favorite-button *ngIf="hasPrefix() === false" [id]="data.id" />
         <img alt="Card" src="{{ data.snippet.thumbnails.high.url }}" />
     </ng-template>
     <ng-template pTemplate="title">
@@ -26,7 +26,7 @@
     </div>
     <ng-template pTemplate="footer">
         <app-link [link]="[data.id]" [style]="'button'">More</app-link>
-        <div *ngIf="hasPrefix" style="margin-top: 1rem; text-align: center">
+        <div *ngIf="hasPrefix() === true" style="margin-top: 1rem; text-align: center">
             <app-remove-button [id]="data.id" />
         </div>
     </ng-template>
