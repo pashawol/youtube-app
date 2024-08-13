@@ -39,10 +39,14 @@ export class VideoEffects {
             switchMap(() =>
                 this.searchService.searchQuery$.pipe(
                     switchMap((query) =>
-                        this.requestService.search(query).pipe(
-                            switchMap((items: Item[]) =>
-                                this.filterService.filter$.pipe(
-                                    map(() => this.filterService.sortDataByFilterCriteria(items)),
+                        this.requestService.currentTokenPage$.pipe(
+                            switchMap((pageToken) =>
+                                this.requestService.search(query, pageToken).pipe(
+                                    switchMap((items) =>
+                                        this.filterService.filter$.pipe(
+                                            map(() => this.filterService.sortDataByFilterCriteria(items))
+                                        )
+                                    ),
                                     map((videos) => VideoActions.loadVideosSuccess({ videos })),
                                     catchError((error) => of(VideoActions.loadVideosFailure({ error: error.message })))
                                 )

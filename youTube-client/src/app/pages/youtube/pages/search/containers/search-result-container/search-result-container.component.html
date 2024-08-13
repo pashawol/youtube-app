@@ -3,6 +3,10 @@
         <app-filter-block *ngIf="toggleFilterBlock | async" [filterCriteria]="filterCriteria" />
 
         <app-search-results-list *ngIf="videosLocal$" [items]="videosLocal$ | async" />
-        <app-search-results-list [items]="videos$ | async | filterByWord: filterCriteria.searchText" />
+        <app-search-results-list
+            [token]="tokenPage$ | async"
+            [showNavigation]="true"
+            [items]="videos$ | async | filterByWord: filterCriteria.searchText"
+        />
     </ng-container>
 </div>

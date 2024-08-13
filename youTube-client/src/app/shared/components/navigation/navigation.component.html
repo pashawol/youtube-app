@@ -1,4 +1,14 @@
 <div class="navigation">
-    <app-button icon="pi pi-angle-left" />
-    <app-button icon="pi pi-angle-right" />
+    <app-button
+        (buttonClick)="onChangeTokenPage(token.prev)"
+        *ngIf="token.prev"
+        icon="pi pi-angle-left"
+        [label]="token.prev"
+    />
+    <app-button
+        (buttonClick)="onChangeTokenPage(token.next)"
+        *ngIf="token.next"
+        icon="pi pi-angle-right"
+        [label]="token.next"
+    />
 </div>

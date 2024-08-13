@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common"
 import { Component, Input } from "@angular/core"
 import { ButtonComponent } from "@app/shared/components"
 import { Store } from "@ngrx/store"
@@ -5,7 +6,7 @@ import { Store } from "@ngrx/store"
 @Component({
     selector: "app-favorite-button",
     standalone: true,
-    imports: [ButtonComponent],
+    imports: [ButtonComponent, CommonModule],
     templateUrl: "./favorite-button.component.html",
     styleUrl: "./favorite-button.component.scss"
 })
