@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common"
 import { Component, OnInit } from "@angular/core"
 import { FilterCriteria } from "@app/core/models/filter.model"
+import { NavigationService } from "@app/shared/services/navigation.service"
 import { loadVideos } from "@app/store/actions/video.actions"
 import { selectLocalVideos, selectVideos } from "@app/store/selectors/video.selectors"
 import { FilterBlockComponent } from "@core/components"
@@ -10,7 +11,7 @@ import { Observable } from "rxjs"
 
 import { SearchResultsListComponent } from "../../components"
 import { FilterByWordPipe } from "../../pipes/filter-by-word.pipe"
-import { FilterService, RequestService } from "../../services"
+import { FilterService } from "../../services"
 
 @Component({
     selector: "app-search-result-container",
@@ -20,7 +21,7 @@ import { FilterService, RequestService } from "../../services"
     styleUrl: "./search-result-container.component.scss"
 })
 export class SearchResultContainerComponent implements OnInit {
-    tokenPage$: Observable<{ prev: string; next: string }> = this.requestService.tokenPageQuery$
+    tokenPage$: Observable<{ prev: string; next: string }> = this.navigationService.tokenPageQuery$
     videos$: Observable<Item[]> = this.store.select(selectVideos)
     videosLocal$: Observable<Item[]> = this.store.select(selectLocalVideos)
 
@@ -31,7 +32,7 @@ export class SearchResultContainerComponent implements OnInit {
 
     constructor(
         private filterService: FilterService,
-        private requestService: RequestService,
+        private navigationService: NavigationService,
         private store: Store
     ) {}
 

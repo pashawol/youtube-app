@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common"
 import { Component, Input, OnInit } from "@angular/core"
-import { RequestService } from "@pages/youtube/pages/search/services/request.service"
+import { NavigationService } from "@app/shared/services/navigation.service"
 import { ButtonComponent } from "@shared/components"
 import { Subject } from "rxjs"
 
@@ -15,10 +15,10 @@ export class NavigationComponent implements OnInit {
     @Input() token: { prev: string | null; next: string | null } = { prev: null, next: null }
     private pageTokenChanged = new Subject<string>()
 
-    constructor(private requestService: RequestService) {}
+    constructor(private navigationService: NavigationService) {}
     ngOnInit(): void {
         this.pageTokenChanged.subscribe((pageToken) => {
-            this.requestService.setTokenPage(pageToken)
+            this.navigationService.setTokenPage(pageToken)
         })
     }
 

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core"
 import { FilterService, SearchService } from "@app/pages/youtube/pages/search/services"
 import { Item } from "@app/shared/models/response.model"
+import { NavigationService } from "@app/shared/services/navigation.service"
 import { Actions, createEffect, ofType } from "@ngrx/effects"
 import { Action, Store } from "@ngrx/store"
 import { RequestService } from "@pages/youtube/pages/search/services/request.service"
@@ -18,6 +19,7 @@ export class VideoEffects {
         private filterService: FilterService,
         private searchService: SearchService,
         private detailService: DetailService,
+        private navigationService: NavigationService,
         private readonly store: Store
     ) {}
 
@@ -39,7 +41,7 @@ export class VideoEffects {
             switchMap(() =>
                 this.searchService.searchQuery$.pipe(
                     switchMap((query) =>
-                        this.requestService.currentTokenPage$.pipe(
+                        this.navigationService.currentTokenPage$.pipe(
                             switchMap((pageToken) =>
                                 this.requestService.search(query, pageToken).pipe(
                                     switchMap((items) =>

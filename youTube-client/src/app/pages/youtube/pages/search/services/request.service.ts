@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
+import { NavigationService } from "@app/shared/services/navigation.service"
 import { Item } from "@shared/models/response.model"
 import { BehaviorSubject, forkJoin, Observable } from "rxjs"
 import { map, switchMap } from "rxjs/operators"
@@ -8,17 +9,10 @@ import { map, switchMap } from "rxjs/operators"
     providedIn: "root"
 })
 export class RequestService {
-    private tokenPageQuerySubject = new BehaviorSubject<{ prev: string; next: string }>({ prev: "", next: "" })
-    public tokenPageQuery$ = this.tokenPageQuerySubject.asObservable()
-
-    private currentTokenPageSubject = new BehaviorSubject<string>("")
-    public currentTokenPage$ = this.currentTokenPageSubject.asObservable()
-
-    constructor(private http: HttpClient) {}
-
-    setTokenPage(token: string) {
-        this.currentTokenPageSubject.next(token)
-    }
+    constructor(
+        private http: HttpClient,
+        private navigationService: NavigationService
+    ) {}
 
     search(query: string, pageToken: string = ""): Observable<Item[]> {
         if (!query) return forkJoin([])
@@ -39,7 +33,7 @@ export class RequestService {
             }>("/search", { params: searchParams })
             .pipe(
                 map((searchResponse) => {
-                    this.tokenPageQuerySubject.next({
+                    this.navigationService.setTokenPagesQuery({
                         prev: searchResponse.prevPageToken,
                         next: searchResponse.nextPageToken
                     })
