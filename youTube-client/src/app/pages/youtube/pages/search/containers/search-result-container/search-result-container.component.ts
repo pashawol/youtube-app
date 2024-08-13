@@ -5,12 +5,14 @@ import { loadVideos } from "@app/store/actions/video.actions"
 import { selectLocalVideos, selectVideos } from "@app/store/selectors/video.selectors"
 import { FilterBlockComponent } from "@core/components"
 import { Store } from "@ngrx/store"
+
 import { Item } from "@shared/models/response.model"
 import { Observable } from "rxjs"
 
 import { SearchResultsListComponent } from "../../components"
 import { FilterByWordPipe } from "../../pipes/filter-by-word.pipe"
 import { FilterService } from "../../services"
+
 @Component({
     selector: "app-search-result-container",
     standalone: true,

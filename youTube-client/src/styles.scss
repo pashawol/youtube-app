@@ -82,3 +82,9 @@ app-search-results-list + app-search-results-list {
     padding-top: 3rem;
     display: block;
 }
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
