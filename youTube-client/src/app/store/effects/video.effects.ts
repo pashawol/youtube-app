@@ -43,7 +43,7 @@ export class VideoEffects {
                     switchMap((query) =>
                         this.navigationService.currentTokenPage$.pipe(
                             switchMap((pageToken) =>
-                                this.requestService.search(query, pageToken).pipe(
+                                this.requestService.search("query", pageToken).pipe(
                                     switchMap((items) =>
                                         this.filterService.filter$.pipe(
                                             map(() => this.filterService.sortDataByFilterCriteria(items))

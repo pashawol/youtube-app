@@ -3,12 +3,10 @@ import { Component, Input } from "@angular/core"
 import { shared } from "@app/shared/constants/shared.constants"
 import { deleteVideo } from "@app/store/actions/video.actions"
 import { Store } from "@ngrx/store"
-
-import { ButtonComponent, LinkComponent, RemoveButtonComponent, FavoriteButtonComponent } from "@shared/components"
+import { HighlightDirective } from "@pages/youtube/directives/highlight.directive"
+import { ButtonComponent, FavoriteButtonComponent, LinkComponent, RemoveButtonComponent } from "@shared/components"
 import { Item } from "@shared/models/response.model"
 import { CardModule } from "primeng/card"
-
-import { HighlightDirective } from "../../../../directives/highlight.directive"
 
 @Component({
     selector: "app-search-results-item",

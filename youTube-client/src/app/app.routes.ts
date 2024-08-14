@@ -22,6 +22,11 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
+        path: "favorites",
+        loadChildren: () => import("@pages/favorites/favorites.module").then((m) => m.FavoritesModule),
+        canActivate: [authGuard]
+    },
+    {
         path: "error",
         loadChildren: () => ErrorModule
     },

@@ -21,7 +21,7 @@ export class RequestService {
             part: "id",
             q: query,
             type: "video",
-            maxResults: "25",
+            maxResults: "20",
             pageToken
         }
 
