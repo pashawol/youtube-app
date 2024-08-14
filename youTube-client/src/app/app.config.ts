@@ -7,6 +7,9 @@ import { provideStoreDevtools } from "@ngrx/store-devtools"
 
 import { routes } from "./app.routes"
 import { authInterceptor } from "./interceptors/auth.interceptor"
+import { FavoritesEffects } from "./pages/favorites/store/effects/favorites.effects"
+import { favoritesReducer } from "./pages/favorites/store/reducers"
+import { favoritesFeatureKey } from "./pages/favorites/store/store.constants"
 import { VideoEffects } from "./store/effects/video.effects"
 import { videoReducer } from "./store/reducers"
 import { videosFeatureKey } from "./store/store.constants"
@@ -17,8 +20,8 @@ export const appConfig: ApplicationConfig = {
         provideRouter(routes),
         // provideClientHydration(),
         provideHttpClient(withInterceptors([authInterceptor])),
-        provideStore({ [videosFeatureKey]: videoReducer }),
-        provideEffects(VideoEffects),
+        provideStore({ [videosFeatureKey]: videoReducer, [favoritesFeatureKey]: favoritesReducer }),
+        provideEffects(VideoEffects, FavoritesEffects),
         provideStoreDevtools({
             maxAge: 25, // Retains last 25 states
             logOnly: !isDevMode(), // Restrict extension to log-only mode

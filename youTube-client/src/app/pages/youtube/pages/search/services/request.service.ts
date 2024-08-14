@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { NavigationService } from "@app/shared/services/navigation.service"
 import { Item } from "@shared/models/response.model"
-import { BehaviorSubject, forkJoin, Observable } from "rxjs"
+import { forkJoin, Observable } from "rxjs"
 import { map, switchMap } from "rxjs/operators"
 
 @Injectable({
