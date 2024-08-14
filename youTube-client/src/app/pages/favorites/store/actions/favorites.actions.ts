@@ -8,8 +8,7 @@ export const loadFavoritesFailure = createAction(
     props<{ error: string | null }>()
 )
 
-export const addFavorite = createAction("[Favorites] Add Favorite", props<{ id: string }>())
-export const removeFavorite = createAction("[Favorites] Remove Favorite", props<{ id: string }>())
+export const toggleFavorite = createAction("[Favorite] Toggle Favorite", props<{ id: string }>())
 
 export const loadFavoritesData = createAction("[Favorites] Load Favorites Data")
 export const loadFavoritesDataSuccess = createAction(

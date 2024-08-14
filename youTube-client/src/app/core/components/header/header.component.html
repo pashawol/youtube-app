@@ -7,6 +7,9 @@
             <app-settings-button />
         </div>
         <div class="row" *ngIf="isLoggedIn$ | async">
+            <a routerLink="/favorites" style="text-decoration: none">
+                <app-button icon="pi pi-heart" />
+            </a>
             <app-login-information-block />
             <app-button severity="danger" (buttonClick)="logout()">Logout</app-button>
         </div>

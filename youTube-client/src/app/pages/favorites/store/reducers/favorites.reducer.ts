@@ -11,22 +11,13 @@ export const favoritesReducer = createReducer(
             favoriteList: favorites
         }
     }),
-    on(FavoritesActions.loadFavoritesFailure, (state, { error }): FavoritesState => {
+    on(FavoritesActions.toggleFavorite, (state, { id }): FavoritesState => {
         return {
             ...state,
-            error
-        }
-    }),
-    on(FavoritesActions.addFavorite, (state, { id }): FavoritesState => {
-        return {
-            ...state,
-            favoriteList: [...state.favoriteList, id]
-        }
-    }),
-    on(FavoritesActions.removeFavorite, (state, { id }): FavoritesState => {
-        return {
-            ...state,
-            favoriteList: state.favoriteList.filter((favorite) => favorite !== id)
+            favoriteList: state.favoriteList.includes(id)
+                ? state.favoriteList.filter((favorite) => favorite !== id)
+                : [...state.favoriteList, id],
+            favoritesData: state.favoritesData.filter((item) => item.id !== id)
         }
     }),
     on(FavoritesActions.loadFavoritesDataSuccess, (state, { favoritesData }): FavoritesState => {

@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common"
 import { Component } from "@angular/core"
+import { RouterLink, RouterOutlet } from "@angular/router"
 import { LoginService } from "@app/pages/login/services/login.service"
 import { ButtonComponent } from "@app/shared/components"
 import { Observable } from "rxjs"
@@ -15,7 +16,9 @@ import { LoginInformationBlockComponent, LogoComponent, SearchBlockComponent, Se
         LoginInformationBlockComponent,
         SettingsButtonComponent,
         ButtonComponent,
-        CommonModule
+        CommonModule,
+        RouterLink,
+        RouterOutlet
     ],
     templateUrl: "./header.component.html",
     styleUrl: "./header.component.scss"
