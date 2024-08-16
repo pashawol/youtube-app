@@ -1,10 +1,10 @@
-<app-navigation [token]="token" *ngIf="showNavigation && items.length > 0" />
+<app-navigation [token]="token()" *ngIf="showNavigation && items.length > 0" />
 <div class="row">
-    @for (data of items; track data.id) {
+    @for (data of items(); track data.id) {
         <app-search-results-item [data]="data" />
     } @empty {
         <h2>Sorry, we didn`t found anything (:</h2>
     }
 </div>
 
-<app-navigation *ngIf="showNavigation && items.length > 0" />
+<app-navigation *ngIf="showNavigation() && items.length > 0" />

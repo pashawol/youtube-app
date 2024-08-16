@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common"
-import { Component, Input } from "@angular/core"
+import { Component, Input, input } from "@angular/core"
 import { shared } from "@app/shared/constants/shared.constants"
 import { deleteVideo } from "@app/store/actions/video.actions"
 import { Store } from "@ngrx/store"
@@ -25,7 +25,7 @@ import { CardModule } from "primeng/card"
 })
 export class SearchResultsItemComponent {
     PREFIX = shared.PREFIX
-    @Input() data: Item
+    data = input<Item>()
 
     constructor(private store: Store) {}
 
@@ -34,6 +34,6 @@ export class SearchResultsItemComponent {
     }
 
     hasPrefix(): boolean {
-        return this.data.id.includes(this.PREFIX)
+        return this.data().id.includes(this.PREFIX)
     }
 }

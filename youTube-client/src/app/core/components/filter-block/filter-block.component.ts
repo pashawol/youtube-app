@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common"
-import { Component, Input, OnChanges, SimpleChanges } from "@angular/core"
+import { Component, Input, OnChanges, signal, SimpleChanges } from "@angular/core"
 import { FormsModule } from "@angular/forms"
 import { FilterService } from "@app/pages/youtube/pages/search/services/filter.service"
 import { ButtonComponent } from "@shared/components"
@@ -17,19 +17,19 @@ import { FilterCriteria } from "../../models/filter.model"
 export class FilterBlockComponent implements OnChanges {
     @Input() filterCriteria: FilterCriteria = { date: "", count: "", searchText: "" }
 
-    searchText: string = ""
+    searchText = signal<string>("")
 
     constructor(private filterService: FilterService) {}
 
     ngOnChanges({ filterCriteria }: SimpleChanges) {
         if (filterCriteria?.currentValue && filterCriteria?.firstChange) {
-            this.searchText = filterCriteria.currentValue.searchText
+            this.searchText.set(filterCriteria.currentValue.searchText)
         }
     }
     onButtonClick(filterData: string) {
         this.filterService.onButtonClick(filterData)
     }
     onInputChange() {
-        this.filterService.onInputChange(this.searchText)
+        this.filterService.onInputChange(this.searchText())
     }
 }

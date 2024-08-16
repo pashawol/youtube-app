@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core"
+import { computed, effect, Injectable } from "@angular/core"
 import { FilterService, SearchService } from "@app/pages/youtube/pages/search/services"
 import { Item } from "@app/shared/models/response.model"
 import { NavigationService } from "@app/shared/services/navigation.service"
@@ -36,25 +36,17 @@ export class VideoEffects {
     })
 
     loadVideos$: Observable<Action> = createEffect(() => {
+        const query: string = this.searchService.searchQuery$()
+        const pageToken: string = this.navigationService.currentTokenPage$()
         return this.actions$.pipe(
             ofType(VideoActions.loadVideos),
             switchMap(() =>
-                this.searchService.searchQuery$.pipe(
-                    switchMap((query) =>
-                        this.navigationService.currentTokenPage$.pipe(
-                            switchMap((pageToken) =>
-                                this.requestService.search("query", pageToken).pipe(
-                                    switchMap((items) =>
-                                        this.filterService.filter$.pipe(
-                                            map(() => this.filterService.sortDataByFilterCriteria(items))
-                                        )
-                                    ),
-                                    map((videos) => VideoActions.loadVideosSuccess({ videos })),
-                                    catchError((error) => of(VideoActions.loadVideosFailure({ error: error.message })))
-                                )
-                            )
-                        )
-                    )
+                this.requestService.search(query, pageToken).pipe(
+                    switchMap((items) =>
+                        this.filterService.filter$.pipe(map(() => this.filterService.sortDataByFilterCriteria(items)))
+                    ),
+                    map((videos) => VideoActions.loadVideosSuccess({ videos })),
+                    catchError((error) => of(VideoActions.loadVideosFailure({ error: error.message })))
                 )
             )
         )

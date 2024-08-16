@@ -1,14 +1,14 @@
 <button
     pButton
     pRipple
-    [icon]="icon"
-    [type]="type"
-    [label]="label"
-    [class]="classList"
-    [disabled]="disabled"
-    [severity]="severity"
-    [outlined]="outlined"
-    [style]="style"
+    [icon]="icon()"
+    [type]="type()"
+    [label]="label()"
+    [class]="classList()"
+    [disabled]="disabled()"
+    [severity]="severity()"
+    [outlined]="outlined()"
+    [style]="style()"
     (click)="onClick()"
 >
     <ng-content />
