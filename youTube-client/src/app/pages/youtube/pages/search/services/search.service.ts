@@ -14,7 +14,4 @@ export class SearchService {
     activateSearch(activate: boolean) {
         this.searchActivated$.set(activate)
     }
-    getSearchQuery = computed(() => {
-        return this.searchQuery$()
-    })
 }

@@ -25,7 +25,7 @@
         </div>
     </div>
     <ng-template pTemplate="footer">
-        <app-link [link]="[data().id]" [style]="'button'">More</app-link>
+        <app-link [link]="'/youtube/' + [data().id]" [style]="'button'">More</app-link>
         <div *ngIf="hasPrefix() === true" style="margin-top: 1rem; text-align: center">
             <app-remove-button [id]="data().id" />
         </div>

@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common"
-import { Component, input, output } from "@angular/core"
+import { Component, input, model, output } from "@angular/core"
 import { ButtonDirective, ButtonModule } from "primeng/button"
 import { RippleModule } from "primeng/ripple"
 
@@ -13,8 +13,8 @@ import { RippleModule } from "primeng/ripple"
 export class ButtonComponent {
     icon = input<string>()
     label = input<string>()
-    type = input<string>()
-    disabled = input<boolean>()
+    type = input<string>("button")
+    disabled = model<boolean>()
     classList = input<string>()
     style = input<string>()
     severity = input<ButtonDirective["severity"]>("primary")

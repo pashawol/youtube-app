@@ -1,14 +1,13 @@
 import { CommonModule } from "@angular/common"
-import { Component, OnInit } from "@angular/core"
+import { Component, OnInit, signal } from "@angular/core"
+import { toSignal } from "@angular/core/rxjs-interop"
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser"
 import { ActivatedRoute } from "@angular/router"
-import { ButtonComponent, RemoveButtonComponent, FavoriteButtonComponent } from "@app/shared/components"
+import { ButtonComponent, FavoriteButtonComponent, RemoveButtonComponent } from "@app/shared/components"
 import { shared } from "@app/shared/constants/shared.constants"
 import { getVideoById } from "@app/store/actions/video.actions"
 import { selectLocalVideoById, selectVideo } from "@app/store/selectors/video.selectors"
 import { Store } from "@ngrx/store"
-import { Item } from "@shared/models/response.model"
-import { Observable } from "rxjs"
 
 import { HighlightDirective } from "../../../../directives/highlight.directive"
 
@@ -24,9 +23,11 @@ export class VideoDetailsComponent implements OnInit {
     PREFIX = shared.PREFIX
     isLocal: boolean = this.id.includes(this.PREFIX)
 
-    video$: Observable<Item> = this.isLocal
-        ? this.store.select(selectLocalVideoById(this.id))
-        : this.store.select(selectVideo)
+    // video$=
+    // this.isLocal
+    //     ? this.store.select(selectLocalVideoById(this.id))
+    //     : this.store.select(selectVideo)
+    video$ = toSignal(this.isLocal ? this.store.select(selectLocalVideoById(this.id)) : this.store.select(selectVideo))
 
     constructor(
         private route: ActivatedRoute,

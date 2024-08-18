@@ -1,4 +1,5 @@
-import { computed, effect, Injectable } from "@angular/core"
+import { Injectable } from "@angular/core"
+import { toObservable } from "@angular/core/rxjs-interop"
 import { FilterService, SearchService } from "@app/pages/youtube/pages/search/services"
 import { Item } from "@app/shared/models/response.model"
 import { NavigationService } from "@app/shared/services/navigation.service"
@@ -13,6 +14,9 @@ import * as VideoActions from "../actions/video.actions"
 
 @Injectable()
 export class VideoEffects {
+    private searchQuery$: Observable<string>
+    private currentTokenPage$: Observable<string>
+    // private filterCriteria$: Observable<FilterCriteria>
     constructor(
         private actions$: Actions,
         private requestService: RequestService,
@@ -21,7 +25,11 @@ export class VideoEffects {
         private detailService: DetailService,
         private navigationService: NavigationService,
         private readonly store: Store
-    ) {}
+    ) {
+        this.searchQuery$ = toObservable(this.searchService.searchQuery$)
+        this.currentTokenPage$ = toObservable(this.navigationService.currentTokenPage$)
+        // this.filterCriteria$ = toObservable(this.filterService.filter$)
+    }
 
     getVideoById$: Observable<Action> = createEffect(() => {
         return this.actions$.pipe(
@@ -36,17 +44,25 @@ export class VideoEffects {
     })
 
     loadVideos$: Observable<Action> = createEffect(() => {
-        const query: string = this.searchService.searchQuery$()
-        const pageToken: string = this.navigationService.currentTokenPage$()
         return this.actions$.pipe(
             ofType(VideoActions.loadVideos),
             switchMap(() =>
-                this.requestService.search(query, pageToken).pipe(
-                    switchMap((items) =>
-                        this.filterService.filter$.pipe(map(() => this.filterService.sortDataByFilterCriteria(items)))
-                    ),
-                    map((videos) => VideoActions.loadVideosSuccess({ videos })),
-                    catchError((error) => of(VideoActions.loadVideosFailure({ error: error.message })))
+                this.searchQuery$.pipe(
+                    switchMap((query: string) =>
+                        this.currentTokenPage$.pipe(
+                            switchMap((pageToken: string) =>
+                                this.requestService.search(query, pageToken).pipe(
+                                    switchMap((items: Item[]) =>
+                                        this.filterService.filter$.pipe(
+                                            map(() => this.filterService.sortDataByFilterCriteria(items))
+                                        )
+                                    ),
+                                    map((videos: Item[]) => VideoActions.loadVideosSuccess({ videos })),
+                                    catchError((error) => of(VideoActions.loadVideosFailure({ error: error.message })))
+                                )
+                            )
+                        )
+                    )
                 )
             )
         )
