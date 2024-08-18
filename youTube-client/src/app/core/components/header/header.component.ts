@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common"
 import { Component } from "@angular/core"
 import { RouterLink, RouterOutlet } from "@angular/router"
 import { LoginService } from "@app/pages/login/services/login.service"
-import { ButtonComponent } from "@app/shared/components"
+import { ButtonComponent, LinkComponent } from "@app/shared/components"
 import { Observable } from "rxjs"
 
 import { LoginInformationBlockComponent, LogoComponent, SearchBlockComponent, SettingsButtonComponent } from ".."
@@ -17,6 +17,7 @@ import { LoginInformationBlockComponent, LogoComponent, SearchBlockComponent, Se
         SettingsButtonComponent,
         ButtonComponent,
         CommonModule,
+        LinkComponent,
         RouterLink,
         RouterOutlet
     ],
