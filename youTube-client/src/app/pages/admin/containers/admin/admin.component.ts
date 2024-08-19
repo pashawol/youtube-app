@@ -11,6 +11,7 @@ import {
 } from "@angular/forms"
 import { ButtonComponent, InputComponent } from "@app/shared/components"
 import { InvalidTextComponent } from "@app/shared/components/invalid-text/invalid-text.component"
+import { shared } from "@app/shared/constants/shared.constants"
 import { dateValidator } from "@app/shared/validations/validation-date"
 import { createVideo } from "@app/store/actions/video.actions"
 import { Store } from "@ngrx/store"
@@ -19,7 +20,6 @@ import { Item } from "@shared/models/response.model"
 import { InputTextModule } from "primeng/inputtext"
 
 import { AdminFormErrors } from "../../constants/error.constants"
-import { shared } from "@app/shared/constants/shared.constants"
 
 @Component({
     selector: "app-admin",

@@ -6,7 +6,7 @@
             <app-search-block />
             <app-settings-button />
         </div>
-        <div class="row" *ngIf="isLoggedIn$ | async">
+        <div class="row" *ngIf="isLoggedIn$">
             <a routerLink="/favorites" style="text-decoration: none">
                 <app-button icon="pi pi-heart" />
             </a>

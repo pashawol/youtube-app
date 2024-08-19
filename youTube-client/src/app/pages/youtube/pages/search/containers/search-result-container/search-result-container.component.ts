@@ -1,13 +1,11 @@
 import { CommonModule } from "@angular/common"
 import { Component, OnInit } from "@angular/core"
-import { FilterCriteria } from "@app/core/models/filter.model"
+import { toSignal } from "@angular/core/rxjs-interop"
 import { NavigationService } from "@app/shared/services/navigation.service"
 import { loadVideos } from "@app/store/actions/video.actions"
 import { selectLocalVideos, selectVideos } from "@app/store/selectors/video.selectors"
 import { FilterBlockComponent, SearchResultsListComponent } from "@core/components"
 import { Store } from "@ngrx/store"
-import { Item } from "@shared/models/response.model"
-import { Observable } from "rxjs"
 
 import { FilterByWordPipe } from "../../pipes/filter-by-word.pipe"
 import { FilterService } from "../../services"
@@ -20,14 +18,12 @@ import { FilterService } from "../../services"
     styleUrl: "./search-result-container.component.scss"
 })
 export class SearchResultContainerComponent implements OnInit {
-    tokenPage$: Observable<{ prev: string; next: string }> = this.navigationService.tokenPageQuery$
-    videos$: Observable<Item[]> = this.store.select(selectVideos)
-    videosLocal$: Observable<Item[]> = this.store.select(selectLocalVideos)
+    tokenPage$ = this.navigationService.tokenPageQuery$()
+    videos$ = toSignal(this.store.select(selectVideos))
+    videosLocal$ = toSignal(this.store.select(selectLocalVideos))
 
-    // searchActivated$: Observable<boolean> = this.searchService.searchActivated$
-    filterCriteria$: Observable<FilterCriteria> = this.filterService.filter$
-
-    toggleFilterBlock: Observable<boolean> = this.filterService.filterToggle$
+    filterCriteria$ = toSignal(this.filterService.filter$)
+    toggleFilterBlock = toSignal(this.filterService.filterToggle$)
 
     constructor(
         private filterService: FilterService,

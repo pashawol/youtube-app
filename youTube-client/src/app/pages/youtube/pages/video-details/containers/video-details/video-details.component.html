@@ -1,4 +1,4 @@
-<div class="container p-card" *ngIf="video$ | async as data" [appHighlight]="data.snippet.publishedAt">
+<div class="container p-card" *ngIf="video$() as data" [appHighlight]="data.snippet.publishedAt">
     <!-- [appHighlight]="data.snippet.publishedAt" -->
     <div class="p-card__row row">
         <div class="col-img">

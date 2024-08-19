@@ -1,9 +1,8 @@
 import { CommonModule } from "@angular/common"
-import { Component } from "@angular/core"
+import { Component, effect } from "@angular/core"
 import { RouterLink, RouterOutlet } from "@angular/router"
 import { LoginService } from "@app/pages/login/services/login.service"
-import { ButtonComponent, LinkComponent } from "@app/shared/components"
-import { Observable } from "rxjs"
+import { ButtonComponent } from "@app/shared/components"
 
 import { LoginInformationBlockComponent, LogoComponent, SearchBlockComponent, SettingsButtonComponent } from ".."
 
@@ -17,7 +16,6 @@ import { LoginInformationBlockComponent, LogoComponent, SearchBlockComponent, Se
         SettingsButtonComponent,
         ButtonComponent,
         CommonModule,
-        LinkComponent,
         RouterLink,
         RouterOutlet
     ],
@@ -25,9 +23,14 @@ import { LoginInformationBlockComponent, LogoComponent, SearchBlockComponent, Se
     styleUrl: "./header.component.scss"
 })
 export class HeaderComponent {
-    readonly isLoggedIn$: Observable<boolean> = this.loginService.loginStatus$
+    // readonly isLoggedIn$: Observable<boolean> = this.loginService.loginStatus$
+    isLoggedIn$ = false
 
-    constructor(private loginService: LoginService) {}
+    constructor(private loginService: LoginService) {
+        effect(() => {
+            this.isLoggedIn$ = this.loginService.loginStatus$()
+        })
+    }
 
     logout() {
         this.loginService.logout()

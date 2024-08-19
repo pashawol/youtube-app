@@ -1,33 +1,33 @@
-<p-card [appHighlight]="data.snippet.publishedAt">
+<p-card [appHighlight]="data().snippet.publishedAt">
     <ng-template pTemplate="header">
-        <app-favorite-button *ngIf="!hasPrefix()" [id]="data.id" />
-        <img alt="Card" src="{{ data.snippet.thumbnails.high.url }}" />
+        <app-favorite-button *ngIf="!hasPrefix()" [id]="data().id" />
+        <img alt="Card" src="{{ data().snippet.thumbnails.high.url }}" />
     </ng-template>
     <ng-template pTemplate="title">
-        <div [innerHTML]="data.snippet.title"></div>
+        <div [innerHTML]="data().snippet.title"></div>
     </ng-template>
     <div class="row">
         <div class="rating-item">
             <i class="pi pi-eye"></i>
-            {{ data.statistics.viewCount }}
+            {{ data().statistics.viewCount }}
         </div>
         <div class="rating-item">
             <i class="pi pi-thumbs-up-fill"></i>
-            {{ data.statistics.likeCount }}
+            {{ data().statistics.likeCount }}
         </div>
         <div class="rating-item">
             <i class="pi pi-thumbs-down-fill"></i>
-            {{ data.statistics.dislikeCount }}
+            {{ data().statistics.dislikeCount }}
         </div>
         <div class="rating-item">
             <i class="pi pi-comment"></i>
-            {{ data.statistics.commentCount }}
+            {{ data().statistics.commentCount }}
         </div>
     </div>
     <ng-template pTemplate="footer">
-        <app-link [link]="[data.id]" [style]="'button'">More</app-link>
+        <app-link [link]="[data().id]" [style]="'button'">More</app-link>
         <div *ngIf="hasPrefix()" style="margin-top: 1rem; text-align: center">
-            <app-remove-button [id]="data.id" />
+            <app-remove-button [id]="data().id" />
         </div>
     </ng-template>
 </p-card>

@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common"
-import { Component, Input } from "@angular/core"
+import { Component, input } from "@angular/core"
 import { NavigationComponent } from "@shared/components"
 import { Item } from "@shared/models/response.model"
 
@@ -13,7 +13,7 @@ import { SearchResultsItemComponent } from "../search-results-item/search-result
     styleUrl: "./search-results-list.component.scss"
 })
 export class SearchResultsListComponent {
-    @Input() items!: Item[]
-    @Input() showNavigation!: boolean
-    @Input() token: { prev: string | null; next: string | null } = { prev: null, next: null }
+    items = input<Item[]>([])
+    showNavigation = input<boolean>(false)
+    token = input<{ prev: string | null; next: string | null }>()
 }

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core"
+import { Component, signal } from "@angular/core"
 import { FilterService } from "@app/pages/youtube/pages/search/services/filter.service"
 import { ButtonComponent } from "@shared/components"
 
@@ -10,11 +10,11 @@ import { ButtonComponent } from "@shared/components"
     styleUrl: "./settings-button.component.scss"
 })
 export class SettingsButtonComponent {
-    showFilter = false
+    showFilter = signal(false)
     constructor(private filterService: FilterService) {}
 
     onButtonClick() {
-        this.showFilter = !this.showFilter
-        this.filterService.toggleFilter(this.showFilter)
+        this.showFilter.set(!this.showFilter())
+        this.filterService.toggleFilter(this.showFilter())
     }
 }

@@ -1,12 +1,12 @@
 <div class="container">
-    <ng-container *ngIf="filterCriteria$ | async as filterCriteria">
-        <app-filter-block *ngIf="toggleFilterBlock | async" [filterCriteria]="filterCriteria" />
+    <ng-container *ngIf="filterCriteria$() as filterCriteria">
+        <app-filter-block *ngIf="toggleFilterBlock()" [filterCriteria]="filterCriteria$()" />
 
-        <app-search-results-list *ngIf="videosLocal$" [items]="videosLocal$ | async" />
+        <app-search-results-list *ngIf="videosLocal$" [items]="videosLocal$()" />
         <app-search-results-list
-            [token]="tokenPage$ | async"
+            [token]="tokenPage$"
             [showNavigation]="true"
-            [items]="videos$ | async | filterByWord: filterCriteria.searchText"
+            [items]="videos$() | filterByWord: filterCriteria$().searchText"
         />
     </ng-container>
 </div>

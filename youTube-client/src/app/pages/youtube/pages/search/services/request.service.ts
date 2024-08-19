@@ -24,6 +24,7 @@ export class RequestService {
             maxResults: "20",
             pageToken
         }
+        console.log(searchParams)
 
         return this.http
             .get<{

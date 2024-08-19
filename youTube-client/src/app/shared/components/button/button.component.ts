@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common"
-import { Component, EventEmitter, Input, Output } from "@angular/core"
+import { Component, input, model, output } from "@angular/core"
 import { ButtonDirective, ButtonModule } from "primeng/button"
 import { RippleModule } from "primeng/ripple"
 
@@ -11,16 +11,16 @@ import { RippleModule } from "primeng/ripple"
     styleUrl: "./button.component.scss"
 })
 export class ButtonComponent {
-    @Input() icon!: string
-    @Input() type: string = "button"
-    @Input() label!: string
-    @Input() disabled = false
-    @Input() classList!: string
-    @Input() severity: ButtonDirective["severity"]
-    @Input() outlined: boolean = false
-    @Input() style!: string
+    icon = input<string>()
+    label = input<string>()
+    type = input<string>("button")
+    disabled = model<boolean>()
+    classList = input<string>()
+    style = input<string>()
+    severity = input<ButtonDirective["severity"]>("primary")
+    outlined = input<boolean>()
 
-    @Output() buttonClick = new EventEmitter<void>()
+    buttonClick = output()
 
     onClick() {
         this.buttonClick.emit()

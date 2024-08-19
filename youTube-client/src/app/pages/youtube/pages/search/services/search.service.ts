@@ -1,21 +1,17 @@
-import { Injectable } from "@angular/core"
-import { BehaviorSubject } from "rxjs"
+import { computed, effect, Injectable, signal } from "@angular/core"
 
 @Injectable({
     providedIn: "root"
 })
 export class SearchService {
-    private searchActivatedSource = new BehaviorSubject<boolean>(false)
-    searchActivated$ = this.searchActivatedSource.asObservable()
-
-    public searchQuerySubject = new BehaviorSubject<string>("")
-    public searchQuery$ = this.searchQuerySubject.asObservable()
+    searchActivated$ = signal<boolean>(false)
+    searchQuery$ = signal<string>("")
 
     setQuery(query: string) {
-        this.searchQuerySubject.next(query)
+        this.searchQuery$.set(query)
     }
 
     activateSearch(activate: boolean) {
-        this.searchActivatedSource.next(activate)
+        this.searchActivated$.set(activate)
     }
 }

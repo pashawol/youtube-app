@@ -1,21 +1,18 @@
-import { Injectable } from "@angular/core"
-import { BehaviorSubject } from "rxjs"
+import { Injectable, signal } from "@angular/core"
 
 @Injectable({
     providedIn: "root"
 })
 export class NavigationService {
-    private tokenPageQuerySubject = new BehaviorSubject<{ prev: string; next: string }>({ prev: "", next: "" })
-    public tokenPageQuery$ = this.tokenPageQuerySubject.asObservable()
+    public tokenPageQuery$ = signal<{ prev: string; next: string }>({ prev: "", next: "" })
 
-    private currentTokenPageSubject = new BehaviorSubject<string>("")
-    public currentTokenPage$ = this.currentTokenPageSubject.asObservable()
+    public currentTokenPage$ = signal<string>("")
 
     setTokenPage(token: string) {
-        this.currentTokenPageSubject.next(token)
+        this.currentTokenPage$.set(token)
     }
 
     setTokenPagesQuery(tokenPage: { prev: string; next: string }) {
-        this.tokenPageQuerySubject.next(tokenPage)
+        this.tokenPageQuery$.set(tokenPage)
     }
 }
