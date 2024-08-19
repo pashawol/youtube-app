@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects"
 import { concatLatestFrom } from "@ngrx/operators"
 import { Action, Store } from "@ngrx/store"
 import { Observable, of } from "rxjs"
-import { catchError, map, mergeMap, withLatestFrom } from "rxjs/operators"
+import { catchError, map, mergeMap, switchMap, withLatestFrom } from "rxjs/operators"
 
 import { FavoritesService } from "../../services/favorites.service"
 import { loadFavoritesDataFailure, loadFavoritesDataSuccess } from "../actions/favorites.actions"
@@ -25,7 +25,7 @@ export class FavoritesEffects {
             ofType(FavoritesActions.loadFavoritesData),
             withLatestFrom(this.store.select(selectFavoritesIds)),
             // concatLatestFrom(() => this.store.select(selectFavoritesIds)),
-            mergeMap(([_, ids]) =>
+            switchMap(([_, ids]) =>
                 this.favoritesService.getFavorites(ids).pipe(
                     map((favoritesData) => loadFavoritesDataSuccess({ favoritesData })),
                     catchError((error) => of(loadFavoritesDataFailure({ error })))
