@@ -1,0 +1,362 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`videoReducer should handle createVideo action 1`] = `
+[
+  {
+    "etag": "",
+    "id": "local-obUsyRdkHaM",
+    "kind": "",
+    "snippet": {
+      "categoryId": "local",
+      "channelId": "",
+      "channelTitle": "",
+      "defaultAudioLanguage": "",
+      "defaultLanguage": "",
+      "description": "video",
+      "liveBroadcastContent": "",
+      "localized": {
+        "description": "video",
+        "title": "New video",
+      },
+      "publishedAt": "08-10-2024",
+      "tags": [
+        "teg",
+        "tag 1",
+        "teg 3",
+      ],
+      "thumbnails": {
+        "default": {
+          "height": 0,
+          "url": "https://media.licdn.com/dms/image/D4E22AQFcylssXyxIAw/feedshare-shrink_800/0/1723378128666?e=1726099200&v=beta&t=MvHvUDQ6kE6SAISk8NooNnRt2Vqw-2KTkbmXZhr9O9o",
+          "width": 0,
+        },
+        "high": {
+          "height": 0,
+          "url": "https://media.licdn.com/dms/image/D4E22AQFcylssXyxIAw/feedshare-shrink_800/0/1723378128666?e=1726099200&v=beta&t=MvHvUDQ6kE6SAISk8NooNnRt2Vqw-2KTkbmXZhr9O9o",
+          "width": 0,
+        },
+        "medium": {
+          "height": 0,
+          "url": "https://media.licdn.com/dms/image/D4E22AQFcylssXyxIAw/feedshare-shrink_800/0/1723378128666?e=1726099200&v=beta&t=MvHvUDQ6kE6SAISk8NooNnRt2Vqw-2KTkbmXZhr9O9o",
+          "width": 0,
+        },
+      },
+      "title": "New video",
+    },
+    "statistics": {
+      "commentCount": "0",
+      "dislikeCount": "0",
+      "favoriteCount": "0",
+      "likeCount": "0",
+      "viewCount": "0",
+    },
+  },
+  {
+    "etag": "",
+    "id": "local-bCBHoHLlMFs",
+    "kind": "",
+    "snippet": {
+      "categoryId": "local",
+      "channelId": "",
+      "channelTitle": "",
+      "defaultAudioLanguage": "",
+      "defaultLanguage": "",
+      "description": "video 2",
+      "liveBroadcastContent": "",
+      "localized": {
+        "description": "video 2",
+        "title": "New video 2",
+      },
+      "publishedAt": "08-10-2024",
+      "tags": [
+        "teg",
+        "tag 1",
+        "teg 3",
+      ],
+      "thumbnails": {
+        "default": {
+          "height": 0,
+          "url": "https://media.licdn.com/dms/image/D4E22AQHXYQf4oyYg1Q/feedshare-shrink_800/0/1723389466302?e=1726099200&v=beta&t=-Ml16Qq4KHKI_PdrFO2GdFWa6-SCIkTpgxigCdOfWUg",
+          "width": 0,
+        },
+        "high": {
+          "height": 0,
+          "url": "https://media.licdn.com/dms/image/D4E22AQHXYQf4oyYg1Q/feedshare-shrink_800/0/1723389466302?e=1726099200&v=beta&t=-Ml16Qq4KHKI_PdrFO2GdFWa6-SCIkTpgxigCdOfWUg",
+          "width": 0,
+        },
+        "medium": {
+          "height": 0,
+          "url": "https://media.licdn.com/dms/image/D4E22AQHXYQf4oyYg1Q/feedshare-shrink_800/0/1723389466302?e=1726099200&v=beta&t=-Ml16Qq4KHKI_PdrFO2GdFWa6-SCIkTpgxigCdOfWUg",
+          "width": 0,
+        },
+      },
+      "title": "New video 2",
+    },
+    "statistics": {
+      "commentCount": "0",
+      "dislikeCount": "0",
+      "favoriteCount": "0",
+      "likeCount": "0",
+      "viewCount": "0",
+    },
+  },
+  {
+    "etag": "etag",
+    "id": "id",
+    "kind": "kind",
+    "snippet": {
+      "categoryId": "categoryId",
+      "channelId": "channelId",
+      "channelTitle": "channelTitle",
+      "defaultAudioLanguage": "defaultAudioLanguage",
+      "defaultLanguage": "defaultLanguage",
+      "description": "description",
+      "liveBroadcastContent": "liveBroadcastContent",
+      "localized": {
+        "description": "description",
+        "title": "title",
+      },
+      "publishedAt": "publishedAt",
+      "tags": [
+        "tags",
+      ],
+      "thumbnails": {
+        "default": {
+          "height": 0,
+          "url": "url",
+          "width": 0,
+        },
+        "high": {
+          "height": 0,
+          "url": "url",
+          "width": 0,
+        },
+        "medium": {
+          "height": 0,
+          "url": "url",
+          "width": 0,
+        },
+      },
+      "title": "title",
+    },
+    "statistics": {
+      "commentCount": "commentCount",
+      "dislikeCount": "dislikeCount",
+      "favoriteCount": "favoriteCount",
+      "likeCount": "likeCount",
+      "viewCount": "viewCount",
+    },
+  },
+]
+`;
+
+exports[`videoReducer should handle getVideoByIdSuccess action 1`] = `
+{
+  "etag": "etag",
+  "id": "id",
+  "kind": "kind",
+  "snippet": {
+    "categoryId": "categoryId",
+    "channelId": "channelId",
+    "channelTitle": "channelTitle",
+    "defaultAudioLanguage": "defaultAudioLanguage",
+    "defaultLanguage": "defaultLanguage",
+    "description": "description",
+    "liveBroadcastContent": "liveBroadcastContent",
+    "localized": {
+      "description": "description",
+      "title": "title",
+    },
+    "publishedAt": "publishedAt",
+    "tags": [
+      "tags",
+    ],
+    "thumbnails": {
+      "default": {
+        "height": 0,
+        "url": "url",
+        "width": 0,
+      },
+      "high": {
+        "height": 0,
+        "url": "url",
+        "width": 0,
+      },
+      "medium": {
+        "height": 0,
+        "url": "url",
+        "width": 0,
+      },
+    },
+    "title": "title",
+  },
+  "statistics": {
+    "commentCount": "commentCount",
+    "dislikeCount": "dislikeCount",
+    "favoriteCount": "favoriteCount",
+    "likeCount": "likeCount",
+    "viewCount": "viewCount",
+  },
+}
+`;
+
+exports[`videoReducer should handle loadVideosSuccess action 1`] = `
+[
+  {
+    "etag": "etag",
+    "id": "id",
+    "kind": "kind",
+    "snippet": {
+      "categoryId": "categoryId",
+      "channelId": "channelId",
+      "channelTitle": "channelTitle",
+      "defaultAudioLanguage": "defaultAudioLanguage",
+      "defaultLanguage": "defaultLanguage",
+      "description": "description",
+      "liveBroadcastContent": "liveBroadcastContent",
+      "localized": {
+        "description": "description",
+        "title": "title",
+      },
+      "publishedAt": "publishedAt",
+      "tags": [
+        "tags",
+      ],
+      "thumbnails": {
+        "default": {
+          "height": 0,
+          "url": "url",
+          "width": 0,
+        },
+        "high": {
+          "height": 0,
+          "url": "url",
+          "width": 0,
+        },
+        "medium": {
+          "height": 0,
+          "url": "url",
+          "width": 0,
+        },
+      },
+      "title": "title",
+    },
+    "statistics": {
+      "commentCount": "commentCount",
+      "dislikeCount": "dislikeCount",
+      "favoriteCount": "favoriteCount",
+      "likeCount": "likeCount",
+      "viewCount": "viewCount",
+    },
+  },
+]
+`;
+
+exports[`videoReducer should return the initial state 1`] = `
+{
+  "currentPagination": null,
+  "error": null,
+  "localVideos": [
+    {
+      "etag": "",
+      "id": "local-obUsyRdkHaM",
+      "kind": "",
+      "snippet": {
+        "categoryId": "local",
+        "channelId": "",
+        "channelTitle": "",
+        "defaultAudioLanguage": "",
+        "defaultLanguage": "",
+        "description": "video",
+        "liveBroadcastContent": "",
+        "localized": {
+          "description": "video",
+          "title": "New video",
+        },
+        "publishedAt": "08-10-2024",
+        "tags": [
+          "teg",
+          "tag 1",
+          "teg 3",
+        ],
+        "thumbnails": {
+          "default": {
+            "height": 0,
+            "url": "https://media.licdn.com/dms/image/D4E22AQFcylssXyxIAw/feedshare-shrink_800/0/1723378128666?e=1726099200&v=beta&t=MvHvUDQ6kE6SAISk8NooNnRt2Vqw-2KTkbmXZhr9O9o",
+            "width": 0,
+          },
+          "high": {
+            "height": 0,
+            "url": "https://media.licdn.com/dms/image/D4E22AQFcylssXyxIAw/feedshare-shrink_800/0/1723378128666?e=1726099200&v=beta&t=MvHvUDQ6kE6SAISk8NooNnRt2Vqw-2KTkbmXZhr9O9o",
+            "width": 0,
+          },
+          "medium": {
+            "height": 0,
+            "url": "https://media.licdn.com/dms/image/D4E22AQFcylssXyxIAw/feedshare-shrink_800/0/1723378128666?e=1726099200&v=beta&t=MvHvUDQ6kE6SAISk8NooNnRt2Vqw-2KTkbmXZhr9O9o",
+            "width": 0,
+          },
+        },
+        "title": "New video",
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "0",
+        "viewCount": "0",
+      },
+    },
+    {
+      "etag": "",
+      "id": "local-bCBHoHLlMFs",
+      "kind": "",
+      "snippet": {
+        "categoryId": "local",
+        "channelId": "",
+        "channelTitle": "",
+        "defaultAudioLanguage": "",
+        "defaultLanguage": "",
+        "description": "video 2",
+        "liveBroadcastContent": "",
+        "localized": {
+          "description": "video 2",
+          "title": "New video 2",
+        },
+        "publishedAt": "08-10-2024",
+        "tags": [
+          "teg",
+          "tag 1",
+          "teg 3",
+        ],
+        "thumbnails": {
+          "default": {
+            "height": 0,
+            "url": "https://media.licdn.com/dms/image/D4E22AQHXYQf4oyYg1Q/feedshare-shrink_800/0/1723389466302?e=1726099200&v=beta&t=-Ml16Qq4KHKI_PdrFO2GdFWa6-SCIkTpgxigCdOfWUg",
+            "width": 0,
+          },
+          "high": {
+            "height": 0,
+            "url": "https://media.licdn.com/dms/image/D4E22AQHXYQf4oyYg1Q/feedshare-shrink_800/0/1723389466302?e=1726099200&v=beta&t=-Ml16Qq4KHKI_PdrFO2GdFWa6-SCIkTpgxigCdOfWUg",
+            "width": 0,
+          },
+          "medium": {
+            "height": 0,
+            "url": "https://media.licdn.com/dms/image/D4E22AQHXYQf4oyYg1Q/feedshare-shrink_800/0/1723389466302?e=1726099200&v=beta&t=-Ml16Qq4KHKI_PdrFO2GdFWa6-SCIkTpgxigCdOfWUg",
+            "width": 0,
+          },
+        },
+        "title": "New video 2",
+      },
+      "statistics": {
+        "commentCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "likeCount": "0",
+        "viewCount": "0",
+      },
+    },
+  ],
+  "video": null,
+  "videos": null,
+}
+`;

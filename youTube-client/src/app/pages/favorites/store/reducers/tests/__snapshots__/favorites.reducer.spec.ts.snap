@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`favoritesReducer should handle loadFavoritesDataFailure action 1`] = `
+{
+  "error": "error",
+  "favoriteList": [
+    "7PxxZWrlRTc",
+    "Dh-k6EcwPmI",
+  ],
+  "favoritesData": [],
+}
+`;
+
+exports[`favoritesReducer should handle loadFavoritesDataSuccess action 1`] = `
+{
+  "error": null,
+  "favoriteList": [
+    "7PxxZWrlRTc",
+    "Dh-k6EcwPmI",
+  ],
+  "favoritesData": [
+    {
+      "etag": "etag",
+      "id": "id",
+      "kind": "kind",
+      "snippet": {
+        "categoryId": "categoryId",
+        "channelId": "channelId",
+        "channelTitle": "channelTitle",
+        "defaultAudioLanguage": "defaultAudioLanguage",
+        "defaultLanguage": "defaultLanguage",
+        "description": "description",
+        "liveBroadcastContent": "liveBroadcastContent",
+        "localized": {
+          "description": "description",
+          "title": "title",
+        },
+        "publishedAt": "publishedAt",
+        "tags": [
+          "tags",
+        ],
+        "thumbnails": {
+          "default": {
+            "height": 0,
+            "url": "url",
+            "width": 0,
+          },
+          "high": {
+            "height": 0,
+            "url": "url",
+            "width": 0,
+          },
+          "medium": {
+            "height": 0,
+            "url": "url",
+            "width": 0,
+          },
+        },
+        "title": "title",
+      },
+      "statistics": {
+        "commentCount": "commentCount",
+        "dislikeCount": "dislikeCount",
+        "favoriteCount": "favoriteCount",
+        "likeCount": "likeCount",
+        "viewCount": "viewCount",
+      },
+    },
+  ],
+}
+`;
+
+exports[`favoritesReducer should handle toggleFavorite action 1`] = `
+{
+  "error": null,
+  "favoriteList": [
+    "7PxxZWrlRTc",
+    "Dh-k6EcwPmI",
+    "id",
+  ],
+  "favoritesData": [],
+}
+`;
+
+exports[`favoritesReducer should return the initial state 1`] = `
+{
+  "error": null,
+  "favoriteList": [
+    "7PxxZWrlRTc",
+    "Dh-k6EcwPmI",
+  ],
+  "favoritesData": [],
+}
+`;
