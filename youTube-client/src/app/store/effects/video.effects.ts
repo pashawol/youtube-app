@@ -67,4 +67,19 @@ export class VideoEffects {
             )
         )
     })
+
+    // loadVideos2$: Observable<Action> = createEffect(() => {
+    //     return this.actions$.pipe(
+    //         ofType(VideoActions.loadVideos),
+    //         switchMap(() =>
+    //             this.requestService.search(query, pageToken).pipe(
+    //                 switchMap((items: Item[]) =>
+    //                     this.filterService.filter$.pipe(map(() => this.filterService.sortDataByFilterCriteria(items)))
+    //                 ),
+    //                 map((videos: Item[]) => VideoActions.loadVideosSuccess({ videos })),
+    //                 catchError((error) => of(VideoActions.loadVideosFailure({ error: error.message })))
+    //             )
+    //         )
+    //     )
+    // })
 }
