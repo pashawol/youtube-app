@@ -1,81 +1,54 @@
+import { signal } from "@angular/core"
 import { TestBed } from "@angular/core/testing"
-import { Item } from "@app/shared/models/response.model"
+import { FilterCriteria } from "@app/core/models/filter.model"
+import { FilterService, RequestService, SearchService } from "@app/pages/youtube/pages/search/services"
+import { NavigationService } from "@app/shared/services/navigation.service"
 import { Actions } from "@ngrx/effects"
 import { provideMockActions } from "@ngrx/effects/testing"
-import { MockStore, provideMockStore } from "@ngrx/store/testing"
+import { RequestService as DetailService } from "@pages/youtube/pages/video-details/services/request.service"
 import { of } from "rxjs"
 
 import * as VideoActions from "../../actions/video.actions"
 import { VideoEffects } from "../video.effects"
-
-const newVideo: Item = {
-    kind: "kind",
-    etag: "etag",
-    id: "id",
-    snippet: {
-        publishedAt: "publishedAt",
-        channelId: "channelId",
-        title: "title",
-        description: "description",
-        thumbnails: {
-            default: {
-                url: "url",
-                width: 0,
-                height: 0
-            },
-            medium: {
-                url: "url",
-                width: 0,
-                height: 0
-            },
-            high: {
-                url: "url",
-                width: 0,
-                height: 0
-            }
-        },
-        channelTitle: "channelTitle",
-        tags: ["tags"],
-        categoryId: "categoryId",
-        liveBroadcastContent: "liveBroadcastContent",
-        localized: {
-            title: "title",
-            description: "description"
-        },
-        defaultAudioLanguage: "defaultAudioLanguage",
-        defaultLanguage: "defaultLanguage"
-    },
-    statistics: {
-        viewCount: "viewCount",
-        likeCount: "likeCount",
-        dislikeCount: "dislikeCount",
-        favoriteCount: "favoriteCount",
-        commentCount: "commentCount"
-    }
-}
-class MockVideoService {
-    static getVideos() {
-        return of(newVideo)
-    }
-}
+import { mockVideo } from "./mocks/video.mock"
 
 describe("Video Effects", () => {
-    let store: MockStore
     let actions$: Actions
     let effects$: VideoEffects
+
+    const fakeQuery = "query"
+    const fakePageToken = "token"
+
+    const mockRequestService = {
+        search: jest.fn().mockReturnValue(of([]))
+    }
+    const mockFilterService: Partial<FilterService> = {
+        sortDataByFilterCriteria: jest.fn().mockReturnValue([]),
+        filter$: of({} as FilterCriteria)
+    }
+    const mockSearchService = {
+        searchQuery$: signal(fakeQuery)
+    }
+    const mockDetailService = {
+        fetchData: jest.fn().mockReturnValue(of(mockVideo))
+    }
+    const mockNavigationService = {
+        currentTokenPage$: signal(fakePageToken)
+    }
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                provideMockStore({ initialState: {} }),
-                provideMockActions(() => actions$),
                 VideoEffects,
-                { provide: MockVideoService, useClass: MockVideoService }
+                provideMockActions(() => actions$),
+                { provide: RequestService, useValue: mockRequestService },
+                { provide: FilterService, useValue: mockFilterService },
+                { provide: SearchService, useValue: mockSearchService },
+                { provide: DetailService, useValue: mockDetailService },
+                { provide: NavigationService, useValue: mockNavigationService }
             ]
         })
 
-        store = TestBed.inject(MockStore)
-        actions$ = TestBed.inject(Actions)
         effects$ = TestBed.inject(VideoEffects)
     })
 
@@ -93,7 +66,7 @@ describe("Video Effects", () => {
 
     it("should fetch video by id", (done) => {
         const action = VideoActions.getVideoById({ id: "local-obUsyRdkHaM" })
-        const completion = VideoActions.getVideoByIdSuccess({ video: {} as Item })
+        const completion = VideoActions.getVideoByIdSuccess({ video: mockVideo })
 
         actions$ = of(action)
 
