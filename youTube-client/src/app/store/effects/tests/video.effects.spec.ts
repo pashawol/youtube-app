@@ -22,7 +22,6 @@ describe("Video Effects", () => {
     const mockRequestService = {
         search: jest.fn().mockReturnValue(of([]))
     }
-
     const mockFilterService: Partial<FilterService> = {
         sortDataByFilterCriteria: jest.fn().mockReturnValue([]),
         filter$: of({} as FilterCriteria)
@@ -45,7 +44,6 @@ describe("Video Effects", () => {
             providers: [
                 VideoEffects,
                 provideMockActions(() => actions$),
-
                 { provide: RequestService, useValue: mockRequestService },
                 { provide: FilterService, useValue: mockFilterService },
                 { provide: SearchService, useValue: mockSearchService },
