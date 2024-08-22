@@ -1,13 +1,10 @@
-import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { Actions, createEffect, ofType } from "@ngrx/effects"
-import { concatLatestFrom } from "@ngrx/operators"
 import { Action, Store } from "@ngrx/store"
 import { Observable, of } from "rxjs"
-import { catchError, map, mergeMap, switchMap, withLatestFrom } from "rxjs/operators"
+import { catchError, map, switchMap, withLatestFrom } from "rxjs/operators"
 
 import { FavoritesService } from "../../services/favorites.service"
-import { loadFavoritesDataFailure, loadFavoritesDataSuccess } from "../actions/favorites.actions"
 import * as FavoritesActions from "../actions/favorites.actions"
 import { selectFavoritesIds } from "../selectors/favorites.selectors"
 
@@ -15,7 +12,6 @@ import { selectFavoritesIds } from "../selectors/favorites.selectors"
 export class FavoritesEffects {
     constructor(
         private actions$: Actions,
-        private http: HttpClient,
         private favoritesService: FavoritesService,
         private store: Store
     ) {}
@@ -27,8 +23,8 @@ export class FavoritesEffects {
             // concatLatestFrom(() => this.store.select(selectFavoritesIds)),
             switchMap(([_, ids]) =>
                 this.favoritesService.getFavorites(ids).pipe(
-                    map((favoritesData) => loadFavoritesDataSuccess({ favoritesData })),
-                    catchError((error) => of(loadFavoritesDataFailure({ error })))
+                    map((favoritesData) => FavoritesActions.loadFavoritesDataSuccess({ favoritesData })),
+                    catchError((error) => of(FavoritesActions.loadFavoritesDataFailure({ error })))
                 )
             )
         )

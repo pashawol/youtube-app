@@ -52,27 +52,27 @@ const newVideo: Item = {
 describe("videoReducer", () => {
     it("should return the initial state", () => {
         const state = videoReducer(undefined, { type: "@@INIT" })
-        expect(state).toMatchSnapshot()
+        expect(state).toBe(initialState)
     })
 
     it("should handle createVideo action", () => {
         const action = VideoActions.createVideo({ video: newVideo })
         const state = videoReducer(initialState, action)
 
-        expect(state.localVideos).toMatchSnapshot()
+        expect(state.localVideos).toEqual([...initialState.localVideos, newVideo])
     })
 
     it("should handle loadVideosSuccess action", () => {
         const action = VideoActions.loadVideosSuccess({ videos: [newVideo] })
         const state = videoReducer(initialState, action)
 
-        expect(state.videos).toMatchSnapshot()
+        expect(state.videos).toEqual([newVideo])
     })
 
     it("should handle getVideoByIdSuccess action", () => {
         const action = VideoActions.getVideoByIdSuccess({ video: newVideo })
         const state = videoReducer(initialState, action)
 
-        expect(state.video).toMatchSnapshot()
+        expect(state.video).toEqual(newVideo)
     })
 })

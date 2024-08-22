@@ -1,8 +1,6 @@
 import { createAction, props } from "@ngrx/store"
 import { Item } from "@shared/models/response.model"
 
-import { VideoState } from "../videos.state"
-
 export const getVideoById = createAction("[Video] Get Video By Id", props<{ id: string }>())
 export const getVideoByIdSuccess = createAction("[Video] Get Video By Id Success", props<{ video: Item }>())
 export const getVideoByIdFailure = createAction("[Video] Get Video By Id Failure", props<{ error: string | null }>())

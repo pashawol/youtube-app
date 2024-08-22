@@ -4,7 +4,7 @@ import { FilterService, SearchService } from "@app/pages/youtube/pages/search/se
 import { Item } from "@app/shared/models/response.model"
 import { NavigationService } from "@app/shared/services/navigation.service"
 import { Actions, createEffect, ofType } from "@ngrx/effects"
-import { Action, Store } from "@ngrx/store"
+import { Action } from "@ngrx/store"
 import { RequestService } from "@pages/youtube/pages/search/services/request.service"
 import { RequestService as DetailService } from "@pages/youtube/pages/video-details/services/request.service"
 import { Observable, of } from "rxjs"
@@ -23,8 +23,7 @@ export class VideoEffects {
         private filterService: FilterService,
         private searchService: SearchService,
         private detailService: DetailService,
-        private navigationService: NavigationService,
-        private readonly store: Store
+        private navigationService: NavigationService
     ) {
         this.searchQuery$ = toObservable(this.searchService.searchQuery$)
         this.currentTokenPage$ = toObservable(this.navigationService.currentTokenPage$)
