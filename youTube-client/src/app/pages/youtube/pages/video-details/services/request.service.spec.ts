@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from "@angular/common/http/testing"
+import { HttpClient } from "@angular/common/http"
 import { TestBed } from "@angular/core/testing"
 
 import { RequestService } from "./request.service"
@@ -6,14 +6,24 @@ import { RequestService } from "./request.service"
 describe("RequestService", () => {
     let service: RequestService
 
+    const mockHttpClient = {
+        get: jest.fn().mockReturnValue({ pipe: jest.fn() })
+    }
+
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule]
+            providers: [
+                {
+                    provide: HttpClient,
+                    useValue: mockHttpClient
+                }
+            ]
         })
         service = TestBed.inject(RequestService)
     })
 
     it("should be created", () => {
-        expect(service).toBeTruthy()
+        service.fetchData("id")
+        expect(mockHttpClient.get).toHaveBeenCalled()
     })
 })

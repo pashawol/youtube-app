@@ -1,16 +1,21 @@
 import { TestBed } from "@angular/core/testing"
 import { Actions } from "@ngrx/effects"
 import { provideMockActions } from "@ngrx/effects/testing"
+import { Store } from "@ngrx/store"
 import { of } from "rxjs"
 
 import { FavoritesService } from "../../../services/favorites.service"
 import * as FavoritesActions from "../../actions/favorites.actions"
 import { FavoritesEffects } from "../favorites.effects"
-import { mockFavorite } from "./mocks/favorites.mock"
 
 describe("Favorites Effects", () => {
     let actions$: Actions
     let effects$: FavoritesEffects
+
+    const mockStore = {
+        dispatch: jest.fn(),
+        select: jest.fn().mockReturnValue(of([]))
+    }
 
     const mockFavoritesService = {
         getFavorites: jest.fn().mockReturnValue(of([]))
@@ -21,7 +26,8 @@ describe("Favorites Effects", () => {
             providers: [
                 FavoritesEffects,
                 provideMockActions(() => actions$),
-                { provide: FavoritesService, useValue: mockFavoritesService }
+                { provide: FavoritesService, useValue: mockFavoritesService },
+                { provide: Store, useValue: mockStore }
             ]
         })
 

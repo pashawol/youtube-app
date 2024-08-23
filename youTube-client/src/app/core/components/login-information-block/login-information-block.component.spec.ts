@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing"
+import { ActivatedRoute } from "@angular/router"
 
 import { LoginInformationBlockComponent } from "./login-information-block.component"
 
@@ -8,7 +9,13 @@ describe("LoginInformationBlockComponent", () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [LoginInformationBlockComponent]
+            imports: [LoginInformationBlockComponent],
+            providers: [
+                {
+                    provide: ActivatedRoute,
+                    useValue: {}
+                }
+            ]
         }).compileComponents()
 
         fixture = TestBed.createComponent(LoginInformationBlockComponent)
