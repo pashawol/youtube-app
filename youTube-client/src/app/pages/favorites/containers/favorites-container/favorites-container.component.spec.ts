@@ -8,11 +8,7 @@ describe("FavoritesContainerComponent", () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [FavoritesContainerComponent],
-            providers: [
-                // Add the _Store provider here
-                { provide: _Store, useValue: {} }
-            ]
+            imports: [FavoritesContainerComponent]
         }).compileComponents()
 
         fixture = TestBed.createComponent(FavoritesContainerComponent)
@@ -21,6 +17,6 @@ describe("FavoritesContainerComponent", () => {
     })
 
     it("should create", () => {
-        expect(component).toBeDefined()
+        expect(component).toBeTruthy()
     })
 })
