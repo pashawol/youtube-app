@@ -9,7 +9,9 @@ describe("RequestService", () => {
     let service: RequestService
 
     const mockResponse = {
-        items: [] as Item[]
+        items: [] as Item[],
+        prevPageToken: "prevToken",
+        nextPageToken: "nextToken"
     }
 
     const mockHttpClient = {
