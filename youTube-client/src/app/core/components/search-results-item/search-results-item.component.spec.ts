@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing"
+import { MockStore, provideMockStore } from "@ngrx/store/testing"
+
 import { SearchResultsItemComponent } from "./search-results-item.component"
-import { provideMockStore, MockStore } from "@ngrx/store/testing"
 
 describe("SearchResultsItemComponent", () => {
     let component: SearchResultsItemComponent

@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common"
-import { Component, OnInit, signal } from "@angular/core"
+import { Component, OnInit } from "@angular/core"
 import { toSignal } from "@angular/core/rxjs-interop"
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser"
 import { ActivatedRoute } from "@angular/router"

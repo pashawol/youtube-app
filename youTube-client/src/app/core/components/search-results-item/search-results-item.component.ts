@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common"
-import { Component, Input, input } from "@angular/core"
+import { Component, input } from "@angular/core"
 import { shared } from "@app/shared/constants/shared.constants"
 import { deleteVideo } from "@app/store/actions/video.actions"
 import { Store } from "@ngrx/store"
