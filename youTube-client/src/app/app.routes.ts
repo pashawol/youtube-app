@@ -23,7 +23,7 @@ export const routes: Routes = [
     },
     {
         path: "favorites",
-        loadChildren: () => import("@pages/favorites/favorites.module").then((m) => m.FavoritesxModule),
+        loadChildren: () => import("@pages/favorites/favorites.module").then((m) => m.FavoritesModule),
         canActivate: [authGuard]
     },
     {

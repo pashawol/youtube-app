@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core"
+import { computed, inject, Injectable, Signal } from "@angular/core"
 import { toObservable } from "@angular/core/rxjs-interop"
 import { FilterService, SearchService } from "@app/pages/youtube/pages/search/services"
 import { Item } from "@app/shared/models/response.model"
@@ -14,21 +14,15 @@ import * as VideoActions from "../actions/video.actions"
 
 @Injectable()
 export class VideoEffects {
-    private searchQuery$: Observable<string>
-    private currentTokenPage$: Observable<string>
-    // private filterCriteria$: Observable<FilterCriteria>
-    constructor(
-        private actions$: Actions,
-        private requestService: RequestService,
-        private filterService: FilterService,
-        private searchService: SearchService,
-        private detailService: DetailService,
-        private navigationService: NavigationService
-    ) {
-        this.searchQuery$ = toObservable(this.searchService.searchQuery$)
-        this.currentTokenPage$ = toObservable(this.navigationService.currentTokenPage$)
-        // this.filterCriteria$ = toObservable(this.filterService.filter$)
-    }
+    private actions$ = inject(Actions)
+    private requestService = inject(RequestService)
+    private filterService = inject(FilterService)
+    private searchService = inject(SearchService)
+    private detailService = inject(DetailService)
+    private navigationService = inject(NavigationService)
+
+    private searchQuery$: Signal<string> = this.searchService.searchQuery$
+    private currentTokenPage$: Signal<string> = this.navigationService.currentTokenPage$
 
     getVideoById$: Observable<Action> = createEffect(() => {
         return this.actions$.pipe(
@@ -46,7 +40,7 @@ export class VideoEffects {
         return this.actions$.pipe(
             ofType(VideoActions.loadVideos),
             switchMap(() =>
-                this.searchQuery$.pipe(
+                this.searchQuery$().pipe(
                     switchMap((query: string) =>
                         this.currentTokenPage$.pipe(
                             switchMap((pageToken: string) =>
